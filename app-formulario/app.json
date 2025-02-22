@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app-hellow",
-    "slug": "app-hellow",
+    "name": "app-formulario",
+    "slug": "app-formulario",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
