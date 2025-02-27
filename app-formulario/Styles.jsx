@@ -43,24 +43,3 @@ export const CampoTexto = styled.TextInput`
   color: ${(props) => props.theme.text};
   margin-top: 5px;
 `;
-
-export const BotaoSalvar = styled.TouchableOpacity`
-  background-color: ${(props) => props.theme.primary || "#4caf50"};
-  border-radius: 25px;
-  padding: 15px 40px;
-  margin-top: 25px;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-`;
-
-export const TextoBotao = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-`;
-
-BotaoSalvar.activeOpacity = 0.7;

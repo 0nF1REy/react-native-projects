@@ -1,42 +1,59 @@
-import React from 'react';
+import React from "react";
 import {
   TelaContainer,
   Titulo,
   CampoContainer,
   RotuloCampo,
   CampoTexto,
-  BotaoSalvar,
-  TextoBotao
-} from './Styles'; 
+} from "./Styles";
+import {
+  StyledButton,
+  StyledTextButton,
+} from "./components/Button/ButtonStyled";
 
 export default function Home() {
   return (
     <TelaContainer>
       <Titulo>Suas Informações</Titulo>
-      
+
       <CampoContainer>
         <RotuloCampo>Nome Completo</RotuloCampo>
-        <CampoTexto placeholder="Cloud Strife Sutoraifu" placeholderTextColor="#888" />
+        <CampoTexto
+          placeholder="Cloud Strife Sutoraifu"
+          placeholderTextColor="#888"
+        />
       </CampoContainer>
 
       <CampoContainer>
         <RotuloCampo>E-mail</RotuloCampo>
-        <CampoTexto placeholder="cloud.sutoraifu@gmail.com" placeholderTextColor="#888" keyboardType="email-address" />
+        <CampoTexto
+          placeholder="cloud.sutoraifu@gmail.com"
+          placeholderTextColor="#888"
+          keyboardType="email-address"
+        />
       </CampoContainer>
 
       <CampoContainer>
         <RotuloCampo>Telefone</RotuloCampo>
-        <CampoTexto placeholder="+55 (XXX) XXX-XXXX" placeholderTextColor="#888" keyboardType="phone-pad" />
+        <CampoTexto
+          placeholder="+55 (XXX) XXX-XXXX"
+          placeholderTextColor="#888"
+          keyboardType="phone-pad"
+        />
       </CampoContainer>
 
       <CampoContainer>
         <RotuloCampo>Data de Nascimento</RotuloCampo>
-        <CampoTexto placeholder="DD/MM/YYYY" placeholderTextColor="#888" keyboardType="numeric" />
+        <CampoTexto
+          placeholder="DD/MM/YYYY"
+          placeholderTextColor="#888"
+          keyboardType="numeric"
+        />
       </CampoContainer>
 
-      <BotaoSalvar>
-        <TextoBotao>Salvar</TextoBotao>
-      </BotaoSalvar>
+      <StyledButton>
+        <StyledTextButton>Salvar</StyledTextButton>
+      </StyledButton>
     </TelaContainer>
   );
 }
