@@ -1,4 +1,11 @@
-npx create-expo-app --template 
-npx expo install react-dom react-native-web @expo/metro-runtime
-npm install styled-components
-npm run web 
+======================================================================|
+|npx create-expo-app --template                                       |
+|npx expo install react-dom react-native-web @expo/metro-runtime      |
+|npm install styled-components                                        |
+|npm run web                                                          |
+|=====================================================================|
+|npm install @react-navigation/native                                 |
+|npm install @react-navigation/stack                                  |
+|=====================================================================|
+|feat: Created a new project and carried out the scaffolding increment|
+|=====================================================================|
