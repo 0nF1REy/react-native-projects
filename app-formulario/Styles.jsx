@@ -11,6 +11,7 @@ export const TelaContainer = styled.View`
 `;
 
 export const Titulo = styled.Text`
+  font-family: "Forum-Regular";
   font-size: 30px;
   font-weight: bold;
   color: ${(props) => props.theme.text};
@@ -25,6 +26,7 @@ export const CampoContainer = styled.View`
 `;
 
 export const RotuloCampo = styled.Text`
+  font-family: "SchibstedGrotesk-Regular";
   font-size: 18px;
   font-weight: 600;
   color: ${(props) => props.theme.text};
@@ -33,6 +35,7 @@ export const RotuloCampo = styled.Text`
 `;
 
 export const CampoTexto = styled.TextInput`
+  font-family: "Varta-Regular";
   height: 50px;
   border-color: #ddd;
   border-width: 1px;

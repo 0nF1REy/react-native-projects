@@ -1,3 +1,5 @@
+import { useFonts } from "expo-font";
+
 import React from "react";
 import {
   TelaContainer,
@@ -12,6 +14,13 @@ import {
 } from "./components/Button/ButtonStyled";
 
 export default function Home() {
+  const [fontsLoaded] = useFonts({
+    "Forum-Regular": require("./assets/fonts/Forum-Regular.ttf"),
+    "SchibstedGrotesk-Regular": require("./assets/fonts/SchibstedGrotesk-Regular.ttf"),
+    "Artifika-Regular": require("./assets/fonts/Artifika-Regular.ttf"),
+    "Varta-Regular": require("./assets/fonts/Varta-Regular.ttf"),
+  });
+
   return (
     <TelaContainer>
       <Titulo>Suas Informações</Titulo>

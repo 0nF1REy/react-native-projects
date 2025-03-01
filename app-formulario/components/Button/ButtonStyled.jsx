@@ -11,6 +11,7 @@ export const StyledButton = styled.TouchableOpacity`
 `;
 
 export const StyledTextButton = styled.Text`
+  font-family: "Artifika-Regular";
   font-size: 18px;
   font-weight: bold;
   color: #fff;
