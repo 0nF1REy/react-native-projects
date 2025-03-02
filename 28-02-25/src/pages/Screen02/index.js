@@ -1,11 +1,9 @@
-import { Text, View  } from "react-native";
+import { ViewContainer, Titulo } from "../../../Styles";
 
 export default function Screen02() {
-    return (
-        <View>
-            <Text>
-                Tela 2
-            </Text>
-        </View>
-    )
+  return (
+    <ViewContainer>
+      <Titulo>Esta é a segunda tela, eba!!!!!!!!!!!!!</Titulo>
+    </ViewContainer>
+  );
 }

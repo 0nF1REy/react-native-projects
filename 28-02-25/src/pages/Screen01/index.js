@@ -1,16 +1,17 @@
-import { TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { Titulo, ViewContainer } from "../../../Styles";
 
 export default function Screen01({ navigation }) {
   function abrir() {
-    navigation.navigate("Tela-two");
+    navigation.navigate("Segunda Tela");
   }
 
   return (
-    <View>
-      <Text>Tela 1</Text>
+    <ViewContainer>
+      <Titulo>Esta é a primeira tela, eba!!!!!!!!!!!!!</Titulo>
       <TouchableOpacity onPress={abrir}>
-        <Text>Abrir Tela 2</Text>
+        <Titulo>Abrir Tela 2</Titulo>
       </TouchableOpacity>
-    </View>
+    </ViewContainer>
   );
 }
