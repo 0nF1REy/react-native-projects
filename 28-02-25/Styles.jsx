@@ -6,6 +6,13 @@ export const Titulo = styled.Text`
   font-weight: 300;
 `;
 
+export const DescNoticia = styled.Text`
+  font-family: "Forum-Regular";
+  
+  font-size: 18px;
+  font-weight: 300;
+`;
+
 export const ViewContainer = styled.View`
   flex: 1;
   justify-content: center;
@@ -13,5 +20,11 @@ export const ViewContainer = styled.View`
   padding: 30px;
   background-color: ${(props) => props.theme.bg};
   border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
 `;
+
+export const Imagem = styled.Image`
+  height: 300px;
+  width: 300px;
+`;
+
