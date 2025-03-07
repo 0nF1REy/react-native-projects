@@ -8,10 +8,3 @@
 |=====================================================================|
 |feat: Created a new project and carried out the scaffolding increment|
 |=====================================================================|
-
-|======================================================================|
-|                       INSERÇÃO DE IMAGENS                            |
-|----------------------------------------------------------------------|
-|<Image source={require('../../../01.png')}/>        ! CAMINHO RELATIVO|
-|<Image source={uri: 'https://wallpapers.com/images/hd/windows-7-background-imfecqv6cnsicbx4.jpg'}/> ! CAMINHO ABSOLUTO|
-|======================================================================|
