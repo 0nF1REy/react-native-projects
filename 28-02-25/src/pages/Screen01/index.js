@@ -1,30 +1,53 @@
-import { Titulo, ViewContainer, Imagem, DescNoticia } from "../../../Styles";
-import { StyledButton, StyledTextButton } from "../../../components/Button/ButtonStyled";
+import { ViewContainer, Imagem, DescNoticia, ArticleContainer } from "../../../Styles";
+import {
+  StyledButton,
+  StyledTextButton,
+} from "../../../components/Button/ButtonStyled";
 
 export default function Screen01({ navigation }) {
+  
   // =======================================
   // FUNÇÃO PARA ABRIR A PÁGINA SEGUINTE !!!
   // =======================================
-  function abrirPrimeiraNoticia() { 
+  function abrirPrimeiraNoticia() {
     navigation.navigate("Primeira Noticia"); // Segunda Tela
   }
-  function abrirSegundaNoticia() { 
+  function abrirSegundaNoticia() {
     navigation.navigate("Segunda Noticia"); // Terceira Tela
   }
 
   return (
     <ViewContainer>
-      <Imagem source={require('../../../assets/images/01.png')}/>
-      <DescNoticia>Not long ago, I saw “Bad Reputation,” the new documentary about Joan Jett, and came out of it exhilarated, listening to “I Love Rock ’n Roll” while powering down Sixth Avenue. Jett’s sound—the full-throttle drums, guitar, and vocals—made me feel a joyous, uncharacteristic assertiveness. Instead of skirting pedestrian traffic, I walked confidently, claiming part of the sidewalk—and was suddenly blasted back to a sense memory of childhood, when I would request “I Love Rock ’n Roll” at the roller rink and pound my skates in time with the beat. In that era, I liked to wear a T-shirt that said “Let’s Face It—Girls Are Smarter.” And in recent weeks, as the wheels have flown off the shabby jalopy that is American civic life, Jett’s music has helped me feel better.</DescNoticia>
-          <StyledButton onPress={abrirPrimeiraNoticia}>
-            <StyledTextButton>Abrir Noticia</StyledTextButton>
-          </StyledButton>
-      <Imagem source={require('../../../assets/images/01.png')}/>
-      <DescNoticia>Not long ago, I saw “Bad Reputation,” the new documentary about Joan Jett, and came out of it exhilarated, listening to “I Love Rock ’n Roll” while powering down Sixth Avenue. Jett’s sound—the full-throttle drums, guitar, and vocals—made me feel a joyous, uncharacteristic assertiveness. Instead of skirting pedestrian traffic, I walked confidently, claiming part of the sidewalk—and was suddenly blasted back to a sense memory of childhood, when I would request “I Love Rock ’n Roll” at the roller rink and pound my skates in time with the beat. In that era, I liked to wear a T-shirt that said “Let’s Face It—Girls Are Smarter.” And in recent weeks, as the wheels have flown off the shabby jalopy that is American civic life, Jett’s music has helped me feel better.</DescNoticia>
-          <StyledButton onPress={abrirSegundaNoticia}>
-            <StyledTextButton>Abrir Noticia</StyledTextButton>
-          </StyledButton>
-
+      <ArticleContainer>
+        <Imagem source={require("../../../assets/images/01.png")} />
+        <DescNoticia>
+          Nova Iorque, NY – O documentário "Bad Reputation" sobre Joan Jett
+          inspirou um morador de Nova Iorque, que, ao ouvir "I Love Rock 'n
+          Roll," reviveu sentimentos de assertividade e nostalgia. Em tempos
+          turbulentos, a música de Jett se torna um refúgio, oferecendo conforto
+          e esperança diante do caos.
+        </DescNoticia>
+        <StyledButton onPress={abrirPrimeiraNoticia}>
+          <StyledTextButton>Abrir Noticia</StyledTextButton>
+        </StyledButton>
+      </ArticleContainer>
+      <ArticleContainer>
+      <Imagem
+        source={{
+          uri: "https://www.radiorock.com.br/wp-content/uploads/2020/12/suzi-quatro.jpg",
+        }}
+      />
+      <DescNoticia>
+        A cantora Suzi Quatro lançou neste fim de semana nas plataformas
+        digitais o single "The Devil In Me," faixa-título de seu próximo álbum,
+        previsto para 26 de março via Steamhammer/SPV. Suzi destaca que o álbum
+        será o "melhor de sua carreira," fruto de colaboração com seu filho,
+        Richard Tuckey.
+      </DescNoticia>
+      <StyledButton onPress={abrirSegundaNoticia}>
+        <StyledTextButton>Abrir Noticia</StyledTextButton>
+      </StyledButton>
+      </ArticleContainer>
     </ViewContainer>
   );
 }
