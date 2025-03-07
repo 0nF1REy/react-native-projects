@@ -1,9 +1,8 @@
 export const colors = {
-    bg: "#e6e6e6", 
-    text: "#333333", 
-    primary: "#007b5e", 
-    secondary: "#004d40",
-    border: "#b0b0b0", 
-    inputBg: "#ffffff", 
-  };
-  
+  bg: "#f9f9f9",
+  text: "#2d2d2d",
+  primary: "#008080", 
+  secondary: "#800080", 
+  border: "#cccccc",
+  inputBg: "#ffffff",
+};

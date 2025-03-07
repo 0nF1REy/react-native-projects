@@ -1,20 +1,21 @@
 import styled from "styled-components/native";
 
 export const StyledButton = styled.TouchableOpacity`
-  background-color: ${(props) => props.theme.primary || "#4caf50"};
+  background-color: ${(props) => props.theme.primary};
   border-radius: 25px;
-  padding: 15px 40px;
-  margin-top: 25px;
+  padding: 12px 30px;
+  margin-top: 15px;
   justify-content: center;
   align-items: center;
+  align-self: center;
 `;
 
 export const StyledTextButton = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #fff;
   text-align: center;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 `;
 
