@@ -22,7 +22,7 @@ export default function Screen03() {
       />
       <DescNoticia>
         A lendária cantora e baixista Suzi Quatro lançou recentemente o
-        videoclipe de "The Devil In Me", faixa-título de seu novo álbum, que
+        videoclipe de "<b>The Devil In Me</b>", faixa-título de seu novo álbum, que
         será lançado em 26 de março pela Steamhammer/SPV. Este trabalho marca
         uma colaboração especial com seu filho, o guitarrista Richard Tuckey, e
         Suzi afirma que este é o melhor álbum de sua carreira até agora. Durante

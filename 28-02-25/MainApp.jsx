@@ -1,4 +1,3 @@
-// App.jsx
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Screen01 from "./src/pages/Screen01";
@@ -11,6 +10,7 @@ const Stack = createStackNavigator();
 export default function MainApp() {
   const [fontsLoaded] = useFonts({
     "Forum-Regular": require("./assets/fonts/Forum-Regular.ttf"),
+    "ABeeZee-Regular": require("./assets/fonts/ABeeZee-Regular.ttf"),
   });
 
   return (
@@ -27,6 +27,12 @@ export default function MainApp() {
           options={{
             title:
               "Joan Jett: A Arte de Empoderar e Inspirar em Tempos de Incerteza",
+            // headerShown: false, // Desativa o header
+            headerTitleStyle: {
+              fontFamily: "ABeeZee-Regular",
+              fontSize: 18,
+              fontWeight: "200",
+            },
           }}
         />
         <Stack.Screen
@@ -35,6 +41,11 @@ export default function MainApp() {
           options={{
             title:
               "Suzi Quatro Lança Videoclipe de 'The Devil In Me' e Anuncia Novo Álbum com Colaboração do Filho",
+            headerTitleStyle: {
+              fontFamily: "ABeeZee-Regular",
+              fontSize: 18,
+              fontWeight: "200",
+            },
           }}
         />
       </Stack.Navigator>
