@@ -2,11 +2,13 @@ import styled from "styled-components/native";
 
 export const Titulo = styled.Text`
   font-family: "Forum-Regular";
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
   color: ${(props) => props.theme.text};
   margin-bottom: 20px;
   text-align: center;
+  text-transform: capitalize;
+  letter-spacing: 1px;
 `;
 
 export const DescNoticia = styled.Text`
@@ -19,11 +21,10 @@ export const DescNoticia = styled.Text`
   margin-bottom: 20px;
 `;
 
-export const ViewContainer = styled.View`
+export const ViewContainer = styled.ScrollView`
   flex: 1;
   background-color: ${(props) => props.theme.bg};
   padding: 20px;
-  overflow: auto;
 `;
 
 export const Imagem = styled.Image`
@@ -38,4 +39,10 @@ export const ArticleContainer = styled.View`
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
+`;
+
+export const IconContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
 `;

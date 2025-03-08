@@ -11,12 +11,26 @@ export const StyledButton = styled.TouchableOpacity`
 `;
 
 export const StyledTextButton = styled.Text`
+  font-family: "ABeeZee-Regular";
   font-size: 16px;
   font-weight: bold;
   color: #fff;
   text-align: center;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
 `;
 
 StyledButton.activeOpacity = 0.7;
+
+export const StyledButtonIcon = styled.TouchableOpacity`
+  padding: 10px;
+  margin-right: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+
+  &:active {
+    opacity: 0.5;
+  }
+`;
