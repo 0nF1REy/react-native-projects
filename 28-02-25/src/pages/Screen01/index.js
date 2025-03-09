@@ -33,15 +33,11 @@ export default function Screen01({ navigation }) {
     <ViewContainer>
       <ArticleContainer>
         <Titulo>
-          Joan Jett: A Arte de Empoderar e Inspirar em Tempos de Incerteza
+          Lynx: Framework de Interface de Usuário da ByteDance Torna-se Open Source
         </Titulo>
-        <Imagem source={require("../../../assets/images/01.png")} />
+        <Imagem source={require("../../../assets/images/lynx.png")} />
         <DescNoticia>
-          Nova Iorque, NY – O documentário "Bad Reputation" sobre Joan Jett
-          inspirou um morador de Nova Iorque, que, ao ouvir "I Love Rock 'n
-          Roll," reviveu sentimentos de assertividade e nostalgia. Em tempos
-          turbulentos, a música de Jett se torna um refúgio, oferecendo conforto
-          e esperança diante do caos.
+          Lynx, uma estrutura de interface do usuário multiplataforma desenvolvida pela ByteDance, foi feita de código aberto por sua equipe de desenvolvimento em 5 de março. O framework visa...
         </DescNoticia>
         <StyledButton onPress={abrirPrimeiraNoticia}>
           <StyledTextButton>Abrir notícia</StyledTextButton>
@@ -68,20 +64,15 @@ export default function Screen01({ navigation }) {
       </ArticleContainer>
       <ArticleContainer>
         <Titulo>
-          Suzi Quatro Lança Videoclipe de 'The Devil In Me' e Anuncia Novo Álbum
-          com Colaboração do Filho
+          Rapid7 sinaliza novo zero-day do PostgreSQL relacionado à exploração do BeyondTrust
         </Titulo>
         <Imagem
           source={{
-            uri: "https://www.radiorock.com.br/wp-content/uploads/2020/12/suzi-quatro.jpg",
+            uri: "https://www.securityweek.com/wp-content/uploads/2023/06/zero-day.jpg",
           }}
         />
         <DescNoticia>
-          A cantora Suzi Quatro lançou neste fim de semana nas plataformas
-          digitais o single "The Devil In Me," faixa-título de seu próximo
-          álbum, previsto para 26 de março via Steamhammer/SPV. Suzi destaca que
-          o álbum será o "melhor de sua carreira," fruto de colaboração com seu
-          filho, Richard Tuckey.
+          Pesquisadores de segurança da Rapid7 sinalizaram na quinta-feira a descoberta de uma nova vulnerabilidade de dia zero no PostgreSQL, que parece ter sido um componente...
         </DescNoticia>
         <StyledButton onPress={abrirSegundaNoticia}>
           <StyledTextButton>Abrir notícia</StyledTextButton>

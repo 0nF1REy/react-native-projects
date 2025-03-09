@@ -46,3 +46,8 @@ export const IconContainer = styled.View`
   justify-content: space-around;
   padding: 10px;
 `;
+
+export const Strong = styled.Text`
+  color: ${(props) => props.theme.primary};
+  font-weight: 800;
+`;

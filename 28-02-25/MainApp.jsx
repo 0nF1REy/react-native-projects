@@ -19,14 +19,19 @@ export default function MainApp() {
         <Stack.Screen
           name="Notícias"
           component={Screen01}
-          options={{ title: "Notícias" }}
+          options={{ title: "Notícias - Wutai News",
+            headerTitleStyle: {
+              fontFamily: "ABeeZee-Regular",
+              fontSize: 18,
+            },
+           }}
         />
         <Stack.Screen
           name="Primeira Noticia"
           component={Screen02}
           options={{
             title:
-              "Joan Jett: A Arte de Empoderar e Inspirar em Tempos de Incerteza",
+              "Lynx: Framework de Interface de Usuário da ByteDance Torna-se Open Source",
             // headerShown: false, // Desativa o header
             headerTitleStyle: {
               fontFamily: "ABeeZee-Regular",
@@ -40,7 +45,7 @@ export default function MainApp() {
           component={Screen03}
           options={{
             title:
-              "Suzi Quatro Lança Videoclipe de 'The Devil In Me' e Anuncia Novo Álbum com Colaboração do Filho",
+              "Rapid7 sinaliza novo zero-day do PostgreSQL relacionado à exploração do BeyondTrust",
             headerTitleStyle: {
               fontFamily: "ABeeZee-Regular",
               fontSize: 18,
