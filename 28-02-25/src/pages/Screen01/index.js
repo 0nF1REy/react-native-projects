@@ -5,6 +5,7 @@ import {
   ArticleContainer,
   Titulo,
   IconContainer,
+  AuthorInfo,
 } from "../../../Styles";
 import {
   StyledButton,
@@ -33,29 +34,25 @@ export default function Screen01({ navigation }) {
     <ViewContainer>
       <ArticleContainer>
         <Titulo>
-          Lynx: Framework de Interface de Usuário da ByteDance Torna-se Open Source
+          Lynx: Framework de Interface de Usuário da ByteDance Torna-se Open
+          Source
         </Titulo>
         <Imagem source={require("../../../assets/images/lynx.png")} />
         <DescNoticia>
-          Lynx, uma estrutura de interface do usuário multiplataforma desenvolvida pela ByteDance, foi feita de código aberto por sua equipe de desenvolvimento em 5 de março. O framework visa...
+          Lynx, uma estrutura de interface do usuário multiplataforma
+          desenvolvida pela ByteDance, foi feita de código aberto por sua equipe
+          de desenvolvimento em 5 de março. O framework visa...
         </DescNoticia>
+        <AuthorInfo>Por Equipe Wutai News – 05 de março de 2025</AuthorInfo>
         <StyledButton onPress={abrirPrimeiraNoticia}>
           <StyledTextButton>Abrir notícia</StyledTextButton>
         </StyledButton>
         <IconContainer>
           <StyledButtonIcon>
-            <FontAwesomeIcon
-              icon={faThumbsUp}
-              size="lg"
-              style={{ marginRight: 10 }}
-            />
+            <FontAwesomeIcon icon={faThumbsUp} size="lg" />
           </StyledButtonIcon>
           <StyledButtonIcon>
-            <FontAwesomeIcon
-              icon={faComment}
-              size="lg"
-              style={{ marginRight: 10 }}
-            />
+            <FontAwesomeIcon icon={faComment} size="lg" />
           </StyledButtonIcon>
           <StyledButtonIcon>
             <FontAwesomeIcon icon={faShareAlt} size="lg" />
@@ -64,7 +61,8 @@ export default function Screen01({ navigation }) {
       </ArticleContainer>
       <ArticleContainer>
         <Titulo>
-          Rapid7 sinaliza novo zero-day do PostgreSQL relacionado à exploração do BeyondTrust
+          Rapid7 sinaliza novo zero-day do PostgreSQL relacionado à exploração
+          do BeyondTrust
         </Titulo>
         <Imagem
           source={{
@@ -72,25 +70,20 @@ export default function Screen01({ navigation }) {
           }}
         />
         <DescNoticia>
-          Pesquisadores de segurança da Rapid7 sinalizaram na quinta-feira a descoberta de uma nova vulnerabilidade de dia zero no PostgreSQL, que parece ter sido um componente...
+          Pesquisadores de segurança da Rapid7 sinalizaram na quinta-feira a
+          descoberta de uma nova vulnerabilidade de dia zero no PostgreSQL, que
+          parece ter sido um componente...
         </DescNoticia>
+        <AuthorInfo>Por Equipe Wutai News – 13 de fevereiro de 2025</AuthorInfo>
         <StyledButton onPress={abrirSegundaNoticia}>
           <StyledTextButton>Abrir notícia</StyledTextButton>
         </StyledButton>
         <IconContainer>
           <StyledButtonIcon>
-            <FontAwesomeIcon
-              icon={faThumbsUp}
-              size="lg"
-              style={{ marginRight: 10 }}
-            />
+            <FontAwesomeIcon icon={faThumbsUp} size="lg" />
           </StyledButtonIcon>
           <StyledButtonIcon>
-            <FontAwesomeIcon
-              icon={faComment}
-              size="lg"
-              style={{ marginRight: 10 }}
-            />
+            <FontAwesomeIcon icon={faComment} size="lg" />
           </StyledButtonIcon>
           <StyledButtonIcon>
             <FontAwesomeIcon icon={faShareAlt} size="lg" />

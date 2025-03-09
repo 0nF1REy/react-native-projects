@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
 export const Titulo = styled.Text`
-  font-family: "Forum-Regular";
+  font-family: "Merriweather_36pt-Regular";
   font-size: 25px;
-  font-weight: bold;
+  font-weight: 400;
   color: ${(props) => props.theme.text};
   margin-bottom: 20px;
   text-align: center;
@@ -12,7 +12,7 @@ export const Titulo = styled.Text`
 `;
 
 export const DescNoticia = styled.Text`
-  font-family: "Forum-Regular";
+  font-family: "Lora-Regular";
   font-size: 16px;
   font-weight: 300;
   text-align: justify;
@@ -39,6 +39,8 @@ export const ArticleContainer = styled.View`
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 `;
 
 export const IconContainer = styled.View`
@@ -50,4 +52,12 @@ export const IconContainer = styled.View`
 export const Strong = styled.Text`
   color: ${(props) => props.theme.primary};
   font-weight: 800;
+`;
+
+export const AuthorInfo = styled.Text`
+  font-family: "Roboto-Regular";
+  font-size: 12px;
+  color: ${(props) => props.theme.textSecondary || '#666'};
+  margin-bottom: 5px;
+  text-align: right;
 `;

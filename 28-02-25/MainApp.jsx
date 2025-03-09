@@ -9,8 +9,9 @@ const Stack = createStackNavigator();
 
 export default function MainApp() {
   const [fontsLoaded] = useFonts({
-    "Forum-Regular": require("./assets/fonts/Forum-Regular.ttf"),
-    "ABeeZee-Regular": require("./assets/fonts/ABeeZee-Regular.ttf"),
+    "Lora-Regular": require("./assets/fonts/Lora-Regular.ttf"),
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "Merriweather_36pt-Regular": require("./assets/fonts/Merriweather_36pt-Regular.ttf"),
   });
 
   return (
@@ -19,9 +20,9 @@ export default function MainApp() {
         <Stack.Screen
           name="Notícias"
           component={Screen01}
-          options={{ title: "Notícias - Wutai News",
+          options={{ title: "Notícias – Wutai News",
             headerTitleStyle: {
-              fontFamily: "ABeeZee-Regular",
+              fontFamily: "Roboto-Regular",
               fontSize: 18,
             },
            }}
@@ -34,7 +35,7 @@ export default function MainApp() {
               "Lynx: Framework de Interface de Usuário da ByteDance Torna-se Open Source",
             // headerShown: false, // Desativa o header
             headerTitleStyle: {
-              fontFamily: "ABeeZee-Regular",
+              fontFamily: "Roboto-Regular",
               fontSize: 18,
               fontWeight: "200",
             },
@@ -47,7 +48,7 @@ export default function MainApp() {
             title:
               "Rapid7 sinaliza novo zero-day do PostgreSQL relacionado à exploração do BeyondTrust",
             headerTitleStyle: {
-              fontFamily: "ABeeZee-Regular",
+              fontFamily: "Roboto-Regular",
               fontSize: 18,
               fontWeight: "200",
             },

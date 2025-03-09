@@ -1,8 +1,15 @@
 export const colors = {
-  bg: "#f9f9f9",
+  // Cores gerais da interface
+  bg: "#f0f0f0",
   text: "#2d2d2d",
-  primary: "#008080", 
-  secondary: "#800080", 
+  textSecondary: "#777",
+  primary: "#008080",
+  secondary: "#6c757d",
   border: "#cccccc",
-  inputBg: "#ffffff",
+  articleBg: "#fff",
+
+  // Cores de feedback ao usuário
+  error: "#dc3545",
+  warning: "#ffc107",
+  success: "#28a745",
 };
