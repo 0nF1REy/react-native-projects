@@ -1,8 +1,14 @@
 import { registerRootComponent } from 'expo';
+import { ThemeProvider } from 'styled-components/native';
+import { colors } from './Theme'; 
+import MainApp from './MainApp';
 
-import App from './App';
+export default function App() { 
+    return (
+      <ThemeProvider theme={colors}>
+        <MainApp />
+      </ThemeProvider>
+    );
+}
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+registerRootComponent(App); 
