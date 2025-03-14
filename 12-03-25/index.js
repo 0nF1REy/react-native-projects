@@ -1,14 +1,4 @@
 import { registerRootComponent } from 'expo';
-import { ThemeProvider } from 'styled-components/native';
-import { colors } from './Theme'; 
-import MainApp from './MainApp';
+import App from './App';
 
-export default function App() { 
-    return (
-      <ThemeProvider theme={colors}>
-        <MainApp />
-      </ThemeProvider>
-    );
-}
-
-registerRootComponent(App); 
+registerRootComponent(App);
