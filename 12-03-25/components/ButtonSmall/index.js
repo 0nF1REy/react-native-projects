@@ -3,8 +3,8 @@ import styles from "./styles";
 
 export default function ButtonSmall({ text }) {
     return (
-        <TouchableOpacity style={styles.teste}>
-            <Text>
+        <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>
                 {text}
             </Text>
         </TouchableOpacity>

@@ -9,12 +9,15 @@ import ButtonLarge from '../../../components/ButtonLarge';
 
 export default function Home() { 
     return (
-      <ThemeProvider theme={colors}>
+      // <ThemeProvider theme={colors}>
         <View style={styles.container}>
             <ButtonSmall text='Confirmar'/>
             <ButtonLarge text2='Cancelar'/>
-            <ButtonIcon text3='Sair'/>
+            <ButtonIcon 
+            text3='Sair'
+            icon="log-out"
+            />
         </View>
-      </ThemeProvider>
+      // </ThemeProvider>
     );
 }

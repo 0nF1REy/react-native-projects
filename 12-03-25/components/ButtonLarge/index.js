@@ -3,8 +3,8 @@ import styles from "./styles";
 
 export default function ButtonLarge({ text2 }) {
     return (
-        <TouchableOpacity>
-            <Text>
+        <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>
                 {text2}
             </Text>
         </TouchableOpacity>
