@@ -4,7 +4,7 @@
 |=====================================================================|
 |npm install @react-navigation/native                                 |
 |npm install @react-navigation/stack                                  |
-|npm install styled-components                                        |
+|npx expo install styled-components                                   |
 |npm install @fortawesome/react-native-fontawesome                    |
 |npm install @fortawesome/free-solid-svg-icons                        |
 |=====================================================================|
