@@ -8,5 +8,5 @@
 |npm install @fortawesome/react-native-fontawesome                    |
 |npm install @fortawesome/free-solid-svg-icons                        |
 |=====================================================================|
-|feat: created a new project and carried out the scaffolding increment|
+|feat: Created a new project and carried out the scaffolding increment|
 |=====================================================================|
