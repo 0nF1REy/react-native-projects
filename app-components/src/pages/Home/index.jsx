@@ -1,9 +1,16 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import TextInputWithIcon from '../../components/TextInputWithIcon';
 import { Container } from './styles';
 
-const Home = () => {
+export default function Home({ navigation }) {
+  // =======================================
+  // FUNÇÃO PARA ABRIR A PÁGINA SEGUINTE !!!
+  // =======================================
+  function abrirSegundaPagina() {
+    navigation.navigate("Primeira Noticia"); // Segunda Tela
+  }
+
   return (
     <Container>
         <ScrollView>
@@ -11,6 +18,4 @@ const Home = () => {
         </ScrollView>
     </Container>
   );
-};
-
-export default Home;
+}

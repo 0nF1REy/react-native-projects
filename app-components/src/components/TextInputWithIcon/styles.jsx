@@ -10,6 +10,10 @@ export const TextContainer = styled.View`
   margin: 10px auto;
 `;
 
+export const ViewPrincipal = styled.View`
+  
+`;
+
 export const TextInputLabel = styled.Text`
   font-size: 16px;
   color: #333;
@@ -36,10 +40,49 @@ export const TextInputField = styled.TextInput`
   padding: 0 8px;
 `;
 
+export const TextInputLogin = styled.TextInput`
+  flex: 1;
+  height: 48px;
+  font-size: 16px;
+  color: #333;
+  padding: 0 8px;
+`;
+
 export const IconButton = styled.TouchableOpacity`
   padding: 8px;
   background-color: #f4f4f4;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
+`;
+
+export const TextoBotao = styled.Text`
+  display: flex;
+  color:rgb(0, 225, 255);
+  font-size: 12px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextContainerBotao = styled.View`
+  background-color: #007000;
+  width: 100%;
+`;
+
+export const BotaoEntar = styled.TouchableOpacity`
+  padding: 8px;
+`;
+
+export const TextContainerAvatar = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Imagem = styled.Image`
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  margin-bottom: 20px;
 `;
