@@ -1,0 +1,66 @@
+import React from "react";
+import { Container, Display, Row, Button, ButtonText } from "./styles"; // Importando os estilos
+
+export default function Calculator() {
+  return (
+    <Container>
+      <Display>0</Display>
+      <Row>
+        <Button>
+          <ButtonText>7</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>8</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>9</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>/</ButtonText>
+        </Button>
+      </Row>
+      <Row>
+        <Button>
+          <ButtonText>4</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>5</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>6</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>*</ButtonText>
+        </Button>
+      </Row>
+      <Row>
+        <Button>
+          <ButtonText>1</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>2</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>3</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>-</ButtonText>
+        </Button>
+      </Row>
+      <Row>
+        <Button>
+          <ButtonText>.</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>0</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>=</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>+</ButtonText>
+        </Button>
+      </Row>
+    </Container>
+  );
+}

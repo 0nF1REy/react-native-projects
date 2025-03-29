@@ -1,49 +1,41 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from './src/pages/Home';
-import Screen02 from "./src/pages/Screen02";
-import { useFonts } from "expo-font";
+import Login from './src/pages/Login';
+import Calculator from './src/pages/Calculator';
+import { useFonts } from 'expo-font';
+import { ActivityIndicator, View } from 'react-native';
 
 const Stack = createStackNavigator();
 
 export default function MainApp() {
+  // Carregando fontes personalizadas
   const [fontsLoaded] = useFonts({
-    "Lora-Regular": require("./assets/fonts/Lora-Regular.ttf"),
-    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-    "Merriweather_36pt-Regular": require("./assets/fonts/Merriweather_36pt-Regular.ttf"),
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
   });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Tela de Login">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
-          name="Tela de Login"
-          component={Home}
-          options={{
-            title: "Tela de Login",
-            headerTitleStyle: {
-              fontFamily: "Roboto-Regular",
-              fontSize: 18,
-            },
-          }}
+          name="Login"
+          component={Login}
+          options={{ title: 'Login' }}
+        />
+        <Stack.Screen
+          name="Calculator"
+          component={Calculator}
+          options={{ title: 'Calculadora' }}
         />
       </Stack.Navigator>
-
-      <Stack.Screen
-        name="Calculadora"
-        component={Screen02}
-        options={{
-          title:
-            "Calculadora: Super Bacana",
-          // headerShown: false, // Desativa o header
-          headerTitleStyle: {
-            fontFamily: "Roboto-Regular",
-            fontSize: 18,
-            fontWeight: "200",
-          },
-        }}
-      />
     </NavigationContainer>
   );
 }

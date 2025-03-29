@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
+import { useNavigation } from '@react-navigation/native';  
 import {
   TextContainer,
   TextInputLabel,
@@ -16,12 +17,11 @@ import {
   Imagem,
 } from "./styles";
 
-
-
-const TextInputWithIcon = ({ placeholder }) => {
-
+const LoginBacana = ({ placeholder }) => {
   const [icone, setIcone] = useState('eye-off');
-  const [text, setText] = useState('true');
+  const [text, setText] = useState(true);
+  
+  const navigation = useNavigation(); 
 
   function openClose() {
     if (icone == "eye") {
@@ -33,18 +33,22 @@ const TextInputWithIcon = ({ placeholder }) => {
     }
   }
 
+  function handleLogin() {
+    navigation.navigate('Calculator');
+  }
+
   return (
     <ViewPrincipal>
 
       <TextContainerAvatar>
-         <Imagem source={require("../../../assets/images/hoje.png")} />
+        <Imagem source={require("../../../assets/images/hoje.png")} />
       </TextContainerAvatar>
 
       <TextContainer>
         <TextInputLabel>Login</TextInputLabel>
         <InputWrapper>
           <TextInputLogin placeholder="Digite seu usuário aqui..." />
-          <IconButton >
+          <IconButton>
             <Icon name="user" size={24} color="#888" />
           </IconButton>
         </InputWrapper>
@@ -53,7 +57,10 @@ const TextInputWithIcon = ({ placeholder }) => {
       <TextContainer>
         <TextInputLabel>Senha</TextInputLabel>
         <InputWrapper>
-          <TextInputField placeholder={placeholder} secureTextEntry={text} />
+          <TextInputField 
+            placeholder={placeholder || "Digite sua senha aqui..."} 
+            secureTextEntry={text} 
+          />
           <IconButton onPress={openClose}>
             <Icon name={icone} size={24} color="#888" />
           </IconButton>
@@ -61,7 +68,7 @@ const TextInputWithIcon = ({ placeholder }) => {
       </TextContainer>
 
       <TextContainerBotao>
-        <BotaoEntar>
+        <BotaoEntar onPress={handleLogin}>  
           <TextoBotao>
             Entrar
           </TextoBotao>
@@ -71,5 +78,4 @@ const TextInputWithIcon = ({ placeholder }) => {
   );
 };
 
-
-export default TextInputWithIcon;
+export default LoginBacana;

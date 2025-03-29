@@ -2,22 +2,23 @@ import styled from "styled-components/native";
 
 export const TextContainer = styled.View`
   background-color: #fff;
-  border-radius: 10px;
-  padding: 15px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #d1d1d6;
   width: 100%;
   max-width: 350px;
-  margin: 10px auto;
+  margin: 15px auto;
 `;
 
 export const ViewPrincipal = styled.View`
-  
+  background-color: #f4f4f9;
+  padding: 20px;
 `;
 
 export const TextInputLabel = styled.Text`
   font-size: 16px;
   color: #333;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 500;
 `;
 
@@ -25,10 +26,10 @@ export const InputWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   border-width: 1px;
-  border-color: #ccc;
+  border-color: #d1d1d6;
   border-radius: 8px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 14px;
+  padding-right: 14px;
   background-color: #fff;
 `;
 
@@ -37,7 +38,7 @@ export const TextInputField = styled.TextInput`
   height: 48px;
   font-size: 16px;
   color: #333;
-  padding: 0 8px;
+  padding: 0 10px;
 `;
 
 export const TextInputLogin = styled.TextInput`
@@ -45,11 +46,11 @@ export const TextInputLogin = styled.TextInput`
   height: 48px;
   font-size: 16px;
   color: #333;
-  padding: 0 8px;
+  padding: 0 10px;
 `;
 
 export const IconButton = styled.TouchableOpacity`
-  padding: 8px;
+  padding: 5px;
   background-color: #f4f4f4;
   border-radius: 50%;
   justify-content: center;
@@ -57,21 +58,22 @@ export const IconButton = styled.TouchableOpacity`
 `;
 
 export const TextoBotao = styled.Text`
-  display: flex;
-  color:rgb(0, 225, 255);
-  font-size: 12px;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
   text-align: center;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const TextContainerBotao = styled.View`
-  background-color: #007000;
+  background-color: #0056b3;
   width: 100%;
+  border-radius: 8px;
 `;
 
 export const BotaoEntar = styled.TouchableOpacity`
-  padding: 8px;
+  background-color: #0056b3;
+  border-radius: 8px;
 `;
 
 export const TextContainerAvatar = styled.View`
@@ -81,8 +83,9 @@ export const TextContainerAvatar = styled.View`
 `;
 
 export const Imagem = styled.Image`
-  width: 200px;
-  height: 200px;
-  border-radius: 100%;
-  margin-bottom: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  margin-bottom: 25px;
+  border: 3px solid #e1c6a9;
 `;
