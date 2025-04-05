@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button } from './styles';
+import { TouchableOpacity, Text } from 'react-native';
+import { StyledButton, ButtonText } from './styles';
 
-const ButtonNest = ({ label, onPress }) => {
+export default function ButtonNest({ onPress, title }) {
   return (
-    <Button onPress={onPress}>
-      <Text>{label}</Text>
-    </Button>
+    <TouchableOpacity onPress={onPress}>
+      <StyledButton>
+        <ButtonText>{title}</ButtonText>
+      </StyledButton>
+    </TouchableOpacity>
   );
-};
-
-export default ButtonNest;
+}

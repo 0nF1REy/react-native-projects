@@ -1,17 +1,19 @@
 import styled from 'styled-components/native';
 
-export const Button = styled.TouchableOpacity`
-  background-color: #f0f0f0;
-  flex: 1;
-  margin: 5px;
-  justify-content: center;
+export const StyledButton = styled.View`
+  background-color: #4b9b47;
+  padding: 12px 30px;
+  border-radius: 12px;
   align-items: center;
-  padding: 20px;
-  border-radius: 5px;
+  justify-content: center;
 `;
 
-export const Text = styled.Text`
-  font-size: 24px;
-  color: #333;
-  font-weight: bold;
+export const ButtonText = styled.Text`
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Lora-Regular';
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
 `;
