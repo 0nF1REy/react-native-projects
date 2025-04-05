@@ -11,7 +11,7 @@ export default function Screen02() {
       />
       <Input
         placeholder="Digite sua altura (cm)"
-        keyboardType="numeric"
+        keyboardType="numeric" value={num1}
       />
       <Button>
         <ButtonText>Calcular IMC</ButtonText>
