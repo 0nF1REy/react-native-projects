@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Input, Button, ButtonText, ResultText, BoldText } from "./styles";
+import { Container, Input, Button, ButtonText, ResultText, BoldText, BotaoVoltarHome, TextoBotaoVoltar } from "./styles";
 import Icon from "react-native-vector-icons/Feather";
 
-export default function Screen02() {
+export default function Screen02({ navigation }) {
   const [peso, setPeso] = React.useState("");
   const [altura, setAltura] = React.useState("");
   const [imc, setImc] = React.useState("");
@@ -18,6 +18,10 @@ export default function Screen02() {
 
     const imcValue = pesoValue / (alturaValue * alturaValue);
     setImc(imcValue.toFixed(2));
+  }
+
+  function abrirTelaHome() {
+    navigation.navigate("Home");
   }
 
   return (
@@ -43,6 +47,11 @@ export default function Screen02() {
       <ResultText>
         Seu IMC é: <BoldText>{imc}</BoldText>
       </ResultText>
+
+      {/* Voltar para a tela Home */}
+      <BotaoVoltarHome onPress={abrirTelaHome}>
+        <TextoBotaoVoltar>Voltar</TextoBotaoVoltar>
+      </BotaoVoltarHome>
     </Container>
   );
 }

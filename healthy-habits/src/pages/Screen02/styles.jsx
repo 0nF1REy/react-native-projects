@@ -45,3 +45,19 @@ export const ResultText = styled.Text`
 export const BoldText = styled.Text`
   font-weight: bold;
 `;
+
+export const BotaoVoltarHome = styled.TouchableOpacity`
+  height: 50px;
+  width: 80%;
+  background-color: #14ab94;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  margin-top: 40px;  
+`;
+
+export const TextoBotaoVoltar = styled.Text`
+  color: white;
+  font-size: 18px;
+  font-weight: 600;  
+`;
