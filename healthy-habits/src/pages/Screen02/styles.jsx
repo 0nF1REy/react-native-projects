@@ -6,6 +6,7 @@ export const Container = styled.View`
   align-items: center;
   background-color: #f5f5f5;
   padding: 20px;
+  font-family: "Roboto-Regular";
 `;
 
 export const Input = styled.TextInput`
@@ -22,7 +23,8 @@ export const Input = styled.TextInput`
 export const Button = styled.TouchableOpacity`
   height: 50px;
   width: 80%;
-  background-color: #4caf50;
+  background-color: #3d85c6;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
@@ -31,6 +33,7 @@ export const Button = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   color: white;
   font-size: 18px;
+  margin-right: 8px;
 `;
 
 export const ResultText = styled.Text`
