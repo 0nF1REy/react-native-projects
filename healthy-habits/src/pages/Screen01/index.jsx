@@ -10,7 +10,7 @@ import {
   RowButtonIcon,
 } from "./styles";
 import { View } from "react-native";
-import ButtonNest from "../../components/ButtonNest";
+import ButtonNext from "../../components/ButtonNest";
 import Icon from "react-native-vector-icons/Feather";
 
 export default function Screen01({ navigation }) {
@@ -73,7 +73,7 @@ export default function Screen01({ navigation }) {
           </TextoBacana>
         </Artigo>
         <RowButtonIcon>
-          <ButtonNest
+          <ButtonNext
             onPress={abrirCalculadoraImc}
             title="Calcular IMC"
             icon={<Icon name={iconeBacanaFlecha} size={20} color="#fff" />}

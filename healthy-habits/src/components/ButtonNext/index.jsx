@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { ButtonText, ButtonWrapper } from "./styles";
 
-export default function ButtonNest({ onPress, title, icon }) {
+export default function ButtonNext({ onPress, title, icon }) {
   return (
     <ButtonWrapper onPress={onPress}>
       <ButtonText>{title}</ButtonText>
