@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import {
-  Alinhamento,
-  Artigo,
-  Imagem,
-  Strong,
-  TextoBacana,
-  Titulo,
-  ViewContainer,
-  RowButtonIcon,
-} from "./styles";
+import { Artigo, Imagem, Titulo, ViewContainer, RowButtonIcon } from "./styles";
 import { View } from "react-native";
-import ButtonNext from "../../components/ButtonNest";
+import ButtonNext from "../../components/ButtonNext";
 import Icon from "react-native-vector-icons/Feather";
+import TextoInformativo from "../../components/TextoInformativo";
 
 export default function Screen01({ navigation }) {
   function abrirCalculadoraImc() {
@@ -31,48 +23,11 @@ export default function Screen01({ navigation }) {
             O que são alimentos termogênicos e como eles podem te ajudar a
             emagrecer
           </Titulo>
-
-          <TextoBacana>
-            Os alimentos termogênicos têm a capacidade de aquecer o organismo,
-            gerar calor e facilitar a perda de calorias. Não existe uma
-            recomendação específica em relação à quantidade necessária de cada
-            um deles para que deem uma mãozinha na manutenção do peso. "Também
-            não há um período de tempo específico para se determinar a perda de
-            peso exata, o que depende da pessoa e varia segundo a sua vontade,
-            determinação e acompanhamento nutricional". Podem ser consumidos
-            crus, como acompanhamento de molhos para saladas ou até salpicados
-            em saladas cruas. Vale ainda agregá-los a temperos de várias
-            preparações culinárias, como ensopados, e serem adicionados a sucos
-            e chás. Confira algumas opções:
-            {"\n\n"}
-            <Strong>Pimenta vermelha:</Strong> Aumenta a circulação sanguínea e
-            a temperatura corporal, e auxilia na digestão. Contém capsaícina,
-            uma substância rica em antioxidantes, com ação anti-inflamatória e
-            que previne o acúmulo de gorduras nas artérias. Se ingerida de
-            maneira exagerada, pode levar à irritabilidade do estômago. Acelera
-            o metabolismo em 20%.
-            {"\n\n"}
-            <Strong>Gengibre:</Strong> Possui gingerol, substância responsável
-            pelo aumento da temperatura do corpo, que ajuda na eliminação de
-            gorduras. Também acelera o metabolismo em 20%. O consumo excessivo
-            pode levar à irritabilidade do estômago.
-            {"\n\n"}
-            <Strong>Ômega 3:</Strong> Presente em peixes (como salmão e
-            sardinha), óleos de peixe e semente de linhaça, ajuda a queimar
-            calorias e eliminar o excesso de líquidos (inchaço). Também tem
-            função anti-inflamatória e previne contra doenças cardiovasculares.
-            Aumenta o metabolismo basal, ou seja, queima calorias.
-            {"\n\n"}
-            <Strong>Chá-verde:</Strong> Reduz a absorção do açúcar no sangue,
-            inibindo a ação da enzima responsável pela digestão dos
-            carboidratos. Pesquisas mostram que pode diminuir a compulsão por
-            carboidratos e auxiliar no bom funcionamento do intestino.
-            {"\n\n"}
-            <Strong>Chá mate</Strong> Contribui com a perda de peso, além de ter
-            propriedades anti-inflamatórias.
-          </TextoBacana>
+          {/* COMPONENTE: Conteúdo do artigo */}
+          <TextoInformativo />
         </Artigo>
         <RowButtonIcon>
+          {/* COMPONENTE: Botão para ir ao cálculo do IMC */}
           <ButtonNext
             onPress={abrirCalculadoraImc}
             title="Calcular IMC"

@@ -23,27 +23,11 @@ export const Titulo = styled.Text`
   letter-spacing: 1px;
 `;
 
-export const TextoBacana = styled.Text`
-  font-family: "Lora-Regular";
-  font-size: 16px;
-  padding: 20px;
-  font-weight: 300;
-  text-align: justify;
-  color: ${(props) => props.theme.text};
-  line-height: 24px;
-`;
-
 export const Artigo = styled.View`
   background-color: #f3f3f3;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 20px;
-`;
-
-
-export const Strong = styled.Text`
-  color: ${(props) => props.theme.primary};
-  font-weight: 800;
 `;
 
 export const RowButtonIcon = styled.View`
