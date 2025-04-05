@@ -1,10 +1,24 @@
 import React from "react";
-import { Alinhamento, Artigo, Container, Imagem, Teste, TextoBacana, Titulo, ViewContainer } from "./styles";
+import { TextInput, Text, TouchableOpacity, View } from "react-native";
+import { Container, Input, Button, ButtonText, ResultText, BoldText } from "./styles";
 
 export default function Screen02() {
   return (
-    <ViewContainer>
-
-    </ViewContainer>
+    <Container>
+      <Input
+        placeholder="Digite seu peso (kg)"
+        keyboardType="numeric"
+      />
+      <Input
+        placeholder="Digite sua altura (cm)"
+        keyboardType="numeric"
+      />
+      <Button>
+        <ButtonText>Calcular IMC</ButtonText>
+      </Button>
+      <ResultText>
+        Seu IMC é: <BoldText>—</BoldText>
+      </ResultText>
+    </Container>
   );
 }

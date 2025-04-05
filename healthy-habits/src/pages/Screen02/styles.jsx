@@ -1,6 +1,44 @@
 import styled from "styled-components/native";
 
-export const ViewContainer = styled.ScrollView`
+export const Container = styled.View`
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
   padding: 20px;
+`;
+
+export const Input = styled.TextInput`
+  height: 50px;
+  width: 80%;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: #ccc;
+  font-size: 16px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  height: 50px;
+  width: 80%;
+  background-color: #4caf50;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+`;
+
+export const ButtonText = styled.Text`
+  color: white;
+  font-size: 18px;
+`;
+
+export const ResultText = styled.Text`
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+`;
+
+export const BoldText = styled.Text`
+  font-weight: bold;
 `;
