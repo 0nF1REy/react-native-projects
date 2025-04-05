@@ -18,15 +18,17 @@ export default function Screen01({ navigation }) {
         <Artigo>
           <Titulo>
             <Imagem
-              source={require("../../../assets/images/thermogenic-foods.jpg")}
+              source={require("../../../assets/images/bmi-metric.jpg")}
             />
             O que são alimentos termogênicos e como eles podem te ajudar a
             emagrecer
           </Titulo>
+
           {/* COMPONENTE: Conteúdo do artigo */}
           <TextoInformativo />
         </Artigo>
         <RowButtonIcon>
+
           {/* COMPONENTE: Botão para ir ao cálculo do IMC */}
           <ButtonNext
             onPress={abrirCalculadoraImc}
