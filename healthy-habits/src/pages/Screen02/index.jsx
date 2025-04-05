@@ -16,8 +16,8 @@ import InputBacanaComponent from "../../components/Input";
 import { useCalcularIMC } from "../../hooks/useCalcularIMC";
 
 export default function Screen02({ navigation }) {
-  const { peso, altura, imc, setPeso, setAltura, calcularIMC } =
-    useCalcularIMC();
+  const { peso, altura, imc, classificacao, setPeso, setAltura, calcularIMC } =
+  useCalcularIMC();
 
   function abrirTelaHome() {
     navigation.navigate("Home");
@@ -54,6 +54,12 @@ export default function Screen02({ navigation }) {
         <ResultText>
           Seu IMC é: <BoldText>{imc}</BoldText>
         </ResultText>
+        {classificacao ? (
+          <ResultText>
+            Classificação: <BoldText>{classificacao}</BoldText>
+          </ResultText>
+            ) : null}
+
 
         {/* Voltar para a tela Home com ícone */}
         <BotaoVoltarHome onPress={abrirTelaHome}>
