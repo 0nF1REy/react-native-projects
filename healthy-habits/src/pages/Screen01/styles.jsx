@@ -39,3 +39,16 @@ export const Artigo = styled.View`
   padding: 15px;
   margin-bottom: 20px;
 `;
+
+
+export const Strong = styled.Text`
+  color: ${(props) => props.theme.primary};
+  font-weight: 800;
+`;
+
+export const RowButtonIcon = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+`;
