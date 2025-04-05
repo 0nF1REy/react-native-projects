@@ -18,7 +18,7 @@ export default function Screen01({ navigation }) {
         <Artigo>
           <Titulo>
             <Imagem
-              source={require("../../../assets/images/bmi-metric.jpg")}
+              source={require("../../../assets/images/thermogenic-foods.jpg")}
             />
             O que são alimentos termogênicos e como eles podem te ajudar a
             emagrecer
