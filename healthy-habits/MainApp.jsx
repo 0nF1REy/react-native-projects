@@ -11,8 +11,8 @@ const Stack = createStackNavigator();
 export default function MainApp() {
   const [fontsLoaded] = useFonts({
     "Lora-Regular": require("./assets/fonts/Lora-Regular.ttf"),
-    Merriweather: require("./assets/fonts/Merriweather_36pt-Regular.ttf"),
-    Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
+    "Merriweather": require("./assets/fonts/Merriweather_36pt-Regular.ttf"),
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -30,7 +30,7 @@ export default function MainApp() {
           name="Home"
           component={Screen01}
           options={{
-            title: "Home - Healthy Habits",
+            title: "Healthy Habits | Home",
             headerTitleStyle: {
               fontFamily: "Roboto-Regular",
               fontSize: 18,
@@ -41,7 +41,7 @@ export default function MainApp() {
           name="Screen02"
           component={Screen02}
           options={{
-            title: "IMC",
+            title: "Healthy Habits | Calcular IMC",
             // headerShown: false, // Desativa o header
             headerTitleStyle: {
               fontFamily: "Roboto-Regular",
