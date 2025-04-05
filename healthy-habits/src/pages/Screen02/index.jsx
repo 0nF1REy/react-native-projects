@@ -7,7 +7,6 @@ import {
   BotaoVoltarHome,
   TextoBotaoVoltar,
   Imagem,
-  ContainerImage,
   ScrollViewContainer,
   ViewContainer,
   TituloBacana,
