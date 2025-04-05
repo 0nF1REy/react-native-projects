@@ -1,13 +1,12 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { StyledButton, ButtonText } from './styles';
+import React from "react";
+import { View } from "react-native";
+import { ButtonText, ButtonWrapper } from "./styles";
 
-export default function ButtonNest({ onPress, title }) {
+export default function ButtonNest({ onPress, title, icon }) {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <StyledButton>
-        <ButtonText>{title}</ButtonText>
-      </StyledButton>
-    </TouchableOpacity>
+    <ButtonWrapper onPress={onPress}>
+      <ButtonText>{title}</ButtonText>
+      {icon && <View style={{ marginLeft: 8 }}>{icon}</View>}
+    </ButtonWrapper>
   );
 }

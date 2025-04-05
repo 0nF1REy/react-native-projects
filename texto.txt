@@ -4,9 +4,10 @@
 |=====================================================================|
 |npm install @react-navigation/native                                 |
 |npm install @react-navigation/stack                                  |
-|npx expo install styled-components                                   |
 |npm install @fortawesome/react-native-fontawesome                    |
 |npm install @fortawesome/free-solid-svg-icons                        |
+|npm install react-native-vector-icons                                |
+|npx expo install styled-components                                   |
 |=====================================================================|
 |feat: Created a new project and carried out the scaffolding increment|
 |=====================================================================|
