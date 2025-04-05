@@ -18,7 +18,7 @@
       const imcValue = pesoValue / (alturaValue * alturaValue);
       setImc(imcValue.toFixed(2));
     }
-
+    
     return (
       <Container>
         <Input
