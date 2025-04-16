@@ -5,11 +5,12 @@ import InputField from "../../components/InputField";
 import { Container } from "./styles";
 
 export default function ConsultaCep({ navigation }) {
+
   const [cep, setCep] = useState("");
   const [logradouro, setLogradouro] = useState("");
-  const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
+  const [bairro, setBairro] = useState("");
 
   async function handleSearch() {
     const data = await fetchCepData(cep);
