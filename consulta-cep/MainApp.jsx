@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/pages/Login";
-import ConsultaCep from "./src/pages/ConsultaCep";
+import ConsultaCnpj from "./src/pages/ConsultaCnpj";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
 
@@ -30,9 +30,9 @@ export default function MainApp() {
           options={{ title: "Login" }}
         />
         <Stack.Screen
-          name="consulta-cep"
-          component={ConsultaCep}
-          options={{ title: "Consulta CEP" }}
+          name="consultaCnpj"
+          component={ConsultaCnpj}
+          options={{ title: "Consulta CNPJ" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

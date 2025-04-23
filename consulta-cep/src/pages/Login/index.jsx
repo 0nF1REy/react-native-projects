@@ -26,7 +26,7 @@ const Login = ({ placeholder }) => {
   }
 
   function handleLogin() {
-    navigation.navigate("consulta-cep");
+    navigation.navigate("consultaCnpj");
   }
 
   return (
