@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'https://brasilapi.com.br/api/'
+    baseURL: "https://brasilapi.com.br/api/"
 });
 
 export default api;
