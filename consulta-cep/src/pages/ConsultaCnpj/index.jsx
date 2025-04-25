@@ -1,32 +1,39 @@
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
-import api from "../../services/BrasilApi";
+import api from "../../services/ApiProduto";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import { Container, ContainerCnpj, Label } from "./styles";
 import { View, Alert } from "react-native";
+import LoadingModal from "../LoadingModal";
 
 export default function ConsultaCnpj() {
-  const [cnpj, setCnpj] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [numero, setNumero] = useState("");
-  const [cep, setCep] = useState("");
-  const [municipio, setMunicipio] = useState("");
+  const [unidade, setUnidade] = useState("");
+  const [valor, setValor] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  async function buscarCnpj() {
+  function gravar() {
+    setLoading(true);
+    setTimeout(function () {
+      setLoading(false);
+
+    }, 2000);
+  }
+
+  async function buscarApi() {
     try {
-      const resposta = await api.get(`cnpj/v1/${cnpj}`);
+      const resposta = await api.get(`produto`);
       const data = resposta.data;
 
-      setLogradouro(data.logradouro || "");
-      setNumero(data.numero || "");
-      setCep(data.cep ? data.cep.toString() : "");
-      setMunicipio(data.municipio || "");
+      setUnidade(data.unidade || "");
+      setValor(data.valor || "");
+      setDescricao(data.descricao || "");
     } catch (error) {
-      console.error("Erro ao buscar CNPJ:", error);
+      console.error("Erro ao Consultar a API:", error);
       Alert.alert(
         "Erro",
-        "Erro ao buscar CNPJ. Verifique se o número está correto."
+        "Erro na consulta da API. Verifique se as informações estão corretas."
       );
     }
   }
@@ -34,49 +41,40 @@ export default function ConsultaCnpj() {
   return (
     <Container>
       <View>
-        <Label>CNPJ</Label>
-        <ContainerCnpj>
-          <InputField
-            placeholder="CNPJ"
-            value={cnpj}
-            onChangeText={(text) => setCnpj(text)}
-            keyboardType="numeric"
-          />
-          <Button onPress={buscarCnpj}>
-            <Icon name="search" size={24} color="#fff" />
-          </Button>
-        </ContainerCnpj>
+        <Label>UNIDADE</Label>
+
+        <InputField
+          placeholder="Unidade"
+          value={unidade}
+          onChangeText={(text) => setUnidade(text)}
+          keyboardType="numeric"
+        />
+
       </View>
 
-      <Label>CEP</Label>
+      <Label>VALOR</Label>
       <InputField
-        placeholder="CEP"
-        value={cep}
-        onChangeText={(text) => setCep(text)}
+        placeholder="Valor"
+        value={valor}
+        onChangeText={(text) => setValor(text)}
         keyboardType="numeric"
       />
 
-      <Label>Logradouro</Label>
+      <Label>DESCRICAO</Label>
       <InputField
-        placeholder="Logradouro"
-        value={logradouro}
-        onChangeText={(text) => setLogradouro(text)}
+        placeholder="Descrição"
+        value={descricao}
+        onChangeText={(text) => setDescricao(text)}
+        keyboardType="text"
       />
 
-      <Label>Município</Label>
-      <InputField
-        placeholder="Município"
-        value={municipio}
-        onChangeText={(text) => setMunicipio(text)}
-      />
-
-      <Label>Número</Label>
-      <InputField
-        placeholder="Número"
-        value={numero}
-        onChangeText={(text) => setNumero(text)}
-        keyboardType="numeric"
-      />
+      <Label>GRAVAR</Label>
+      <ContainerCnpj>
+        <Button onPress={gravar}>
+          <Icon name="save" size={24} color="#fff" />
+        </Button>
+        <LoadingModal visible={loading} />
+      </ContainerCnpj>
     </Container>
   );
 }

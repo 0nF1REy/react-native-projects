@@ -11,6 +11,7 @@
 |npm install @fortawesome/free-solid-svg-icons                        |
 |npm install react-native-vector-icons                                |
 |npx expo install styled-components                                   |
+|npm install react-native-fast-image                                  |
 |=====================================================================|
 |feat: Created a new project and carried out the scaffolding increment|
 |=====================================================================|
