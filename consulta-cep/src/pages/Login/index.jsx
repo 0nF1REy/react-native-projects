@@ -26,7 +26,7 @@ const Login = ({ placeholder }) => {
   }
 
   function handleLogin() {
-    navigation.navigate("consultaCnpj");
+    navigation.navigate("MinhaAPI");
   }
 
   return (

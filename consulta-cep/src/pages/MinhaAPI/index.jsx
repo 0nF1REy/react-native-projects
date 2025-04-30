@@ -7,18 +7,45 @@ import { Container, ContainerCnpj, Label } from "./styles";
 import { View, Alert } from "react-native";
 import LoadingModal from "../LoadingModal";
 
-export default function ConsultaCnpj() {
+export default function MinhaAPI({ navigation }) {
+
+  function handleRegisters() {
+    navigation.navigate("Registers");
+  }
+
   const [unidade, setUnidade] = useState("");
   const [valor, setValor] = useState("");
   const [descricao, setDescricao] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function gravar() {
+  async function gravar() {
     setLoading(true);
-    setTimeout(function () {
-      setLoading(false);
 
-    }, 2000);
+    let data = {
+      // descricao
+      descricao: descricao,
+      valor: valor,
+      unidade: unidade
+    };
+
+    // O produto é o endpoint da API
+    const response = await api.post('produto', data);
+
+    if (response.status == 201) {
+      setLoading(false);
+      setDescricao("");
+      setValor("");
+      setUnidade("");
+    } else {
+      setLoading(false);
+      alert("Erro ao cadastrar produto");
+    }
+
+
+    // setTimeout(function () {
+    //   setLoading(false);
+
+    // }, 2000);
   }
 
   async function buscarApi() {
@@ -41,10 +68,10 @@ export default function ConsultaCnpj() {
   return (
     <Container>
       <View>
-        <Label>UNIDADE</Label>
+        <Label>Unidade de Medida</Label>
 
         <InputField
-          placeholder="Unidade"
+          placeholder="Insira a unidade de media"
           value={unidade}
           onChangeText={(text) => setUnidade(text)}
           keyboardType="numeric"
@@ -72,6 +99,9 @@ export default function ConsultaCnpj() {
       <ContainerCnpj>
         <Button onPress={gravar}>
           <Icon name="save" size={24} color="#fff" />
+        </Button>
+        <Button onPress={handleRegisters}>
+        <Icon name="play" size={24} color="#fff" />
         </Button>
         <LoadingModal visible={loading} />
       </ContainerCnpj>

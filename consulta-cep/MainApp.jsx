@@ -2,7 +2,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/pages/Login";
-import ConsultaCnpj from "./src/pages/ConsultaCnpj";
+import MinhaAPI from "./src/pages/MinhaAPI";
+import Registers from "./src/pages/Registers";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
 
@@ -30,9 +31,14 @@ export default function MainApp() {
           options={{ title: "Login" }}
         />
         <Stack.Screen
-          name="consultaCnpj"
-          component={ConsultaCnpj}
-          options={{ title: "Consulta CNPJ" }}
+          name="MinhaAPI"
+          component={MinhaAPI}
+          options={{ title: "Minha API" }}
+        />
+        <Stack.Screen
+          name="Registers"
+          component={Registers}
+          options={{ title: "Registros" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -3,7 +3,7 @@ import Icon from "react-native-vector-icons/Feather";
 import api from "../../services/ApiProduto";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
-import { Container, ContainerCnpj, Label } from "./styles";
+import { Container, ContainerCnpj, Label } from "../MinhaAPI/styles";
 import { View, Alert } from "react-native";
 
 export default function ConsultaCnpj() {
