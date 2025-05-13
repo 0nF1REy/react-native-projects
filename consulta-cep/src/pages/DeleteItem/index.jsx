@@ -1,52 +1,80 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, Text } from "react-native";
+import { Alert } from "react-native";
 import LoadingModal from "../LoadingModal";
 import api from "../../services/ApiProduto";
-import { ProductItem } from "../../components/ProductItem";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  Container,
+  Title,
+  StyledButton,
+  ButtonText,
+  Highlight,
+} from "./styles";
 
-const Registers = ({ }) => {
+const DeleteItem = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { id } = route.params;
 
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [descricao, setDescricao] = useState("");
 
-    // [] Matriz vazia
-    const [dados, setDados] = useState([]);
+  useEffect(() => {
+    buscarProduto();
+  }, []);
 
-    // Quando a tela carregar, chama a função buscarDados
-    useEffect(() => {
-        buscarDados();
-    }, []);
-
-    // [] Significa que vai executar uma vez (Quando a tela carregar)
-    async function buscarDados() {
-        setLoading(true);
-
-        const response = await api.get('produto');
-
-        if (response.status == 200) {
-            setDados(response.data);
-        } else {
-            alert("Não foi possível carregar os produtos");
-        }
-
-        setLoading(false);
+  async function buscarProduto() {
+    setLoading(true);
+    try {
+      const response = await api.get(`produto/${id}`);
+      if (response.status === 200) {
+        setDescricao(response.data.descricao);
+      } else {
+        alert("Não foi possível carregar o produto");
+      }
+    } catch (err) {
+      alert("Erro ao buscar produto");
     }
+    setLoading(false);
+  }
 
-    return (
-        <View>
-            <FlatList
-                data={dados}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => {
-                    return (
-                        <ProductItem text={item.descricao} />
-                    );
-                }}
-            />
+  async function excluirProduto() {
+    setLoading(true);
+    try {
+      const response = await api.delete(`produto/${id}`);
+      if (response.status === 200) {
+        Alert.alert("Sucesso", "Produto excluído com sucesso!");
+        navigation.goBack();
+      } else {
+        alert("Erro ao excluir");
+      }
+    } catch (err) {
+      alert("Erro ao excluir");
+    }
+    setLoading(false);
+  }
 
-            <LoadingModal visible={loading} />
+  return (
+    <Container>
+      <Title>
+        Tem certeza que deseja excluir o produto:{" "}
+        <Highlight>{descricao}</Highlight>?
+      </Title>
 
-        </View>
-    );
+      <StyledButton onPress={excluirProduto}>
+        <ButtonText>Sim, excluir</ButtonText>
+      </StyledButton>
+
+      <StyledButton
+        onPress={() => navigation.goBack()}
+        style={{ backgroundColor: "#aaa" }}
+      >
+        <ButtonText>Cancelar</ButtonText>
+      </StyledButton>
+
+      <LoadingModal visible={loading} />
+    </Container>
+  );
 };
 
-export default Registers;
+export default DeleteItem;

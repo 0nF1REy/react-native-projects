@@ -3,15 +3,15 @@ import { Item, ItemText, Button, ButtonGroup } from "./styles";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 
-const ProductItem = ({ text }) => {
+const ProductItem = ({ text, id }) => {
   const navigation = useNavigation();
 
   const handleEditItem = () => {
-    navigation.navigate("EditItem");
+    navigation.navigate("EditItem", { id });
   };
 
   const handleDeleteItem = () => {
-    navigation.navigate("DeleteItem");
+    navigation.navigate("DeleteItem", { id });
   };
 
   return (

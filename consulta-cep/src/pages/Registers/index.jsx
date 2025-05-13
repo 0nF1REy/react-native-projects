@@ -39,7 +39,9 @@ const Registers = () => {
         <FlatList
           data={dados}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <ProductItem text={item.descricao} />}
+          renderItem={({ item }) => (
+            <ProductItem text={item.descricao} id={item.id} />
+          )}
         />
       )}
     </Container>
