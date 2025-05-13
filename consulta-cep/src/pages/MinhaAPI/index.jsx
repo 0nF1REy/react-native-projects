@@ -1,110 +1,103 @@
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import api from "../../services/ApiProduto";
-import Button from "../../components/Button";
-import InputField from "../../components/InputField";
-import { Container, ContainerCnpj, Label } from "./styles";
-import { View, Alert } from "react-native";
+import {
+  Container,
+  ActionButtonsContainer,
+  ErrorText,
+  SuccessText,
+  Button,
+  ButtonText,
+  IconContainer,
+} from "./styles";
 import LoadingModal from "../LoadingModal";
+import InputWithLabel from "../../components/InputWithLabel";
 
 export default function MinhaAPI({ navigation }) {
-
-  function handleRegisters() {
-    navigation.navigate("Registers");
-  }
-
   const [unidade, setUnidade] = useState("");
   const [valor, setValor] = useState("");
   const [descricao, setDescricao] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   async function gravar() {
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    if (!unidade || !valor || !descricao) {
+      setErrorMessage("Todos os campos devem ser preenchidos!");
+      return;
+    }
+
     setLoading(true);
 
     let data = {
-      // descricao
       descricao: descricao,
       valor: valor,
-      unidade: unidade
+      unidade: unidade,
     };
 
-    // O produto é o endpoint da API
-    const response = await api.post('produto', data);
-
-    if (response.status == 201) {
-      setLoading(false);
-      setDescricao("");
-      setValor("");
-      setUnidade("");
-    } else {
-      setLoading(false);
-      alert("Erro ao cadastrar produto");
-    }
-
-
-    // setTimeout(function () {
-    //   setLoading(false);
-
-    // }, 2000);
-  }
-
-  async function buscarApi() {
     try {
-      const resposta = await api.get(`produto`);
-      const data = resposta.data;
-
-      setUnidade(data.unidade || "");
-      setValor(data.valor || "");
-      setDescricao(data.descricao || "");
+      const response = await api.post("produto", data);
+      if (response.status === 201) {
+        setDescricao("");
+        setValor("");
+        setUnidade("");
+        setSuccessMessage("Produto cadastrado com sucesso!");
+      } else {
+        setErrorMessage("Erro ao cadastrar produto.");
+      }
     } catch (error) {
-      console.error("Erro ao Consultar a API:", error);
-      Alert.alert(
-        "Erro",
-        "Erro na consulta da API. Verifique se as informações estão corretas."
-      );
+      console.error("Erro ao cadastrar:", error);
+      setErrorMessage("Erro ao cadastrar produto.");
     }
+
+    setLoading(false);
   }
 
   return (
     <Container>
-      <View>
-        <Label>Unidade de Medida</Label>
-
-        <InputField
-          placeholder="Insira a unidade de media"
-          value={unidade}
-          onChangeText={(text) => setUnidade(text)}
-          keyboardType="numeric"
-        />
-
-      </View>
-
-      <Label>VALOR</Label>
-      <InputField
-        placeholder="Valor"
-        value={valor}
-        onChangeText={(text) => setValor(text)}
+      <InputWithLabel
+        label="Unidade de Medida"
+        value={unidade}
+        onChangeText={(text) => setUnidade(text)}
+        placeholder="Insira a unidade de medida"
         keyboardType="numeric"
       />
-
-      <Label>DESCRICAO</Label>
-      <InputField
-        placeholder="Descrição"
+      <InputWithLabel
+        label="Valor"
+        value={valor}
+        onChangeText={(text) => setValor(text)}
+        placeholder="Valor"
+        keyboardType="numeric"
+      />
+      <InputWithLabel
+        label="Descrição"
         value={descricao}
         onChangeText={(text) => setDescricao(text)}
-        keyboardType="text"
+        placeholder="Descrição"
+        keyboardType="default"
       />
 
-      <Label>GRAVAR</Label>
-      <ContainerCnpj>
+      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+      {successMessage && <SuccessText>{successMessage}</SuccessText>}
+
+      <ActionButtonsContainer>
         <Button onPress={gravar}>
-          <Icon name="save" size={24} color="#fff" />
+          <ButtonText>Salvar</ButtonText>
+          <IconContainer>
+            <Icon name="save" size={24} color="#fff" />
+          </IconContainer>
         </Button>
-        <Button onPress={handleRegisters}>
-        <Icon name="play" size={24} color="#fff" />
+        <Button onPress={() => navigation.navigate("Registers")}>
+          <ButtonText>Listar</ButtonText>
+          <IconContainer>
+            <Icon name="play" size={24} color="#fff" />
+          </IconContainer>
         </Button>
         <LoadingModal visible={loading} />
-      </ContainerCnpj>
+      </ActionButtonsContainer>
     </Container>
   );
 }

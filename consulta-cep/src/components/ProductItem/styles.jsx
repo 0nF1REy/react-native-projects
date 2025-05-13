@@ -1,27 +1,35 @@
 import styled from "styled-components/native";
 
 export const Item = styled.View`
-  flex: 1;
-  flex-direction: row;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 16px;
-  padding-top: 16px;
-  background-color: ${({ theme }) => theme.colors.primary};
   width: 100%;
-  border-color: black;
-  border-radius: 8px;
-  margin-bottom: 8px;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  background-color: #213a8c;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.border};
+`;
+
+export const ItemText = styled.Text`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.articleBg};
+  flex: 1;
+`;
+
+export const ButtonGroup = styled.View`
+  flex-direction: row;
 `;
 
 export const Button = styled.TouchableOpacity`
-  width: 25%;
-  flex: 1;
-  flex-direction: row;
-`;
-
-export const ViewContainer = styled.View`
-  padding-top: 16px;
-  padding-bottom: 16px;
+  width: 40px;
+  height: 40px;
+  margin-left: 8px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.articleBg};
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
 `;

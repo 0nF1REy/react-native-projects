@@ -1,7 +1,7 @@
 import React from "react";
-import { InputWrapper, Input, Label } from "./styles";
+import { InputWrapper, Input, Label, ErrorText } from "./styles";
 
-const InputField = ({
+const InputWithLabel = ({
   label,
   value,
   onChangeText,
@@ -23,4 +23,4 @@ const InputField = ({
   );
 };
 
-export default InputField;
+export default InputWithLabel;
