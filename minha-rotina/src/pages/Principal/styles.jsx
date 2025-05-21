@@ -34,10 +34,17 @@ export const TaskDescription = styled.Text`
   margin-top: 4px;
 `;
 
+export const TaskStatusConcluido = styled.Text`
+  background-color: #00ff00;
+`;
+
+export const TaskStatusPendente = styled.Text`
+  background-color: #ff0000;
+`;
+
 export const TaskStatus = styled.Text`
   font-size: 14px;
   margin-top: 8px;
-  color: ${({ status }) => (status === "concluído" ? "green" : "orange")};
   font-weight: bold;
 `;
 

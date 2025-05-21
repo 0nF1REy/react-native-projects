@@ -14,6 +14,8 @@ import {
   ButtonText,
   IconContainer,
   ErrorText,
+  TaskStatusConcluido,
+  TaskStatusPendente,
 } from "./styles";
 import LoadingModal from "../LoadingModal";
 
@@ -22,16 +24,15 @@ export default function Principal({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const dataHoje = new Date().toISOString().split("T")[0]; // formato AAAA-MM-DD
+  const dataHoje = new Date().toISOString().split("T")[0];
 
   async function carregarTarefas() {
     setLoading(true);
     setErrorMessage("");
 
     try {
-      const response = await api.get("/tarefas");
+      const response = await api.get("nota");
       if (response.status === 200) {
-        // Filtra somente tarefas da data atual
         const tarefasHoje = response.data.filter(
           (tarefa) => tarefa.data === dataHoje
         );
@@ -50,7 +51,7 @@ export default function Principal({ navigation }) {
   async function marcarConcluida(id) {
     setLoading(true);
     try {
-      await api.put(`/tarefas/${id}`, { status: "concluído" });
+      await api.put(`/nota/${id}`, { status: "concluído"});
       carregarTarefas();
     } catch (error) {
       console.error("Erro ao atualizar tarefa:", error);
@@ -77,6 +78,14 @@ export default function Principal({ navigation }) {
             <TaskText>{item.titulo}</TaskText>
             {item.descricao !== "" && (
               <TaskDescription>{item.descricao}</TaskDescription>
+            )}
+            {
+            item.status === "concluído" ? 
+            (
+              <TaskStatusConcluido>{item.descricao}</TaskStatusConcluido>
+            ):
+            (
+              <TaskStatusPendente>{item.descricao}</TaskStatusPendente>
             )}
             <TaskStatus status={item.status}>
               {item.status === "concluído" ? "✅ Concluído" : "⌛ Pendente"}

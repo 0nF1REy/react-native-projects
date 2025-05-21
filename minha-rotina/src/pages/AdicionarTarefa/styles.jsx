@@ -36,7 +36,7 @@ export const Button = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 48%;
+  width: 100%;
 `;
 
 export const ButtonText = styled.Text`

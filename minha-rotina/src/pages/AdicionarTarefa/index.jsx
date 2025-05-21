@@ -31,7 +31,7 @@ export default function AdicionarTarefa({ navigation }) {
 
     setLoading(true);
 
-    const novaTarefa = {
+    let data = {
       titulo: titulo.trim(),
       descricao: descricao.trim(),
       status: "pendente",
@@ -39,7 +39,7 @@ export default function AdicionarTarefa({ navigation }) {
     };
 
     try {
-      const response = await api.post("tarefas", novaTarefa);
+      const response = await api.post("nota", data);
 
       if (response.status === 201) {
         setTitulo("");
