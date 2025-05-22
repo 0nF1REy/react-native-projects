@@ -28,18 +28,16 @@ export const TaskText = styled.Text`
   font-weight: bold;
 `;
 
-export const TaskDescription = styled.Text`
-  font-size: 14px;
-  color: #555;
-  margin-top: 4px;
-`;
-
 export const TaskStatusConcluido = styled.Text`
-  background-color: #00ff00;
+  background-color: #367055;
+  border-radius: 3px;
+  color: #fff;
 `;
 
 export const TaskStatusPendente = styled.Text`
-  background-color: #ff0000;
+  background-color: #8c2a2a;
+  border-radius: 3px;
+  color: #fff;
 `;
 
 export const TaskStatus = styled.Text`

@@ -7,7 +7,6 @@ import {
   TaskList,
   TaskItem,
   TaskText,
-  TaskDescription,
   TaskStatus,
   ActionButtonsContainer,
   Button,
@@ -76,9 +75,6 @@ export default function Principal({ navigation }) {
         renderItem={({ item }) => (
           <TaskItem onPress={() => marcarConcluida(item.id)}>
             <TaskText>{item.titulo}</TaskText>
-            {item.descricao !== "" && (
-              <TaskDescription>{item.descricao}</TaskDescription>
-            )}
             {
             item.status === "concluído" ? 
             (
