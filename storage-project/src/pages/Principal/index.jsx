@@ -2,18 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Container } from "./styles";
 import { Image } from "react-native";
 import LoadingModal from "../LoadingModal";
+import { useRoute } from "@react-navigation/native";
 import CardComponent from "../../components/Card";
 import TextComponent from "../../components/Text";
 import PostCreatorComponent from "../../components/PostCreator";
-import PreviewModal from "../PreviewModal"; // <-- Import do modal
+import PreviewModal from "../PreviewModal"; 
 
 export default function Principal() {
+  const route = useRoute(); 
+  const { username } = route.params; 
   const [loading, setLoading] = useState(true);
   const [imagemSource, setImagemSource] = useState(null);
   const [text, setText] = useState("");
   const [icon] = useState("heart");
 
-  const [showPreviewModal, setShowPreviewModal] = useState(false); // <-- Estado do modal
+  const [showPreviewModal, setShowPreviewModal] = useState(false); 
 
   useEffect(() => {
     const carregarImagem = async () => {
@@ -38,7 +41,7 @@ export default function Principal() {
 
   return (
     <Container>
-      <TextComponent text="Olá, Avery Collins!" />
+      <TextComponent text={`Olá, ${username}`} />
 
       <PostCreatorComponent
         value={text}

@@ -24,7 +24,7 @@ const Login = ({ placeholder }) => {
   }
 
   function handleLogin() {
-    navigation.navigate("Principal");
+    navigation.navigate("Principal", { username });
   }
 
   return (
