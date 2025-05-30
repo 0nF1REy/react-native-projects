@@ -19,8 +19,19 @@ export const CardTitle = styled.Text`
   color: #333;
 `;
 
-export const CardDescription = styled.Text`
+export const FooterRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 16px 12px 16px;
+`;
+
+export const DescriptionText = styled.Text`
   font-size: 14px;
   color: #666;
-  margin: 0 16px 12px 16px;
+  flex: 1;
+`;
+
+export const HeartIcon = styled.TouchableOpacity`
+  margin-left: 8px;
 `;

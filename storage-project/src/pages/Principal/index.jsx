@@ -4,10 +4,13 @@ import { Image } from "react-native";
 import LoadingModal from "../LoadingModal";
 import CardComponent from "../../components/Card";
 import TextComponent from "../../components/Text";
+import PostCreatorComponent from "../../components/PostCreator";
 
 export default function Principal() {
   const [loading, setLoading] = useState(true);
   const [imagemSource, setImagemSource] = useState(null);
+  const [text, setText] = useState("");
+  const [icon] = useState("heart");
 
   useEffect(() => {
     const carregarImagem = async () => {
@@ -34,10 +37,19 @@ export default function Principal() {
     <Container>
       <TextComponent text="Olá, Avery Collins!" />
 
+      <PostCreatorComponent
+        value={text}
+        onChangeText={setText}
+        onAttachPress={() => {}}
+        onSendPress={() => {}}
+        attachText="Anexar Imagem"
+      />
+
       <CardComponent
         title="Imagem"
         description="Foto de usuário"
         imageSource={imagemSource}
+        iconName={icon}
       />
     </Container>
   );

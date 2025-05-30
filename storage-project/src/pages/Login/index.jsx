@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import {
   AvatarContainer,
   FormContainer,
-  IconButton,
   ImageAvatar,
-  InputField,
-  InputPassword,
-  InputWrapper,
   LoginView,
-  Label,
+  StyledTextComponent,
   SuperiorView,
-  TextSuperior,
 } from "./styles";
 import ButtonComponent from "../../components/Button";
+import InputWithIconComponent from "../../components/InputWithIcon";
 
 const Login = ({ placeholder }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [icon, setIcon] = useState("eye-off");
   const [hidePassword, setHidePassword] = useState(true);
   const navigation = useNavigation();
@@ -33,34 +30,33 @@ const Login = ({ placeholder }) => {
   return (
     <LoginView>
       <SuperiorView>
-        <TextSuperior>Login</TextSuperior>
+        <StyledTextComponent text="Login" />
       </SuperiorView>
       <AvatarContainer>
         <ImageAvatar source={require("../../../assets/images/kagura.png")} />
       </AvatarContainer>
 
       <FormContainer>
-        <Label>Username</Label>
-        <InputWrapper>
-          <InputField placeholder="Type your username..." />
-          <IconButton>
-            <Icon name="user" size={24} color="#888" />
-          </IconButton>
-        </InputWrapper>
+        <InputWithIconComponent
+          label="Username"
+          placeholder="Type your username..."
+          iconName="user"
+          value={username}
+          onChangeText={setUsername}
+        />
 
-        <Label>Password</Label>
-        <InputWrapper>
-          <InputPassword
-            placeholder={placeholder || "Type your password..."}
-            secureTextEntry={hidePassword}
-          />
-          <IconButton onPress={togglePasswordVisibility}>
-            <Icon name={icon} size={24} color="#888" />
-          </IconButton>
-        </InputWrapper>
+        <InputWithIconComponent
+          label="Password"
+          placeholder={placeholder || "Type your password..."}
+          iconName={icon}
+          isPassword={true}
+          secureTextEntry={hidePassword}
+          onToggleVisibility={togglePasswordVisibility}
+          value={password}
+          onChangeText={setPassword}
+        />
 
         <ButtonComponent onpress={handleLogin} label="Começar" />
-
         <ButtonComponent label="Entrar com o google" />
       </FormContainer>
     </LoginView>
