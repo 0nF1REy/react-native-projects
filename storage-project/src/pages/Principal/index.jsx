@@ -5,12 +5,15 @@ import LoadingModal from "../LoadingModal";
 import CardComponent from "../../components/Card";
 import TextComponent from "../../components/Text";
 import PostCreatorComponent from "../../components/PostCreator";
+import PreviewModal from "../PreviewModal"; // <-- Import do modal
 
 export default function Principal() {
   const [loading, setLoading] = useState(true);
   const [imagemSource, setImagemSource] = useState(null);
   const [text, setText] = useState("");
   const [icon] = useState("heart");
+
+  const [showPreviewModal, setShowPreviewModal] = useState(false); // <-- Estado do modal
 
   useEffect(() => {
     const carregarImagem = async () => {
@@ -40,9 +43,14 @@ export default function Principal() {
       <PostCreatorComponent
         value={text}
         onChangeText={setText}
-        onAttachPress={() => {}}
+        onAttachPress={() => setShowPreviewModal(true)}
         onSendPress={() => {}}
         attachText="Anexar Imagem"
+      />
+
+      <PreviewModal
+        visible={showPreviewModal}
+        onClose={() => setShowPreviewModal(false)}
       />
 
       <CardComponent

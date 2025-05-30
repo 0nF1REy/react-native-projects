@@ -9,7 +9,7 @@ export const SuperiorView = styled.View`
 
 // Estilização de um componente
 export const StyledTextComponent = styled(TextComponent)`
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
 `;
@@ -27,9 +27,8 @@ export const AvatarContainer = styled.View`
 `;
 
 export const ImageAvatar = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 120px;
+  height: 120px;
 `;
 
 export const FormContainer = styled.View``;

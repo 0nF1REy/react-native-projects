@@ -30,10 +30,12 @@ const Login = ({ placeholder }) => {
   return (
     <LoginView>
       <SuperiorView>
-        <StyledTextComponent text="Login" />
+        <StyledTextComponent text="Bem-vindo! Faça login na sua conta" />
       </SuperiorView>
       <AvatarContainer>
-        <ImageAvatar source={require("../../../assets/images/kagura.png")} />
+        <ImageAvatar
+          source={require("../../../assets/images/default-avatar.png")}
+        />
       </AvatarContainer>
 
       <FormContainer>

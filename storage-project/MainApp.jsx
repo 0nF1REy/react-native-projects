@@ -32,7 +32,7 @@ export default function MainApp() {
         <Stack.Screen
           name="Principal"
           component={Principal}
-          options={{ title: "Tela Principal" }}
+          options={{ title: "Home" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
