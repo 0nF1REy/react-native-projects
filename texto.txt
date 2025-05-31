@@ -10,6 +10,8 @@
 |npm install @fortawesome/react-native-fontawesome                    |
 |npm install @fortawesome/free-solid-svg-icons                        |
 |npm install react-native-vector-icons                                |
+|npm install react-native-safe-area-context                           |
+|npm install @react-native-async-storage/async-storage                |
 |npx expo install styled-components                                   |
 |npm install react-native-fast-image                                  |
 |npx expo install expo-image                                          |
