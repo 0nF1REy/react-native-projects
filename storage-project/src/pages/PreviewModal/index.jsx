@@ -4,34 +4,41 @@ import * as ImagePicker from "expo-image-picker";
 import { Container, Box, Preview, Button, ButtonText } from "./styles";
 
 export default function PreviewModal({ visible, onClose }) {
-  const [selectedImage, setSelectedImage] = useState(null);
 
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: "images",
-      allowsEditing: true,
-      quality: 1,
-    });
+  const [image, setImage] = useState();
 
-    if (!result.canceled) {
-      setSelectedImage({ uri: result.assets[0].uri });
+  async function chooseImage() {
+    const rest = await
+    ImagePicker.launchImageLibraryAsync(
+      {
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1
+      }
+    );
+    if(!rest.canceled) {
+      setImage(rest.assets[0]);
     }
-  };
+  }
 
   return (
     <Modal transparent animationType="fade" visible={visible}>
       <Container>
         <Box>
-          <Preview
+          { image ? (<Preview
             source={
-              selectedImage
-                ? selectedImage
-                : require("../../../assets/images/default-image.jpg")
+              image
+            }
+            resizeMode="contain"
+          />):(<Preview
+            source={
+                require("../../../assets/images/default-image.jpg")
             }
             resizeMode="contain"
           />
 
-          <Button onPress={pickImage}>
+          )}
+
+          <Button onPress={chooseImage}>
             <ButtonText>Escolher Imagem</ButtonText>
           </Button>
 
