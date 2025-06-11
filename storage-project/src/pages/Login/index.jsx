@@ -10,6 +10,8 @@ import {
 } from "./styles";
 import ButtonComponent from "../../components/Button";
 import InputWithIconComponent from "../../components/InputWithIcon";
+import { auth } from "../../firebase/config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ placeholder }) => {
   const [username, setUsername] = useState("");
@@ -25,6 +27,16 @@ const Login = ({ placeholder }) => {
 
   function handleLogin() {
     navigation.navigate("Principal", { username });
+  }
+
+  async function criarUsuario() {
+    let user;
+    user = await createUserWithEmailAndPassword(
+      auth,
+      'email@email.com',
+      '12345'
+    );
+    console.log(user)
   }
 
   return (
@@ -60,6 +72,7 @@ const Login = ({ placeholder }) => {
 
         <ButtonComponent onpress={handleLogin} label="Começar" />
         <ButtonComponent label="Entrar com o google" />
+        <ButtonComponent onpress={criarUsuario} label="Realizar cadastro" />
       </FormContainer>
     </LoginView>
   );
