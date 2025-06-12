@@ -5,6 +5,7 @@ export const Label = styled.Text`
   margin-bottom: 8px;
   margin-top: 16px;
   color: ${({ theme }) => theme.colors.text};
+  font-weight: bold;
 `;
 
 export const InputWrapper = styled.View`

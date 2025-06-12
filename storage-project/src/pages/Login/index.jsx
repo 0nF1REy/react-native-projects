@@ -11,7 +11,7 @@ import {
 import ButtonComponent from "../../components/Button";
 import InputWithIconComponent from "../../components/InputWithIcon";
 import { auth } from "../../firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ placeholder }) => {
   const [username, setUsername] = useState("");
@@ -25,18 +25,21 @@ const Login = ({ placeholder }) => {
     setHidePassword((prev) => !prev);
   }
 
-  function handleLogin() {
-    navigation.navigate("Principal", { username });
-  }
-
   async function criarUsuario() {
     let user;
     user = await createUserWithEmailAndPassword(
       auth,
-      'email@email.com',
-      '12345'
+      'alanryan619@email.com',
+      '12345a'
     );
     console.log(user)
+  }
+
+  async function login() {
+    let user = await signInWithEmailAndPassword(auth, username, password);
+    if (user.user) {
+      navigation.navigate("Principal", { username });
+    }
   }
 
   return (
@@ -52,16 +55,16 @@ const Login = ({ placeholder }) => {
 
       <FormContainer>
         <InputWithIconComponent
-          label="Username"
-          placeholder="Type your username..."
+          label="Email"
+          placeholder="Forneça um email..."
           iconName="user"
           value={username}
           onChangeText={setUsername}
         />
 
         <InputWithIconComponent
-          label="Password"
-          placeholder={placeholder || "Type your password..."}
+          label="Senha"
+          placeholder={placeholder || "Forneça uma senha..."}
           iconName={icon}
           isPassword={true}
           secureTextEntry={hidePassword}
@@ -70,7 +73,7 @@ const Login = ({ placeholder }) => {
           onChangeText={setPassword}
         />
 
-        <ButtonComponent onpress={handleLogin} label="Começar" />
+        <ButtonComponent onpress={login} label="Entrar" />
         <ButtonComponent label="Entrar com o google" />
         <ButtonComponent onpress={criarUsuario} label="Realizar cadastro" />
       </FormContainer>

@@ -41,8 +41,8 @@ export default function Principal() {
 
   return (
     <Container>
-      <TextComponent text={`Olá, ${username}`} />
-
+      {/* <TextComponent text={`Olá, ${username}`} /> */}
+      <TextComponent text={`Olá, Alan Ryan!`} />
       <PostCreatorComponent
         value={text}
         onChangeText={setText}
@@ -57,6 +57,24 @@ export default function Principal() {
       />
 
       <CardComponent
+        title="Imagem"
+        description="Foto de usuário"
+        imageSource={imagemSource}
+        iconName={icon}
+      />
+            <CardComponent
+        title="Imagem"
+        description="Foto de usuário"
+        imageSource={imagemSource}
+        iconName={icon}
+      />
+            <CardComponent
+        title="Imagem"
+        description="Foto de usuário"
+        imageSource={imagemSource}
+        iconName={icon}
+      />
+                  <CardComponent
         title="Imagem"
         description="Foto de usuário"
         imageSource={imagemSource}
