@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { captureRef } from "react-native-view-shot";
-import { View, StyleSheet, ImageSourcePropType } from "react-native";
+import { View, StyleSheet, ImageSourcePropType, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
+import domtoimage from "dom-to-image";
 
 import ImageViewer from "@/components/ImageViewer";
 import Button from "@/components/Button";
@@ -16,7 +17,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 const PlaceholderImage = require("@/assets/images/background-image.jpg");
 
 export default function Index() {
-  const imageRef = useRef<View>(null);
+  const imageRef = useRef<View | HTMLElement | null>(null);
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
@@ -59,18 +60,41 @@ export default function Index() {
   };
 
   const onSaveImageAsync = async () => {
-    try {
-      const localUri = await captureRef(imageRef, {
-        height: 440,
-        quality: 1,
-      });
+    if (Platform.OS !== "web") {
+      try {
+        const localUri = await captureRef(imageRef, {
+          height: 440,
+          quality: 1,
+        });
 
-      await MediaLibrary.saveToLibraryAsync(localUri);
-      if (localUri) {
-        alert("Saved!");
+        await MediaLibrary.saveToLibraryAsync(localUri);
+        if (localUri) {
+          alert("Saved!");
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
+    } else {
+      try {
+        if (!imageRef.current) {
+          throw new Error("imageRef.current is null");
+        }
+
+        const element = imageRef.current as HTMLElement;
+
+        const dataUrl = await domtoimage.toJpeg(element, {
+          quality: 0.95,
+          width: 320,
+          height: 440,
+        });
+
+        let link = document.createElement("a");
+        link.download = "sticker-smash.jpeg";
+        link.href = dataUrl;
+        link.click();
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -78,7 +102,16 @@ export default function Index() {
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <View ref={imageRef} collapsable={false}>
+          <View
+            ref={(node) => {
+              if (Platform.OS === "web") {
+                imageRef.current = node as HTMLElement | null;
+              } else {
+                imageRef.current = node;
+              }
+            }}
+            collapsable={false}
+          >
             <ImageViewer
               imgSource={PlaceholderImage}
               selectedImage={selectedImage}
