@@ -1,94 +1,133 @@
-import React from "react";
-import { ScrollView, View, Text, Image, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  ScrollView,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { getMovieList, getImageUrl } from "../actions/movieList";
 
-// Server Component para listar filmes
-export default async function MoviesPage() {
-  try {
-    const movieData = await getMovieList(1);
-    const movies = movieData.results.slice(0, 10); 
+export default function MoviesPage() {
+  const [movies, setMovies] = useState([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        const movieData = await getMovieList(1);
+        setMovies(movieData.results.slice(0, 10));
+        setTotalResults(movieData.total_results);
+      } catch (err: any) {
+        setError(true);
+        setErrorMessage(err.message || "Erro desconhecido");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMovies();
+  }, []);
+
+  if (loading) {
     return (
-      <ScrollView style={styles.container}>
-        <Text style={styles.title}>Filmes Populares</Text>
-
-        {movies.map((movie) => (
-          <View key={movie.id} style={styles.movieCard}>
-            <Image
-              source={{ uri: getImageUrl(movie.poster_path) }}
-              style={styles.poster}
-              resizeMode="cover"
-            />
-            <View style={styles.movieInfo}>
-              <Text style={styles.movieTitle}>{movie.title}</Text>
-              <Text style={styles.movieYear}>
-                {new Date(movie.release_date).getFullYear()}
-              </Text>
-              <Text style={styles.movieRating}>
-                ⭐ {movie.vote_average.toFixed(1)}/10
-              </Text>
-              <Text style={styles.movieOverview} numberOfLines={3}>
-                {movie.overview}
-              </Text>
-            </View>
-          </View>
-        ))}
-
-        <Text style={styles.footer}>
-          Total: {movieData.total_results} filmes encontrados
-        </Text>
-      </ScrollView>
+      <View style={[styles.container, styles.centerContent]}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
     );
-  } catch {
+  }
+
+  if (error) {
     return (
-      <View style={styles.errorContainer}>
+      <View style={[styles.container, styles.centerContent]}>
         <Text style={styles.errorText}>
-          Erro ao carregar filmes. Verifique sua chave da API do TMDB.
+          Erro ao carregar filmes: {errorMessage}
         </Text>
       </View>
     );
   }
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>Filmes Populares</Text>
+
+      {movies.map((movie) => (
+        <View key={movie.id} style={styles.movieCard}>
+          <Image
+            source={{
+              uri: movie.poster_path
+                ? getImageUrl(movie.poster_path)
+                : "https://via.placeholder.com/100x150?text=Sem+Imagem",
+            }}
+            style={styles.poster}
+            resizeMode="cover"
+          />
+          <View style={styles.movieInfo}>
+            <Text style={styles.movieTitle}>{movie.title}</Text>
+            <Text style={styles.movieYear}>
+              {movie.release_date
+                ? new Date(movie.release_date).getFullYear()
+                : "N/A"}
+            </Text>
+            <Text style={styles.movieRating}>
+              ⭐ {movie.vote_average.toFixed(1)}/10
+            </Text>
+            <Text style={styles.movieOverview} numberOfLines={3}>
+              {movie.overview}
+            </Text>
+          </View>
+        </View>
+      ))}
+
+      <Text style={styles.footer}>
+        Total: {totalResults} filmes encontrados
+      </Text>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
     padding: 16,
+    backgroundColor: "#fff",
+  },
+  centerContent: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-    color: "#333",
+    marginBottom: 16,
   },
   movieCard: {
     flexDirection: "row",
-    backgroundColor: "white",
+    marginBottom: 20,
     borderRadius: 8,
-    marginBottom: 16,
-    padding: 12,
-    shadowColor: "#000",
+    backgroundColor: "#f9f9f9",
+    overflow: "hidden",
+    elevation: 2, 
+    shadowColor: "#000", 
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   poster: {
-    width: 80,
-    height: 120,
-    borderRadius: 6,
+    width: 100,
+    height: 150,
   },
   movieInfo: {
     flex: 1,
-    marginLeft: 12,
+    padding: 12,
     justifyContent: "space-between",
   },
   movieTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
-    color: "#333",
     marginBottom: 4,
   },
   movieYear: {
@@ -98,29 +137,22 @@ const styles = StyleSheet.create({
   },
   movieRating: {
     fontSize: 14,
-    color: "#f39c12",
-    marginBottom: 8,
+    color: "#f5a623",
+    marginBottom: 6,
   },
   movieOverview: {
-    fontSize: 12,
-    color: "#666",
-    lineHeight: 16,
+    fontSize: 13,
+    color: "#444",
   },
   footer: {
     textAlign: "center",
+    fontSize: 14,
     color: "#999",
-    marginTop: 20,
-    marginBottom: 40,
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
+    marginTop: 16,
+    marginBottom: 32,
   },
   errorText: {
     fontSize: 16,
-    color: "#e74c3c",
-    textAlign: "center",
+    color: "red",
   },
 });
