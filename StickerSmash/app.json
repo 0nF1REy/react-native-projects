@@ -24,12 +24,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://app-rsc.expo.app"
-        }
-      ],
+      "expo-router",
       [
         "expo-splash-screen",
         {
