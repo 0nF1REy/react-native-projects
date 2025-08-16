@@ -1,4 +1,15 @@
-# React Native Projects Collection 📱
+<h1 align="center">
+   React Native Projects Collection
+</h1>
+
+<div align="center">
+
+![Maintenance](https://img.shields.io/maintenance/yes/2025?style=for-the-badge)
+![License MIT](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+
+</div>
+
+## 📖 Descrição
 
 Este repositório contém uma coleção de projetos React Native desenvolvidos para aprendizado e experimentação com diferentes funcionalidades e tecnologias.
 
@@ -37,29 +48,34 @@ Este repositório contém uma coleção de projetos React Native desenvolvidos p
 ### Execução Geral
 
 1. **Clone o repositório:**
+
    ```bash
-   git clone <url-do-repositorio>
+   git clone https://github.com/0nF1REy/react-native-projects.git
    cd react-native-projects
    ```
 
 2. **Navegue até o projeto desejado:**
+
    ```bash
    cd nome-do-projeto
    ```
 
 3. **Instale as dependências:**
+
    ```bash
    npm install
    ```
 
 4. **Execute o projeto:**
-   
+
    Para projetos Expo:
+
    ```bash
    npx expo start
    ```
-   
+
    Para projetos React Native:
+
    ```bash
    npx react-native run-android
    # ou
@@ -69,15 +85,18 @@ Este repositório contém uma coleção de projetos React Native desenvolvidos p
 ## 📱 Projetos em Destaque
 
 ### StickerSmash
+
 Um editor de imagens interativo onde você pode adicionar stickers emoji às suas fotos. Construído com Expo e React Native.
 
 **Funcionalidades:**
+
 - Seleção de imagens da galeria
 - Adição de stickers emoji
 - Captura de tela da imagem editada
 - Salvamento na galeria do dispositivo
 
 **Como executar:**
+
 ```bash
 cd StickerSmash
 npm install
@@ -85,9 +104,11 @@ npx expo start
 ```
 
 ### Storage Project
+
 Projeto demonstrando integração com Firebase para armazenamento de dados.
 
 **Configuração:**
+
 1. Copie o arquivo de exemplo de configuração:
    ```bash
    cp .env.example .env
@@ -95,9 +116,11 @@ Projeto demonstrando integração com Firebase para armazenamento de dados.
 2. Configure suas credenciais do Firebase no arquivo `.env`
 
 ### Health BMI Calculator
+
 Calculadora de Índice de Massa Corporal com interface intuitiva.
 
 ### Pokemon Search
+
 Aplicativo para buscar e visualizar informações de Pokémon usando a PokéAPI.
 
 ## 🛠️ Tecnologias Utilizadas
@@ -123,24 +146,44 @@ Cada projeto neste repositório demonstra conceitos específicos do desenvolvime
 - Captura e manipulação de imagens
 - Formulários e validação
 
-## 🤝 Contribuição
-
-Este é um repositório de estudos e experimentação. Sinta-se à vontade para:
-
-1. Fazer fork do projeto
-2. Criar uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abrir um Pull Request
-
-## 📄 Licença
-
-Este projeto é destinado para fins educacionais e de aprendizado.
-
-## 📞 Contato
-
-Para dúvidas ou sugestões sobre os projetos, sinta-se à vontade para abrir uma issue.
-
 ---
 
-*Desenvolvido com ❤️ para aprender React Native*
+## 📫 Contribuir
+
+Contribuições são muito bem-vindas! Se você deseja contribuir com o projeto, por favor, siga estes passos:
+
+1.  **Faça um Fork** do repositório.
+
+2.  **Crie uma nova Branch** para sua feature ou correção:
+
+    ```bash
+    git checkout -b feature/nome-da-feature
+    ```
+
+3.  **Faça suas alterações** e realize o commit:
+
+    ```bash
+    git commit -m "feat: Adiciona nova feature"
+    ```
+
+4.  **Envie suas alterações** para o seu fork:
+
+    ```bash
+    git push origin feature/nome-da-feature
+    ```
+
+5.  **Abra um pull request** para a branch `main` do repositório original.
+
+## 📚 Recursos Adicionais
+
+- **<a href="https://www.atlassian.com/br/git/tutorials/making-a-pull-request" target="_blank">📝 Como criar um Pull Request</a>**
+
+- **<a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">💾 Padrão de Commits Convencionais</a>**
+
+## 📜 Licença
+
+Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
+
+> ℹ️ **Aviso de Licença:** © 2025 Alan Ryan da Silva Domingues. Este projeto está licenciado sob os termos da licença MIT. Isso significa que você pode usá-lo, copiá-lo, modificá-lo e distribuí-lo com liberdade, desde que mantenha os avisos de copyright.
+
+⭐ Se este repositório foi útil para você, considere dar uma estrela!
