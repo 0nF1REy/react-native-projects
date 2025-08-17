@@ -146,6 +146,44 @@ Cada projeto neste repositório demonstra conceitos específicos do desenvolvime
 - Captura e manipulação de imagens
 - Formulários e validação
 
+## 👤 Sobre o Desenvolvedor
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+        <br>
+        <a href="https://github.com/0nF1REy" target="_blank">
+          <img src="./readme_images/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan" style="border-radius:50%;border:3px solid #0077B5;">
+        </a>
+        </p>
+        <a href="https://github.com/0nF1REy" target="_blank">
+          <strong>Alan Ryan</strong>
+        </a>
+        </p>
+        ☕ Peopleware | Tech Enthusiast | Code Slinger ☕
+        <br>
+        Apaixonado por código limpo, arquitetura escalável e experiências digitais envolventes
+        </p>
+          Conecte-se comigo:
+        </p>
+        <a href="https://www.linkedin.com/in/alan-ryan-b115ba228" target="_blank">
+          <img src="https://img.shields.io/badge/LinkedIn-Alan_Ryan-0077B5?style=flat&logo=linkedin" alt="LinkedIn">
+        </a>
+        <a href="https://gitlab.com/alanryan619" target="_blank">
+          <img src="https://img.shields.io/badge/GitLab-@0nF1REy-FCA121?style=flat&logo=gitlab" alt="GitLab">
+        </a>
+        <a href="mailto:alanryan619@gmail.com" target="_blank">
+          <img src="https://img.shields.io/badge/Email-alanryan619@gmail.com-D14836?style=flat&logo=gmail" alt="Email">
+        </a>
+        </p>
+    </td>
+  </tr>
+</table>
+
+</div>
+
 ---
 
 ## 📫 Contribuir
