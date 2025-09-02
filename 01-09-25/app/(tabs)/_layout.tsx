@@ -23,7 +23,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="redux"
         options={{
-          title: "Redux Carrinho",
+          title: "Redux",
           tabBarIcon: ({ color }) => (
             <Ionicons name="aperture-outline" size={24} color={color} />
           ),
