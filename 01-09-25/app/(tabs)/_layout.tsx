@@ -29,6 +29,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="counter-redux"
+        options={{
+          title: "Counter",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="calculator-outline" size={24} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
