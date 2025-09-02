@@ -1,6 +1,7 @@
 import { View, Text, Button, FlatList, StyleSheet } from "react-native";
-
-import { useCart } from "../../context/CartContext";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
+import { addItem } from "../../store/slices/cartSlice";
 import CartIcon from "@/components/CartIcon";
 
 const PRODUCTS = [
@@ -10,13 +11,14 @@ const PRODUCTS = [
 ];
 
 export default function HomeScreen() {
-  const { addItem } = useCart();
+  const dispatch = useDispatch();
+  const items = useSelector((state: RootState) => state.cart.items);
 
   const renderProduct = ({ item }: { item: (typeof PRODUCTS)[0] }) => (
     <View style={styles.item}>
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.price}>R$ {item.price.toFixed(2)}</Text>
-      <Button title="Adicionar" onPress={() => addItem(item)} />
+      <Button title="Adicionar" onPress={() => dispatch(addItem(item))} />
     </View>
   );
 
@@ -29,20 +31,17 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id.toString()}
       />
       <CartIcon />
+      <Text style={styles.totalItems}>
+        Total de itens no carrinho:{" "}
+        {items.reduce((sum, i) => sum + i.quantity, 0)}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
+  container: { flex: 1, padding: 10 },
+  header: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
   item: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -51,11 +50,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
-  name: {
-    fontSize: 18,
-  },
-  price: {
-    fontSize: 16,
-    color: "green",
-  },
+  name: { fontSize: 18 },
+  price: { fontSize: 16, color: "green" },
+  totalItems: { marginTop: 10, fontSize: 16, fontWeight: "bold" },
 });

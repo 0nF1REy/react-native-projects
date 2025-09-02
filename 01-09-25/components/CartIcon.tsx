@@ -1,45 +1,38 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { useCart } from "../context/CartContext";
+import { View, Text, TouchableOpacity } from "react-native";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function CartIcon() {
-  const { items } = useCart();
-  const itemCount = items.reduce((count, item) => count + item.quantity, 0);
+const CartIcon: React.FC = () => {
+  const totalItems = useSelector((state: RootState) =>
+    state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
 
   return (
-    <View style={styles.container}>
-  <Ionicons name="cart-outline" size={28} color="black" />
-      {itemCount > 0 && (
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>{itemCount}</Text>
-        </View>
-      )}
-    </View>
+    <TouchableOpacity style={{ marginRight: 16 }}>
+      <View style={{ position: "relative" }}>
+        <Ionicons name="cart" size={24} color="black" />
+        {totalItems > 0 && (
+          <View
+            style={{
+              position: "absolute",
+              top: -8,
+              right: -8,
+              backgroundColor: "red",
+              borderRadius: 8,
+              width: 16,
+              height: 16,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 10 }}>{totalItems}</Text>
+          </View>
+        )}
+      </View>
+    </TouchableOpacity>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-  },
-  text: { fontSize: 28 },
-  badge: {
-    position: "absolute",
-    top: 2,
-    right: 2,
-    backgroundColor: "red",
-    borderRadius: 10,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-  },
-  badgeText: {
-    color: "white",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-});
+export default CartIcon;

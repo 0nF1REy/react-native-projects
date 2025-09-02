@@ -1,14 +1,15 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { CartProvider } from "../context/CartContext";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 export default function RootLayout() {
   return (
-    <CartProvider>
+    <Provider store={store}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="dark" />
-    </CartProvider>
+    </Provider>
   );
 }

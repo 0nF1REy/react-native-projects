@@ -1,41 +1,31 @@
+import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import CartIcon from "../../components/CartIcon";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: true,
-        tabBarActiveTintColor: "#ffd700",
-        tabBarInactiveTintColor: "#aaa",
-        tabBarStyle: {
-          backgroundColor: "#1f1f1f",
-          borderTopWidth: 0,
-          elevation: 5,
-          paddingVertical: 5,
-          height: 60,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "bold",
-        },
+        tabBarActiveTintColor: "#007AFF",
+        headerRight: () => <CartIcon />,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-sharp" size={size} color={color} />
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="cart"
+        name="redux"
         options={{
-          title: "Carrinho",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cart" size={size} color={color} />
+          title: "Redux Carrinho",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="aperture-outline" size={24} color={color} />
           ),
         }}
       />
