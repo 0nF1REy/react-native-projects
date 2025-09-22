@@ -4,10 +4,10 @@ export default function Page04() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        Explorar fora das Tabs arquivo page-04.tsx
+        Explorar fora das Tabs - arquivo page-04.tsx
       </Text>
-      <Text>
-        Essa é a versão acessada pelo Stack do RootLayout funçao
+      <Text style={styles.subtitle}>
+        Essa é a versão acessada pelo Stack do RootLayout - função
         ExploreOutsideTabs
       </Text>
     </View>
@@ -15,6 +15,26 @@ export default function Page04() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  title: { fontSize: 20, fontWeight: "bold" },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f0e1",
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: "serif",
+    fontWeight: "bold",
+    color: "#6b4226",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 18,
+    fontFamily: "serif",
+    color: "#b59b82",
+    textAlign: "center",
+    lineHeight: 24,
+  },
 });
