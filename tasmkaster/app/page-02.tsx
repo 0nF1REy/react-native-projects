@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function ExploreOutsideTabs() {
+export default function Page02() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Explorar fora das Tabs arquivo beltranis.tsx</Text>
+      <Text style={styles.title}>Explorar fora das Tabs arquivo page-02.tsx</Text>
       <Text>Essa é a versão acessada pelo Stack do RootLayout funçao ExploreOutsideTabs</Text>
     </View>
   );
