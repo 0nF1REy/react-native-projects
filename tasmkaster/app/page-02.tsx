@@ -1,81 +1,169 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, TouchableOpacity, Text, Dimensions, Alert, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Dimensions,
+  Alert,
+  StyleSheet,
+  Animated,
+  Vibration,
+} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
+// --- Constantes ---
+const SYMBOL_SIZE = 60;
+const GAME_INITIAL_TIME = 5;
+const SCORE_TO_WIN = 10;
+const INITIAL_LIVES = 3;
+const TIME_DEDUCTION_PER_CLICK = 0.1;
+const TIME_BONUS_ON_MISS = 0.5;
+
 export default function Page02() {
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(3);
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [lives, setLives] = useState(INITIAL_LIVES);
+  const [timeLeft, setTimeLeft] = useState(GAME_INITIAL_TIME);
   const [gameActive, setGameActive] = useState(true);
-  const [symbolPosition, setSymbolPosition] = useState({ x: 100, y: 200 });
+  const [symbolPosition, setSymbolPosition] = useState({ x: 0, y: 0 });
 
-  const SYMBOL_SIZE = 60;
-  const GAME_TIME = 5;
-  
-  const PLAYABLE_WIDTH = screenWidth - SYMBOL_SIZE - 40;
-  const PLAYABLE_HEIGHT = screenHeight - SYMBOL_SIZE - 200;
+  // Valores de animação
+  const symbolScaleAnim = useRef(new Animated.Value(1)).current;
+  const timeBarWidthAnim = useRef(new Animated.Value(screenWidth - 40)).current;
+  const gameOverScaleAnim = useRef(new Animated.Value(0)).current;
 
+  const PLAYABLE_AREA_PADDING_HORIZONTAL = 20;
+  const PLAYABLE_AREA_PADDING_TOP = 100;
+  const PLAYABLE_AREA_PADDING_BOTTOM = 50;
+
+  const PLAYABLE_WIDTH =
+    screenWidth - 2 * PLAYABLE_AREA_PADDING_HORIZONTAL - SYMBOL_SIZE;
+  const PLAYABLE_HEIGHT =
+    screenHeight -
+    PLAYABLE_AREA_PADDING_TOP -
+    PLAYABLE_AREA_PADDING_BOTTOM -
+    SYMBOL_SIZE;
+
+  // Função para animar a escala do símbolo
+  const animateSymbolClick = useCallback(() => {
+    symbolScaleAnim.setValue(0.8);
+    Animated.spring(symbolScaleAnim, {
+      toValue: 1.2,
+      friction: 3,
+      useNativeDriver: true,
+    }).start(() => {
+      Animated.timing(symbolScaleAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      }).start();
+    });
+  }, [symbolScaleAnim]);
+
+  // Função para animar a barra de tempo
+  const animateTimeBar = useCallback(() => {
+    const totalBarWidth = screenWidth - 40;
+    const barWidth = (timeLeft / GAME_INITIAL_TIME) * totalBarWidth;
+    Animated.timing(timeBarWidthAnim, {
+      toValue: barWidth < 0 ? 0 : barWidth,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+  }, [timeLeft, timeBarWidthAnim]);
+
+  // Gera posição aleatória para o símbolo
   const generateRandomPosition = useCallback(() => {
-    const newX = Math.random() * PLAYABLE_WIDTH + 20;
-    const newY = Math.random() * PLAYABLE_HEIGHT + 100;
-    
-    return {
-      x: Math.max(20, Math.min(newX, PLAYABLE_WIDTH)),
-      y: Math.max(100, Math.min(newY, PLAYABLE_HEIGHT + 100))
-    };
+
+    // A posição x mínima é o padding horizontal
+    const minX = PLAYABLE_AREA_PADDING_HORIZONTAL;
+
+    // A posição y mínima é o padding superior (abaixo do HUD)
+    const minY = PLAYABLE_AREA_PADDING_TOP;
+
+    // Garante que o símbolo inteiro esteja dentro da área jogável
+    const randomX = minX + Math.random() * PLAYABLE_WIDTH;
+    const randomY = minY + Math.random() * PLAYABLE_HEIGHT;
+
+    return { x: randomX, y: randomY };
   }, [PLAYABLE_WIDTH, PLAYABLE_HEIGHT]);
 
+  // Manipular evento de clique do símbolo
   const handleSymbolClick = useCallback(() => {
     if (!gameActive) return;
 
-    setScore(prevScore => {
+    animateSymbolClick();
+    Vibration.vibrate(50);
+
+    setScore((prevScore) => {
       const newScore = prevScore + 1;
-      
-      if (newScore >= 10) {
+
+      if (newScore >= SCORE_TO_WIN) {
         setGameActive(false);
+        Animated.spring(gameOverScaleAnim, {
+          toValue: 1,
+          friction: 7,
+          useNativeDriver: true,
+        }).start();
         Alert.alert(
-          'Parabéns! 🎉',
-          `Você ganhou com ${newScore} pontos!`,
+          'Vitória Galáctica!',
+          `Você capturou ${newScore} estrelas!`,
           [{ text: 'Jogar Novamente', onPress: resetGame }]
         );
       }
-      
       return newScore;
     });
-    
-    setSymbolPosition(generateRandomPosition());
-    
-    setTimeLeft(GAME_TIME);
-  }, [gameActive, generateRandomPosition]);
 
+    setSymbolPosition(generateRandomPosition());
+    setTimeLeft((prev) => Math.max(1, prev - TIME_DEDUCTION_PER_CLICK));
+  }, [
+    gameActive,
+    generateRandomPosition,
+    animateSymbolClick,
+    gameOverScaleAnim,
+  ]);
+
+  // Reiniciar o estado do jogo
   const resetGame = useCallback(() => {
     setScore(0);
-    setLives(3);
-    setTimeLeft(GAME_TIME);
+    setLives(INITIAL_LIVES);
+    setTimeLeft(GAME_INITIAL_TIME);
     setGameActive(true);
     setSymbolPosition(generateRandomPosition());
-  }, [generateRandomPosition]);
+    gameOverScaleAnim.setValue(0);
+    timeBarWidthAnim.setValue(screenWidth - 40);
+  }, [generateRandomPosition, gameOverScaleAnim, timeBarWidthAnim]);
 
+  // Lidar com o tempo esgotado (clique perdido)
   const handleTimeOut = useCallback(() => {
     if (!gameActive) return;
+
+    Vibration.vibrate(100);
 
     const newLives = lives - 1;
     setLives(newLives);
 
     if (newLives <= 0) {
       setGameActive(false);
+      Animated.spring(gameOverScaleAnim, {
+        toValue: 1,
+        friction: 7,
+        useNativeDriver: true,
+      }).start();
       Alert.alert(
-        'Game Over! 💀',
-        `Pontuação final: ${score}/10`,
+        'Missão Abortada!',
+        `Pontuação final: ${score}/${SCORE_TO_WIN}`,
         [{ text: 'Jogar Novamente', onPress: resetGame }]
       );
     } else {
       setSymbolPosition(generateRandomPosition());
-      setTimeLeft(GAME_TIME);
+      setTimeLeft((prev) =>
+        Math.min(GAME_INITIAL_TIME, prev + TIME_BONUS_ON_MISS)
+      );
     }
-  }, [gameActive, lives, score, generateRandomPosition, resetGame]);
+  }, [gameActive, lives, score, generateRandomPosition, resetGame, gameOverScaleAnim]);
 
+  // Efeito do temporizador do jogo
   useEffect(() => {
     if (!gameActive) return;
 
@@ -85,19 +173,36 @@ export default function Page02() {
     }
 
     const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
+      setTimeLeft((prev) => Math.max(0, prev - 1));
     }, 1000);
 
     return () => clearInterval(timer);
   }, [timeLeft, gameActive, handleTimeOut]);
 
+  // Efeito para animação da barra de tempo
+  useEffect(() => {
+    if (gameActive) {
+      animateTimeBar();
+    }
+  }, [timeLeft, gameActive, animateTimeBar]);
+
+  // Configuração inicial do jogo
+  useEffect(() => {
+    resetGame();
+  }, []);
+
+  // Renderizar ícones de coração para as vidas
   const renderLives = () => {
     const hearts = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < INITIAL_LIVES; i++) {
       hearts.push(
-        <Text key={i} style={styles.heart}>
-          {i < lives ? '❤️' : '🤍'}
-        </Text>
+        <FontAwesome
+          key={i}
+          name={i < lives ? 'heart' : 'heart-o'}
+          size={20}
+          color={i < lives ? '#ff0077' : '#555'}
+          style={styles.heartIcon}
+        />
       );
     }
     return hearts;
@@ -105,27 +210,45 @@ export default function Page02() {
 
   return (
     <View style={styles.gameContainer}>
+      {/* HUD (Heads-Up Display) */}
       <View style={styles.hudContainer}>
         <View style={styles.scoreContainer}>
+          <FontAwesome name="star" size={18} color="#00ffff" />
           <Text style={styles.scoreText}>
-            ⚡ {score}/10
+            {' '}
+            {score}/{SCORE_TO_WIN}
           </Text>
         </View>
 
-        <View style={styles.livesContainer}>
-          {renderLives()}
-        </View>
+        <View style={styles.livesContainer}>{renderLives()}</View>
 
         <View>
-          <Text style={[
-            styles.timerText, 
-            { color: timeLeft <= 2 ? '#ff4757' : '#00ff88' }
-          ]}>
-            {timeLeft}s
+          <Text
+            style={[
+              styles.timerText,
+              { color: timeLeft <= 2 ? '#ff0077' : '#00ffff' },
+            ]}
+          >
+            {Math.round(timeLeft)}s
           </Text>
         </View>
       </View>
 
+      {/* Barra de Progresso do Tempo */}
+      <View style={styles.timeBarBackground}>
+        <Animated.View
+          style={[
+            styles.timeBarFill,
+            {
+              width: timeBarWidthAnim,
+              backgroundColor:
+                timeLeft <= GAME_INITIAL_TIME / 3 ? '#ff0077' : '#00ffff',
+            },
+          ]}
+        />
+      </View>
+
+      {/* Área do Jogo */}
       <View style={styles.gameArea}>
         {gameActive && (
           <TouchableOpacity
@@ -135,43 +258,41 @@ export default function Page02() {
               {
                 left: symbolPosition.x,
                 top: symbolPosition.y,
-                transform: [{ scale: timeLeft <= 2 ? 1.1 : 1.0 }]
-              }
+                transform: [{ scale: symbolScaleAnim }],
+              },
             ]}
-            activeOpacity={0.7}
+            activeOpacity={0.8}
           >
-            <Text style={styles.symbolText}>
-              ⚛️
-            </Text>
+            <FontAwesome name="rocket" size={30} color="#0a0a0a" />
           </TouchableOpacity>
         )}
 
-        {gameActive && (
-          <View style={styles.indicator} />
-        )}
-
+        {/* Tela de Fim de Jogo / Vitória */}
         {!gameActive && (
-          <View style={styles.gameOverContainer}>
-            <Text style={[
-              styles.gameOverTitle,
-              { color: score >= 10 ? '#00ff88' : '#ff4757' }
-            ]}>
-              {score >= 10 ? 'VOCÊ GANHOU!' : 'GAME OVER'}
-            </Text>
-            
-            <Text style={styles.finalScore}>
-              Pontuação: {score}/10
-            </Text>
-            
-            <TouchableOpacity
-              onPress={resetGame}
-              style={styles.restartButton}
+          <Animated.View
+            style={[
+              styles.gameOverContainer,
+              { transform: [{ scale: gameOverScaleAnim }] },
+            ]}
+          >
+            <Text
+              style={[
+                styles.gameOverTitle,
+                { color: score >= SCORE_TO_WIN ? '#00ffff' : '#ff0077' },
+              ]}
             >
-              <Text style={styles.restartButtonText}>
-                JOGAR NOVAMENTE
-              </Text>
+              {score >= SCORE_TO_WIN ? 'MISSÃO CUMPRIDA!' : 'GAME OVER'}
+            </Text>
+
+            <Text style={styles.finalScore}>
+              Estrelas Coletadas: {score}/{SCORE_TO_WIN}
+            </Text>
+
+            <TouchableOpacity onPress={resetGame} style={styles.restartButton}>
+              <FontAwesome name="refresh" size={18} color="#0a0a0a" />
+              <Text style={styles.restartButtonText}> JOGAR NOVAMENTE</Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
         )}
       </View>
     </View>
@@ -181,110 +302,121 @@ export default function Page02() {
 const styles = StyleSheet.create({
   gameContainer: {
     flex: 1,
-    backgroundColor: '#0a0a0a'
+    backgroundColor: '#0a0a0a',
   },
-  
+
   hudContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 50,
-    paddingBottom: 20,
-    borderBottomWidth: 2,
-    borderBottomColor: '#00ff88'
+    paddingBottom: 10,
+    borderBottomWidth: 0,
   },
-  
+
   scoreContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  
+
   scoreText: {
-    color: '#00ff88',
-    fontSize: 18,
-    fontWeight: 'bold'
+    color: '#00ffff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: 5,
   },
-  
+
   livesContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  
-  heart: {
-    fontSize: 20,
-    marginRight: 5
+
+  heartIcon: {
+    marginRight: 5,
   },
-  
+
   timerText: {
-    fontSize: 18,
-    fontWeight: 'bold'
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-  
+
+  // --- Barra de Tempo ---
+  timeBarBackground: {
+    height: 10,
+    backgroundColor: '#333',
+    marginHorizontal: 20,
+    borderRadius: 5,
+    overflow: 'hidden',
+    marginBottom: 10,
+  },
+  timeBarFill: {
+    height: '100%',
+    borderRadius: 5,
+  },
+
   gameArea: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
+    overflow: 'hidden',
   },
-  
+
   symbol: {
     position: 'absolute',
-    width: 60,
-    height: 60,
-    backgroundColor: '#00ff88',
-    borderRadius: 30,
+    width: SYMBOL_SIZE,
+    height: SYMBOL_SIZE,
+    backgroundColor: '#00ffff',
+    borderRadius: SYMBOL_SIZE / 2,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#00ff88',
+    shadowColor: '#00ffff',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
-    elevation: 10
+    shadowOpacity: 1,
+    shadowRadius: 15,
+    elevation: 15,
   },
-  
-  symbolText: {
-    fontSize: 30,
-    color: '#ffffff'
-  },
-  
-  indicator: {
-    position: 'absolute',
-    bottom: 30,
-    right: 30,
-    width: 20,
-    height: 20,
-    backgroundColor: '#00ff88',
-    borderRadius: 10
-  },
-  
+
   gameOverContainer: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.8)'
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
   },
-  
+
   gameOverTitle: {
-    fontSize: 32,
+    fontSize: 38,
     fontWeight: 'bold',
-    marginBottom: 20
+    marginBottom: 25,
+    textShadowColor: 'rgba(255, 255, 255, 0.5)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
   },
-  
+
   finalScore: {
-    color: '#00ff88',
-    fontSize: 24,
-    marginBottom: 30
+    color: '#00ffff',
+    fontSize: 28,
+    marginBottom: 40,
+    fontWeight: '600',
   },
-  
+
   restartButton: {
-    backgroundColor: '#00ff88',
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 25
+    flexDirection: 'row',
+    backgroundColor: '#00ffff',
+    paddingHorizontal: 35,
+    paddingVertical: 18,
+    borderRadius: 30,
+    alignItems: 'center',
+    shadowColor: '#00ffff',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.7,
+    shadowRadius: 12,
+    elevation: 12,
   },
-  
+
   restartButtonText: {
-    color: '#000',
-    fontSize: 18,
-    fontWeight: 'bold'
-  }
+    color: '#0a0a0a',
+    fontSize: 19,
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
 });
