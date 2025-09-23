@@ -9,7 +9,7 @@ export default function Task() {
       <Text style={styles.subtitle}>TASK</Text>
       <Button
         title="Ir para a página 03"
-        onPress={() => router.push("/page-03")}
+        onPress={() => router.push("/page-02")}
         color="#6b4226"
       />
       <Button

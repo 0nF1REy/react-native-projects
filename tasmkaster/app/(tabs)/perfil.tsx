@@ -33,14 +33,14 @@ export default function Perfil() {
             style={styles.vintageButton}
             onPress={() => router.push("/page-03")}
           >
-            <Text style={styles.buttonText}>Acessar Caderno de Bordo</Text>
+            <Text style={styles.buttonText}>Acessar Caderno de Bordo - 01</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.vintageButton}
             onPress={() => router.push("/page-04")}
           >
-            <Text style={styles.buttonText}>Consultar Anais Antigos</Text>
+            <Text style={styles.buttonText}>Acessar Caderno de Bordo - 02</Text>
           </TouchableOpacity>
         </View>
 
