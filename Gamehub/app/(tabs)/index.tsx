@@ -1,39 +1,69 @@
-// App.js básico com componentes fundamentais
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StyleSheet, Text, View, Button } from "react-native";
+import { useRouter } from "expo-router";
+import { useTheme } from "../hooks/useTheme";
+import { spacing, typography } from "../constants/theme";
+import HeaderWithAvatar from "../components/HeaderWithAvatar";
 
 export default function Index() {
- const router = useRouter();
+  const router = useRouter();
+  const { theme } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Página index</Text>
-      <Text style={styles.subtitle}>Primeira página?</Text>
-      <Button
-        title="Ir para xulambs (fora das Tabs)" //botões do stack navigation aqui que a magic acontece.
-        onPress={() => router.push("/xulambs")}
-        
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
+      <HeaderWithAvatar
+        userName="Retrô"
+        onAvatarPress={() => router.push("/beltranis")}
       />
 
-      <Button
-        title="Ir para Beltranis (fora das Tabs)"
-        onPress={() => router.push("/beltranis")}
-      />
+      <View style={styles.container}>
+        <Text
+          style={[styles.title, { color: theme.text, fontFamily: "monospace" }]}
+        >
+          Página Inicial
+        </Text>
+        <Text style={[styles.subtitle, { color: theme.textSecondary }]}>
+          Bem-vindo à vibe dos anos 80!
+        </Text>
+
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Ir para Xulambs"
+            onPress={() => router.push("/xulambs")}
+            color={theme.primary}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Ir para Beltranis"
+            onPress={() => router.push("/beltranis")}
+            color={theme.accent}
+          />
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column', // Mudando para coluna para evitar sobreposição
-    alignItems: 'center', // Centraliza o conteúdo na tela
-    gap: 8,
-    padding: 16, // Adiciona um pouco de espaçamento
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: spacing.lg,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 8,
+    fontSize: typography.sizes.title,
+    fontWeight: typography.weights.bold,
+    marginBottom: spacing.md,
   },
   subtitle: {
-    fontSize: 18, // Ajuste do tamanho da fonte para o subtítulo
+    fontSize: typography.sizes.lg,
+    marginBottom: spacing.xl,
+  },
+  buttonContainer: {
+    marginVertical: spacing.sm,
+    width: "80%",
+    borderRadius: 8,
+    overflow: "hidden",
   },
 });

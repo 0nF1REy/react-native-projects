@@ -1,69 +1,50 @@
-// app/(tabs)/_layout.tsx
-
-import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-import { Platform } from 'react-native';
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+import { Platform } from "react-native";
+import { useTheme } from "../hooks/useTheme";
 
 export default function TabLayout() {
+  const { theme } = useTheme();
+
   return (
     <Tabs
       screenOptions={{
-        // Cores da aba: Mantendo o que estava na primeira parte antes do conflito,
-        // mas você pode usar o tema dinâmico aqui se quiser!
-        tabBarActiveTintColor: '#9d86f7', // Cor ativa (roxo/lilás)
-        tabBarInactiveTintColor: 'green', // Cor inativa (verde)
-        
-        // Configurações de layout da aba (do segundo bloco de código)
-        headerShown: false, // Oculta o cabeçalho padrão das abas
-        tabBarStyle: Platform.select({
-          ios: {
-            // Estilo para iOS para permitir efeitos de blur (se usado)
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      
-      {/* -------------------- Tab: Index -------------------- */}
+        headerShown: false,
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.textMuted,
+        tabBarStyle: {
+          backgroundColor: theme.surface,
+          borderTopColor: theme.border,
+          paddingTop: 8,
+          ...(Platform.OS === "ios" && {
+            position: "absolute",
+            borderTopWidth: 0,
+          }),
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Index',
-          headerShown: true, // Cabeçalho visível na tela Index
+          title: "Início",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" color={color} size={size} />
+            <Ionicons name="home-outline" color={color} size={size} />
           ),
         }}
       />
-      
-      {/* -------------------- Tab: Explore -------------------- */}
+
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          headerShown: true, // Cabeçalho visível na tela Explore
+          title: "Explorar",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="search" color={color} size={size} />
+            <Ionicons name="compass-outline" color={color} size={size} />
           ),
         }}
       />
-      
-      {/* -------------------- Tab: xulambs (Se existir) -------------------- */}
-      {/* Se você tiver uma tela 'xulambs.tsx' no diretório (tabs), 
-        adicione a referência aqui.
-      */}
-      {/* <Tabs.Screen
-        name="xulambs" 
-        options={{
-          title: 'Xulambs',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="aperture" color={color} size={size} />
-          ),
-        }}
-      /> */}
-      
     </Tabs>
   );
 }

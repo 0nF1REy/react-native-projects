@@ -1,77 +1,66 @@
-// App.js básico com componentes fundamentais
+import { View, Text, StyleSheet, Button } from "react-native";
+import { useRouter } from "expo-router";
+import { useTheme } from "../hooks/useTheme";
+import { spacing, typography } from "../constants/theme";
+import HeaderWithAvatar from "../components/HeaderWithAvatar";
 
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { useRouter } from 'expo-router';
-
-export default function Task() {
+export default function Explore() {
   const router = useRouter();
-  {/*criação o router para navegação, essencial para lógica de navegação.
-  🔧 Explicação
-
-useRouter() → hook fornecido pelo Expo Router.
-
-Ele te dá acesso ao objeto router, que tem métodos como:
-
-router.push("/rota") → navega para a rota especificada.
-
-router.replace("/rota") → substitui a rota atual.
-
-router.back() → volta para a tela anterior.  
-    
-    */}
-
+  const { theme } = useTheme();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Página de task</Text>
-      <Text style={styles.subtitle2}>segunda página!</Text>
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
+      <HeaderWithAvatar userName="Retrô" notifications={5} />
 
-      <Button
-              title="Ir para beltranis (fora das Tabs)"
-              onPress={() => router.push("/beltranis")} //tem que ter uma variável antes
-              //  para recever o useRouter o "const router"é para isso
-            />
-      <Button
-        title="Ir para xulambs (fora das Tabs)"
-        onPress={() => router.push("/xulambs")}
-        
-      />    
+      <View style={styles.container}>
+        <Text
+          style={[styles.title, { color: theme.text, fontFamily: "monospace" }]}
+        >
+          Explorar Mundos
+        </Text>
+        <Text style={[styles.subtitle, { color: theme.textSecondary }]}>
+          Encontre novos jogos e jogadores.
+        </Text>
 
-
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Perfil Beltranis"
+            onPress={() => router.push("/beltranis")}
+            color={theme.primary}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Página Xulambs"
+            onPress={() => router.push("/xulambs")}
+            color={theme.accent}
+          />
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-
-    flexDirection: 'column', // Mudando para coluna para evitar sobreposição
-    alignItems: 'center', // Centraliza o conteúdo na tela
-    gap: 8,
-    padding: 16, // Adiciona um pouco de espaçamento
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: spacing.lg,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 8,
+    fontSize: typography.sizes.title,
+    fontWeight: typography.weights.bold,
+    marginBottom: spacing.md,
   },
   subtitle: {
-    fontSize: 18, // Ajuste do tamanho da fonte para o subtítulo
-
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+    fontSize: typography.sizes.lg,
+    marginBottom: spacing.xl,
   },
-  title2: {
-    gap: 8,
-    marginBottom: 8,
+  buttonContainer: {
+    marginVertical: spacing.sm,
+    width: "80%",
+    borderRadius: 8,
+    overflow: "hidden",
   },
-  subtitle2: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-
-  },
-}); 
-
+});
