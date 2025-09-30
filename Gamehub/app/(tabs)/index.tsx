@@ -20,7 +20,7 @@ export default function Index() {
 
       <ContentContainer>
         <Title>Página Inicial</Title>
-        <Subtitle>Bem-vindo à vibe dos anos 80!</Subtitle>
+        <Subtitle>Bem-vindo!</Subtitle>
 
         <ButtonWrapper>
           <Button

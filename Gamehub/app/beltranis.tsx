@@ -4,13 +4,18 @@ import { View, Alert } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
 import { spacing, typography } from "./constants/theme";
 
-// --- Componentes de Lógica ---
+// --- Tipos e Interfaces ---
 interface ActionButtonProps {
   title: string;
   isPrimary?: boolean;
   onPress: () => void;
 }
 
+interface ActionButtonContainerProps {
+  isPrimary?: boolean;
+}
+
+// --- Componente de Lógica Pequeno ---
 const ActionButton: React.FC<ActionButtonProps> = ({
   title,
   isPrimary,
@@ -21,6 +26,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   </ActionButtonContainer>
 );
 
+// --- Componente Principal da Tela ---
 export default function BeltranisProfile() {
   const [isFollowing, setIsFollowing] = React.useState<boolean>(false);
 
@@ -79,6 +85,7 @@ export default function BeltranisProfile() {
   );
 }
 
+// --- Componentes Estilizados ---
 const ActionButtonContainer = styled.TouchableOpacity<ActionButtonContainerProps>`
   flex: 1;
   padding: ${spacing.md}px;
@@ -100,11 +107,6 @@ const ActionButtonContainer = styled.TouchableOpacity<ActionButtonContainerProps
       isPrimary?: boolean;
     }) => (isPrimary ? "transparent" : theme.primary)};
 `;
-
-// --- Componentes Estilizados com Anotação Explícita ---
-interface ActionButtonContainerProps {
-  isPrimary?: boolean;
-}
 
 const ActionButtonText = styled.Text<ActionButtonContainerProps>`
   font-size: ${typography.sizes.md}px;

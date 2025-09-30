@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Alert } from "react-native";
 // eslint-disable-next-line import/no-named-as-default
 import styled, { DefaultTheme, useTheme } from "styled-components/native";
-import { addOpacity, spacing, typography } from "./constants/theme";
+import { addOpacity, spacing, typography, themes } from "./constants/theme";
+import { ThemeContext, ThemeContextType } from "./contexts/ThemeContext";
 
 // --- Tipos para Props Condicionais ---
 interface OnlineProps {
@@ -18,6 +19,11 @@ export default function ExploreOutsideTabs2() {
   const [likes, setLikes] = useState(42);
   const [isOnline, setIsOnline] = useState(true);
   const theme = useTheme();
+
+  const themeContext = useContext(ThemeContext) as ThemeContextType;
+  const { themeName, changeTheme } = themeContext;
+
+  const availableThemes = Object.keys(themes);
 
   const handleLike = () => {
     setLikes((prev) => prev + 1);
@@ -36,10 +42,28 @@ export default function ExploreOutsideTabs2() {
     <ScreenScrollView contentContainerStyle={{ paddingBottom: spacing.lg }}>
       <HeaderSection>
         <HeaderTitle>GameHub Demo</HeaderTitle>
-        <HeaderSubtitle>
-          Demonstração de componentes com styled-components
-        </HeaderSubtitle>
+        <HeaderSubtitle>Demonstração de temas dinâmicos</HeaderSubtitle>
       </HeaderSection>
+
+      <Section>
+        <SectionTitle>Temas Disponíveis</SectionTitle>
+        <Row style={{ flexWrap: "wrap" }}>
+          {availableThemes.map((name) => (
+            <ThemeButton
+              key={name}
+              isActive={themeName === name}
+              onPress={() => changeTheme(name)}
+              style={{
+                backgroundColor: themes[name as keyof typeof themes].primary,
+              }}
+            >
+              <ThemeButtonText>
+                {name.charAt(0).toUpperCase() + name.slice(1)}
+              </ThemeButtonText>
+            </ThemeButton>
+          ))}
+        </Row>
+      </Section>
 
       <Section>
         <SectionTitle>Componentes de Card</SectionTitle>
@@ -66,7 +90,6 @@ export default function ExploreOutsideTabs2() {
 
       <Section>
         <SectionTitle>Botões Interativos</SectionTitle>
-        {/* CORREÇÃO AQUI */}
         <Row>
           <ActionButtonContainer isPrimary onPress={handleLike}>
             <ActionButtonText isPrimary>LIKE {likes}</ActionButtonText>
@@ -296,4 +319,18 @@ const ColorBoxText = styled.Text`
 const Row = styled.View`
   flex-direction: row;
   gap: ${spacing.sm}px;
+`;
+
+const ThemeButton = styled.TouchableOpacity<{ isActive: boolean }>`
+  padding: ${spacing.sm}px ${spacing.md}px;
+  border-radius: 20px;
+  border: 2px solid
+    ${({ theme, isActive }: { theme: DefaultTheme; isActive: boolean }) =>
+      isActive ? theme.accent : "transparent"};
+`;
+
+const ThemeButtonText = styled.Text`
+  color: #000;
+  font-weight: 600;
+  font-size: ${typography.sizes.sm}px;
 `;
