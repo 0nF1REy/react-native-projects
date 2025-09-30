@@ -1,7 +1,8 @@
 {
   "name": "gamehub",
+  "version": "2.0.0",
+  "description": "A modern React Native app for gamers to explore, connect, and manage their gaming experience.",
   "main": "expo-router/entry",
-  "version": "1.0.0",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -10,6 +11,32 @@
     "web": "expo start --web",
     "lint": "expo lint"
   },
+  "keywords": [
+    "react-native",
+    "expo",
+    "game",
+    "gaming",
+    "mobile",
+    "community",
+    "hub",
+    "explore",
+    "connect",
+    "profile",
+    "notifications"
+  ],
+  "author": {
+    "name": "Alan Ryan da Silva Domingues",
+    "email": "alanryan619@gmail.com"
+  },
+  "homepage": "https://github.com/0nF1REy/react-native-projects",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/react-native-projects.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/react-native-projects/issues"
+  },
+  "license": "MIT",
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.10",

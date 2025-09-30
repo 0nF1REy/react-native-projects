@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "tasmkaster",
-    "slug": "tasmkaster",
-    "version": "1.0.0",
+    "name": "Gamehub",
+    "slug": "gamehub",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "tasmkaster",
+    "scheme": "gamehub",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
