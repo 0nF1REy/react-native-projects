@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { View, Alert } from "react-native";
-// eslint-disable-next-line import/no-named-as-default
 import styled, { DefaultTheme, useTheme } from "styled-components/native";
 import { addOpacity, spacing, typography, themes } from "./constants/theme";
 import { ThemeContext, ThemeContextType } from "./contexts/ThemeContext";

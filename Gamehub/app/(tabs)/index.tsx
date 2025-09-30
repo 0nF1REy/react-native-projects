@@ -1,6 +1,5 @@
 import { Button } from "react-native";
 import { useRouter } from "expo-router";
-// eslint-disable-next-line import/no-named-as-default
 import styled, { DefaultTheme, useTheme } from "styled-components/native";
 
 import { spacing, typography } from "../constants/theme";

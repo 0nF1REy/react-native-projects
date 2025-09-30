@@ -1,9 +1,8 @@
 import React from "react";
 import { View } from "react-native";
-// eslint-disable-next-line import/no-named-as-default
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, useTheme } from "styled-components/native";
+import { FontAwesome } from "@expo/vector-icons";
 
-// --- Componente Principal (Lógica) ---
 interface HeaderWithAvatarProps {
   userName?: string;
   notifications?: number;
@@ -17,18 +16,12 @@ const HeaderWithAvatar: React.FC<HeaderWithAvatarProps> = ({
   onAvatarPress,
   onNotificationPress,
 }) => {
-  const handleAvatarPress = (): void => {
-    if (onAvatarPress) onAvatarPress();
-  };
-
-  const handleNotificationPress = (): void => {
-    if (onNotificationPress) onNotificationPress();
-  };
+  const theme = useTheme();
 
   return (
     <Container>
       <AvatarSection
-        onPress={handleAvatarPress}
+        onPress={onAvatarPress}
         activeOpacity={0.7}
         disabled={!onAvatarPress}
       >
@@ -45,12 +38,12 @@ const HeaderWithAvatar: React.FC<HeaderWithAvatarProps> = ({
       </AvatarSection>
 
       <NotificationContainer
-        onPress={handleNotificationPress}
+        onPress={onNotificationPress}
         activeOpacity={0.7}
         disabled={!onNotificationPress}
       >
         <NotificationIcon>
-          <BellIcon>🔔</BellIcon>
+          <FontAwesome name="bell" size={20} color={theme.text} />
           {notifications > 0 && (
             <Badge>
               <BadgeText>
@@ -64,7 +57,7 @@ const HeaderWithAvatar: React.FC<HeaderWithAvatarProps> = ({
   );
 };
 
-// --- Componentes Estilizados com Anotação Explícita ---
+// --- Estilização ---
 const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -117,10 +110,6 @@ const NotificationIcon = styled.View`
   background-color: ${({ theme }: { theme: DefaultTheme }) =>
     theme.primary + "20"};
   border-radius: 20px;
-`;
-
-const BellIcon = styled.Text`
-  font-size: 18px;
 `;
 
 const Badge = styled.View`

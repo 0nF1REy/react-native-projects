@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Alert } from "react-native";
-// eslint-disable-next-line import/no-named-as-default
 import styled, { DefaultTheme } from "styled-components/native";
 import { spacing, typography } from "./constants/theme";
 
