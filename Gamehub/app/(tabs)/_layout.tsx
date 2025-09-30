@@ -2,10 +2,10 @@ import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Platform } from "react-native";
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "styled-components/native";
 
 export default function TabLayout() {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   return (
     <Tabs

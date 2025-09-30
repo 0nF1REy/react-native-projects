@@ -1,8 +1,86 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useTheme } from "../hooks/useTheme";
-import { Theme } from "../constants/theme";
+import { View } from "react-native";
+// eslint-disable-next-line import/no-named-as-default
+import styled, { DefaultTheme } from "styled-components/native";
 
+// --- Componentes Estilizados com Anotação Explícita ---
+const Container = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 20px 20px 20px;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.surface};
+`;
+
+const AvatarSection = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const AvatarCircle = styled.View`
+  width: 45px;
+  height: 45px;
+  border-radius: 22.5px;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+`;
+
+const AvatarText = styled.Text`
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const Greeting = styled.Text`
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.textSecondary};
+  font-size: 14px;
+`;
+
+const UserName = styled.Text`
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+const NotificationContainer = styled.TouchableOpacity`
+  position: relative;
+`;
+
+const NotificationIcon = styled.View`
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }: { theme: DefaultTheme }) =>
+    theme.primary + "20"};
+  border-radius: 20px;
+`;
+
+const BellIcon = styled.Text`
+  font-size: 18px;
+`;
+
+const Badge = styled.View`
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.error};
+  border-radius: 10px;
+  min-width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BadgeText = styled.Text`
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+// --- Componente Principal (Lógica) ---
 interface HeaderWithAvatarProps {
   userName?: string;
   notifications?: number;
@@ -16,135 +94,51 @@ const HeaderWithAvatar: React.FC<HeaderWithAvatarProps> = ({
   onAvatarPress,
   onNotificationPress,
 }) => {
-  const { theme } = useTheme();
-  // A função `createStyles` sabe o que é `theme`
-  const styles = createStyles(theme);
-
   const handleAvatarPress = (): void => {
-    if (onAvatarPress) {
-      onAvatarPress();
-    }
+    if (onAvatarPress) onAvatarPress();
   };
 
   const handleNotificationPress = (): void => {
-    if (onNotificationPress) {
-      onNotificationPress();
-    }
+    if (onNotificationPress) onNotificationPress();
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.avatarSection}
+    <Container>
+      <AvatarSection
         onPress={handleAvatarPress}
         activeOpacity={0.7}
         disabled={!onAvatarPress}
       >
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>
+        <AvatarCircle>
+          <AvatarText>
             {userName && userName.length > 0 ? userName[0].toUpperCase() : "G"}
-          </Text>
-        </View>
+          </AvatarText>
+        </AvatarCircle>
 
         <View>
-          <Text style={styles.greeting}>Olá,</Text>
-          <Text style={styles.userName}>{userName}</Text>
+          <Greeting>Olá,</Greeting>
+          <UserName>{userName}</UserName>
         </View>
-      </TouchableOpacity>
+      </AvatarSection>
 
-      <TouchableOpacity
-        style={styles.notificationContainer}
+      <NotificationContainer
         onPress={handleNotificationPress}
         activeOpacity={0.7}
         disabled={!onNotificationPress}
       >
-        <View style={styles.notificationIcon}>
-          <Text style={styles.bellIcon}>🔔</Text>
-
+        <NotificationIcon>
+          <BellIcon>🔔</BellIcon>
           {notifications > 0 && (
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>
+            <Badge>
+              <BadgeText>
                 {notifications > 9 ? "9+" : notifications.toString()}
-              </Text>
-            </View>
+              </BadgeText>
+            </Badge>
           )}
-        </View>
-      </TouchableOpacity>
-    </View>
+        </NotificationIcon>
+      </NotificationContainer>
+    </Container>
   );
 };
-
-// A função espera um parâmetro do tipo `Theme`
-const createStyles = (theme: Theme) =>
-  StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingHorizontal: 20,
-      paddingTop: 50,
-      paddingBottom: 20,
-      backgroundColor: theme.surface,
-    },
-    avatarSection: {
-      flexDirection: "row",
-      alignItems: "center",
-      opacity: 1,
-    },
-    avatar: {
-      width: 45,
-      height: 45,
-      borderRadius: 22.5,
-      backgroundColor: theme.primary,
-      justifyContent: "center",
-      alignItems: "center",
-      marginRight: 12,
-    },
-    avatarText: {
-      color: theme.background,
-      fontSize: 18,
-      fontWeight: "bold",
-    },
-    greeting: {
-      color: theme.textSecondary,
-      fontSize: 14,
-    },
-    userName: {
-      color: theme.text,
-      fontSize: 16,
-      fontWeight: "bold",
-    },
-    notificationContainer: {
-      position: "relative",
-      opacity: 1,
-    },
-    notificationIcon: {
-      width: 40,
-      height: 40,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: theme.primary + "20",
-      borderRadius: 20,
-    },
-    bellIcon: {
-      fontSize: 18,
-    },
-    badge: {
-      position: "absolute",
-      top: -5,
-      right: -5,
-      backgroundColor: theme.error,
-      borderRadius: 10,
-      minWidth: 20,
-      height: 20,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    badgeText: {
-      color: theme.text,
-      fontSize: 12,
-      fontWeight: "bold",
-    },
-  });
 
 export default HeaderWithAvatar;

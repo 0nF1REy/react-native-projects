@@ -1,17 +1,18 @@
 import { Link, Stack } from "expo-router";
-import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+// eslint-disable-next-line import/no-named-as-default
+import styled, { DefaultTheme } from "styled-components/native";
 
-import { useTheme } from "./hooks/useTheme";
-import { spacing, typography } from "./constants/theme";
+import { spacing, typography, themes } from "./constants/theme";
 
+// --- Componente Principal ---
 export default function NotFoundScreen() {
-  const { theme } = useTheme();
+  const retroTheme = themes.retro;
 
   const headerStyleWithBorder = {
-    backgroundColor: theme.surface,
+    backgroundColor: retroTheme.surface,
     borderBottomWidth: 2,
-    borderBottomColor: theme.border,
+    borderBottomColor: retroTheme.border,
   };
 
   return (
@@ -21,77 +22,67 @@ export default function NotFoundScreen() {
           title: "FALHA NA ROTA",
           headerShadowVisible: false,
           headerStyle: headerStyleWithBorder,
-          headerTintColor: theme.primary,
+          headerTintColor: retroTheme.primary,
           headerTitleStyle: { fontFamily: "monospace", fontWeight: "bold" },
         }}
       />
-      <View style={[styles.container, { backgroundColor: theme.background }]}>
-        <Ionicons
-          name="alert-circle-outline"
-          size={80}
-          color={theme.accent}
-          style={styles.icon}
-        />
+      <Container>
+        <Icon name="alert-circle-outline" size={80} color={retroTheme.accent} />
 
-        <Text style={[styles.title, { color: theme.primary }]}>404</Text>
+        <Title>404</Title>
 
-        <Text style={[styles.subtitle, { color: theme.textSecondary }]}>
-          Parece que você encontrou uma falha no Grid.
-        </Text>
+        <Subtitle>Parece que você encontrou uma falha no Grid.</Subtitle>
 
-        <Link
-          href="/"
-          style={[
-            styles.linkButton,
-            {
-              backgroundColor: theme.primary,
-              borderColor: theme.accent,
-            },
-          ]}
-        >
-          <Text style={[styles.linkButtonText, { color: theme.background }]}>
-            VOLTAR AO INÍCIO
-          </Text>
-        </Link>
-      </View>
+        <LinkButton href="/">
+          <LinkButtonText>VOLTAR AO INÍCIO</LinkButtonText>
+        </LinkButton>
+      </Container>
     </>
   );
 }
 
-// StyleSheet
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: spacing.lg,
-  },
-  icon: {
-    marginBottom: spacing.lg,
-  },
-  title: {
-    fontSize: typography.sizes.heading * 2,
-    fontWeight: "bold",
-    fontFamily: "monospace",
-    marginBottom: spacing.md,
-  },
-  subtitle: {
-    fontSize: typography.sizes.lg,
-    fontFamily: "monospace",
-    textAlign: "center",
-    marginBottom: spacing.xl,
-    maxWidth: 300,
-  },
-  linkButton: {
-    marginTop: spacing.lg,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.xl,
-    borderRadius: 8,
-    borderWidth: 2,
-  },
-  linkButtonText: {
-    fontSize: typography.sizes.lg,
-    fontWeight: "bold",
-    fontFamily: "monospace",
-  },
-});
+// --- Componentes Estilizados com Anotação Explícita ---
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: ${spacing.lg}px;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
+`;
+
+const Icon = styled(Ionicons)`
+  margin-bottom: ${spacing.lg}px;
+`;
+
+const Title = styled.Text`
+  font-size: ${typography.sizes.heading * 2}px;
+  font-weight: bold;
+  font-family: monospace;
+  margin-bottom: ${spacing.md}px;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
+`;
+
+const Subtitle = styled.Text`
+  font-size: ${typography.sizes.lg}px;
+  font-family: monospace;
+  text-align: center;
+  margin-bottom: ${spacing.xl}px;
+  max-width: 300px;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.textSecondary};
+`;
+
+const LinkButton = styled(Link)`
+  margin-top: ${spacing.lg}px;
+  padding: ${spacing.md}px ${spacing.xl}px;
+  border-radius: 8px;
+  border-width: 2px;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
+  border-color: ${({ theme }: { theme: DefaultTheme }) => theme.accent};
+`;
+
+const LinkButtonText = styled.Text`
+  font-size: ${typography.sizes.lg}px;
+  font-weight: bold;
+  font-family: monospace;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
+`;

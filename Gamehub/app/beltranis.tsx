@@ -1,8 +1,10 @@
 import React from "react";
-import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
-import { useTheme } from "./hooks/useTheme";
-import { spacing, typography, addOpacity } from "./constants/theme";
+import { View, Alert } from "react-native";
+// eslint-disable-next-line import/no-named-as-default
+import styled, { DefaultTheme } from "styled-components/native";
+import { spacing, typography } from "./constants/theme";
 
+// --- Componentes de Lógica ---
 interface ActionButtonProps {
   title: string;
   isPrimary?: boolean;
@@ -11,48 +13,18 @@ interface ActionButtonProps {
 
 const ActionButton: React.FC<ActionButtonProps> = ({
   title,
-  isPrimary = true,
+  isPrimary,
   onPress,
-}) => {
-  const { theme } = useTheme();
-
-  return (
-    <TouchableOpacity
-      style={{
-        flex: 1,
-        backgroundColor: isPrimary ? theme.primary : "transparent",
-        padding: spacing.md,
-        borderRadius: 25,
-        alignItems: "center",
-        borderWidth: isPrimary ? 0 : 2,
-        borderColor: isPrimary ? "transparent" : theme.primary,
-        shadowColor: isPrimary ? theme.primary : "transparent",
-        shadowOffset: { width: 0, height: isPrimary ? 2 : 0 },
-        shadowOpacity: isPrimary ? 0.25 : 0,
-        shadowRadius: isPrimary ? 4 : 0,
-        elevation: isPrimary ? 4 : 0,
-      }}
-      onPress={onPress}
-    >
-      <Text
-        style={{
-          color: isPrimary ? theme.background : theme.primary,
-          fontSize: typography.sizes.md,
-          fontWeight: "600",
-        }}
-      >
-        {title}
-      </Text>
-    </TouchableOpacity>
-  );
-};
+}) => (
+  <ActionButtonContainer isPrimary={isPrimary} onPress={onPress}>
+    <ActionButtonText isPrimary={isPrimary}>{title}</ActionButtonText>
+  </ActionButtonContainer>
+);
 
 export default function BeltranisProfile() {
-  const { theme } = useTheme();
   const [isFollowing, setIsFollowing] = React.useState<boolean>(false);
 
   const handleFollow = () => {
-    // A tipagem de `prev` é inferida corretamente pelo useState tipado
     setIsFollowing((prev) => !prev);
     Alert.alert(
       "Ação",
@@ -61,73 +33,16 @@ export default function BeltranisProfile() {
   };
 
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-        backgroundColor: theme.background,
-      }}
-    >
-      <View
-        style={{
-          padding: spacing.xl,
-          alignItems: "center",
-          borderBottomWidth: 3,
-          borderBottomColor: theme.accent,
-        }}
-      >
-        <View
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 50,
-            backgroundColor: theme.primary,
-            borderWidth: 4,
-            borderColor: theme.accent,
-            marginBottom: spacing.md,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: typography.sizes.heading,
-              color: theme.background,
-            }}
-          >
-            JD
-          </Text>
-        </View>
-        <Text
-          style={{
-            fontSize: typography.sizes.heading,
-            fontWeight: "700",
-            color: theme.text,
-            textShadowColor: theme.accent,
-            textShadowRadius: 10,
-          }}
-        >
-          Jett_Decoder // ID: 2077
-        </Text>
-        <Text
-          style={{
-            fontSize: typography.sizes.lg,
-            color: theme.textSecondary,
-            marginTop: spacing.xs,
-          }}
-        >
-          Netrunner | Lvl 99 | Tokyo Grid
-        </Text>
-      </View>
+    <ProfileScrollView contentContainerStyle={{ paddingBottom: spacing.lg }}>
+      <HeaderSection>
+        <AvatarCircle>
+          <AvatarText>JD</AvatarText>
+        </AvatarCircle>
+        <UserName>Jett_Decoder // ID: 2077</UserName>
+        <UserInfo>Netrunner | Lvl 99 | Tokyo Grid</UserInfo>
+      </HeaderSection>
 
-      <View
-        style={{
-          flexDirection: "row",
-          padding: spacing.lg,
-          gap: spacing.md,
-          borderBottomWidth: 1,
-          borderBottomColor: theme.border,
-        }}
-      >
+      <Row style={{ gap: spacing.md }}>
         <ActionButton
           title={isFollowing ? "SEGUINDO" : "SEGUIR"}
           isPrimary={!isFollowing}
@@ -138,63 +53,140 @@ export default function BeltranisProfile() {
           isPrimary={true}
           onPress={() => Alert.alert("Mensagem", "Abrindo chat seguro...")}
         />
-      </View>
+      </Row>
 
-      <View
-        style={{
-          padding: spacing.lg,
-          flexDirection: "row",
-          justifyContent: "space-around",
-          borderBottomWidth: 1,
-          borderBottomColor: theme.border,
-        }}
-      >
+      <Row style={{ justifyContent: "space-around" }}>
         {[
           { label: "GAMES", value: "45" },
           { label: "WINS", value: "250" },
           { label: "K/D", value: "2.4" },
         ].map((stat) => (
-          // O erro da prop 'key' desaparece com a config certa do tsconfig
           <View key={stat.label} style={{ alignItems: "center" }}>
-            <Text
-              style={{
-                fontSize: typography.sizes.heading,
-                fontWeight: "700",
-                color: theme.accent,
-                textShadowColor: addOpacity(theme.accent, 0.5),
-                textShadowRadius: 8,
-              }}
-            >
-              {stat.value}
-            </Text>
-            <Text
-              style={{
-                fontSize: typography.sizes.sm,
-                color: theme.textSecondary,
-              }}
-            >
-              {stat.label}
-            </Text>
+            <StatsValue>{stat.value}</StatsValue>
+            <StatsLabel>{stat.label}</StatsLabel>
           </View>
         ))}
-      </View>
+      </Row>
 
-      <View style={{ padding: spacing.lg }}>
-        <Text
-          style={{
-            fontSize: typography.sizes.xl,
-            fontWeight: "600",
-            color: theme.primary,
-            marginBottom: spacing.md,
-          }}
-        >
-          Minhas Habilidades
-        </Text>
-        <Text style={{ fontSize: typography.sizes.md, color: theme.text }}>
-          "Codificando a próxima revolução. Minha rig é uma extensão da minha
-          mente. Não me enfrente no Grid."
-        </Text>
-      </View>
-    </ScrollView>
+      <Section>
+        <SectionTitle>Minhas Habilidades</SectionTitle>
+        <BodyText>
+          &ldquo;Codificando a próxima revolução. Minha rig é uma extensão da
+          minha mente. Não me enfrente no Grid.&rdquo;
+        </BodyText>
+      </Section>
+    </ProfileScrollView>
   );
 }
+
+const ActionButtonContainer = styled.TouchableOpacity<ActionButtonContainerProps>`
+  flex: 1;
+  padding: ${spacing.md}px;
+  border-radius: 25px;
+  align-items: center;
+  background-color: ${({
+    theme,
+    isPrimary = true,
+  }: {
+    theme: DefaultTheme;
+    isPrimary?: boolean;
+  }) => (isPrimary ? theme.primary : "transparent")};
+  border: 2px solid
+    ${({
+      theme,
+      isPrimary = true,
+    }: {
+      theme: DefaultTheme;
+      isPrimary?: boolean;
+    }) => (isPrimary ? "transparent" : theme.primary)};
+`;
+
+// --- Componentes Estilizados com Anotação Explícita ---
+interface ActionButtonContainerProps {
+  isPrimary?: boolean;
+}
+
+const ActionButtonText = styled.Text<ActionButtonContainerProps>`
+  font-size: ${typography.sizes.md}px;
+  font-weight: 600;
+  color: ${({
+    theme,
+    isPrimary = true,
+  }: {
+    theme: DefaultTheme;
+    isPrimary?: boolean;
+  }) => (isPrimary ? theme.background : theme.primary)};
+`;
+
+const ProfileScrollView = styled.ScrollView`
+  flex: 1;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
+`;
+
+const HeaderSection = styled.View`
+  padding: ${spacing.xl}px;
+  align-items: center;
+  border-bottom-width: 3px;
+  border-bottom-color: ${({ theme }: { theme: DefaultTheme }) => theme.accent};
+`;
+
+const AvatarCircle = styled.View`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
+  border: 4px solid ${({ theme }: { theme: DefaultTheme }) => theme.accent};
+  margin-bottom: ${spacing.md}px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AvatarText = styled.Text`
+  font-size: ${typography.sizes.heading}px;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
+`;
+
+const UserName = styled.Text`
+  font-size: ${typography.sizes.heading}px;
+  font-weight: 700;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
+`;
+
+const UserInfo = styled.Text`
+  font-size: ${typography.sizes.lg}px;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.textSecondary};
+  margin-top: ${spacing.xs}px;
+`;
+
+const Section = styled.View`
+  padding: ${spacing.lg}px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${({ theme }: { theme: DefaultTheme }) => theme.border};
+`;
+
+const Row = styled(Section)`
+  flex-direction: row;
+`;
+
+const StatsValue = styled.Text`
+  font-size: ${typography.sizes.heading}px;
+  font-weight: 700;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.accent};
+`;
+
+const StatsLabel = styled.Text`
+  font-size: ${typography.sizes.sm}px;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.textSecondary};
+`;
+
+const SectionTitle = styled.Text`
+  font-size: ${typography.sizes.xl}px;
+  font-weight: 600;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
+  margin-bottom: ${spacing.md}px;
+`;
+
+const BodyText = styled.Text`
+  font-size: ${typography.sizes.md}px;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
+`;
