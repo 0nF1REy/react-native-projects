@@ -4,8 +4,6 @@ import styled, { DefaultTheme, useTheme } from "styled-components/native";
 import { spacing, typography } from "../constants/theme";
 import HeaderWithAvatar from "../components/HeaderWithAvatar";
 
-// --- Componente Principal ---
-
 export default function Explore() {
   const router = useRouter();
   const theme = useTheme();
@@ -21,7 +19,7 @@ export default function Explore() {
         <ButtonWrapper>
           <Button
             title="Perfil Beltranis"
-            onPress={() => router.push("/beltranis")}
+            onPress={() => router.push("/gamer-profile-scxxreen")}
             color={theme.primary}
           />
         </ButtonWrapper>
@@ -37,7 +35,6 @@ export default function Explore() {
   );
 }
 
-// --- Componentes Estilizados com Anotação Explícita ---
 const ScreenContainer = styled.View`
   flex: 1;
   background-color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
@@ -65,7 +62,8 @@ const Subtitle = styled.Text`
 `;
 
 const ButtonWrapper = styled.View`
-  margin-vertical: ${spacing.sm}px;
+  margin-top: ${spacing.sm}px;
+  margin-bottom: ${spacing.sm}px;
   width: 80%;
   border-radius: 8px;
   overflow: hidden;

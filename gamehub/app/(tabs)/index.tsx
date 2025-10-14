@@ -1,11 +1,11 @@
-import { Button, } from "react-native";
+import { Button } from "react-native";
 import { useRouter } from "expo-router";
 import styled, { DefaultTheme, useTheme } from "styled-components/native";
 
 import { spacing, typography } from "../constants/theme";
 import HeaderWithAvatar from "../components/HeaderWithAvatar";
 import { Link } from "expo-router";
-// --- Componente Principal ---
+
 export default function Index() {
   const router = useRouter();
   const theme = useTheme();
@@ -14,15 +14,15 @@ export default function Index() {
     <ScreenContainer>
       <HeaderWithAvatar
         userName="Retrô"
-        onAvatarPress={() => router.push("/beltranis")} //trocar aquui
+        onAvatarPress={() => router.push("/gamer-profile-screen")}
       />
 
       <ContentContainer>
         <Title>Página Inicial</Title>
         <Subtitle>Bem-vindo!</Subtitle>
-<Link href="/community" asChild>
-  <Button title="Comunidade" color={theme.error} />
-</Link>
+        <Link href="/community" asChild>
+          <Button title="Comunidade" color={theme.error} />
+        </Link>
         <ButtonWrapper>
           <Button
             title="Ir para Xulambs"
@@ -32,8 +32,8 @@ export default function Index() {
         </ButtonWrapper>
         <ButtonWrapper>
           <Button
-            title="Ir para Beltranis"
-            onPress={() => router.push("/beltranis")}
+            title="Ir para a tela do Gamer Profile!"
+            onPress={() => router.push("/gamer-profile-screen")}
             color={theme.accent}
           />
         </ButtonWrapper>
@@ -42,7 +42,6 @@ export default function Index() {
   );
 }
 
-// --- Componentes Estilizados com Anotação Explícita ---
 const ScreenContainer = styled.View`
   flex: 1;
   background-color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
@@ -70,7 +69,8 @@ const Subtitle = styled.Text`
 `;
 
 const ButtonWrapper = styled.View`
-  margin-vertical: ${spacing.sm}px;
+  margin-top: ${spacing.sm}px;
+  margin-bottom: ${spacing.sm}px;
   width: 80%;
   border-radius: 8px;
   overflow: hidden;
