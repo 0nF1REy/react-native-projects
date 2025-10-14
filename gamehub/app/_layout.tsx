@@ -28,12 +28,9 @@ export default function RootLayout() {
           <Stack.Screen name="+not-found" />
           <Stack.Screen name="xulambs" />
           <Stack.Screen name="beltranis" />
-<<<<<<< HEAD
-=======
            <Stack.Screen name="community" options={{ title: "Comunidade", headerShown: true 
     }} 
   />
->>>>>>> 3c34d21 (main: feat (gamehub) - Launched a new project by reformulating an old project)
         </Stack>
         <StatusBar style={themeName === "minimal" ? "dark" : "light"} />
       </ThemeProvider>

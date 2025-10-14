@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-import { Button } from "react-native";
-=======
 import { Button, } from "react-native";
->>>>>>> 3c34d21 (main: feat (gamehub) - Launched a new project by reformulating an old project)
 import { useRouter } from "expo-router";
 import styled, { DefaultTheme, useTheme } from "styled-components/native";
 
 import { spacing, typography } from "../constants/theme";
 import HeaderWithAvatar from "../components/HeaderWithAvatar";
-<<<<<<< HEAD
-
-=======
 import { Link } from "expo-router";
->>>>>>> 3c34d21 (main: feat (gamehub) - Launched a new project by reformulating an old project)
 // --- Componente Principal ---
 export default function Index() {
   const router = useRouter();
@@ -22,23 +14,15 @@ export default function Index() {
     <ScreenContainer>
       <HeaderWithAvatar
         userName="Retrô"
-<<<<<<< HEAD
-        onAvatarPress={() => router.push("/beltranis")}
-=======
         onAvatarPress={() => router.push("/beltranis")} //trocar aquui
->>>>>>> 3c34d21 (main: feat (gamehub) - Launched a new project by reformulating an old project)
       />
 
       <ContentContainer>
         <Title>Página Inicial</Title>
         <Subtitle>Bem-vindo!</Subtitle>
-<<<<<<< HEAD
-
-=======
 <Link href="/community" asChild>
   <Button title="Comunidade" color={theme.error} />
 </Link>
->>>>>>> 3c34d21 (main: feat (gamehub) - Launched a new project by reformulating an old project)
         <ButtonWrapper>
           <Button
             title="Ir para Xulambs"
