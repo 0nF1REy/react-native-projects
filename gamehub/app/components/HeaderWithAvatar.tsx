@@ -25,11 +25,7 @@ const HeaderWithAvatar: React.FC<HeaderWithAvatarProps> = ({
         activeOpacity={0.7}
         disabled={!onAvatarPress}
       >
-        <AvatarCircle>
-          <AvatarText>
-            {userName && userName.length > 0 ? userName[0].toUpperCase() : "G"}
-          </AvatarText>
-        </AvatarCircle>
+        <AvatarImage source={{ uri: "https://i.pravatar.cc/300" }} />
 
         <View>
           <Greeting>Olá,</Greeting>
@@ -71,20 +67,11 @@ const AvatarSection = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const AvatarCircle = styled.View`
+const AvatarImage = styled.Image`
   width: 45px;
   height: 45px;
   border-radius: 22.5px;
-  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
-  justify-content: center;
-  align-items: center;
   margin-right: 12px;
-`;
-
-const AvatarText = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
-  font-size: 18px;
-  font-weight: bold;
 `;
 
 const Greeting = styled.Text`

@@ -27,10 +27,11 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
           <Stack.Screen name="xulambs" />
-          <Stack.Screen name="beltranis" />
-           <Stack.Screen name="community" options={{ title: "Comunidade", headerShown: true 
-    }} 
-  />
+          <Stack.Screen name="gamer-profile-screen" />
+          <Stack.Screen
+            name="community"
+            options={{ title: "Comunidade", headerShown: true }}
+          />
         </Stack>
         <StatusBar style={themeName === "minimal" ? "dark" : "light"} />
       </ThemeProvider>

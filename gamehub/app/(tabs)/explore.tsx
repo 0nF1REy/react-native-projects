@@ -18,8 +18,8 @@ export default function Explore() {
 
         <ButtonWrapper>
           <Button
-            title="Perfil Beltranis"
-            onPress={() => router.push("/gamer-profile-scxxreen")}
+            title="Perfil"
+            onPress={() => router.push("/gamer-profile-screen")}
             color={theme.primary}
           />
         </ButtonWrapper>

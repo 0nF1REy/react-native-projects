@@ -3,9 +3,9 @@ import { View, Alert } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
 import { spacing, typography } from "./constants/theme";
 
-import ActionButton from "./components/beltranis/ActionButton";
-import ProfileHeader from "./components/beltranis/ProfileHeader";
-import MessageModal from "./components/beltranis/MessageModal";
+import ActionButton from "./components/gamer-profile-screen/ActionButton";
+import ProfileHeader from "./components/gamer-profile-screen/ProfileHeader";
+import MessageModal from "./components/gamer-profile-screen/MessageModal";
 
 interface Message {
   id: string;
@@ -73,7 +73,7 @@ export default function GamerProfileScreen() {
   return (
     <ProfileScrollView contentContainerStyle={{ paddingBottom: spacing.lg }}>
       <ProfileHeader
-        avatarInitials="JD"
+        avatarUri="https://i.pravatar.cc/300"
         userName="Jett_Decoder"
         userId="2077"
         userInfo="Netrunner | Lvl 99 | Tokyo Grid"
