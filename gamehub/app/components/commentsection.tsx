@@ -25,12 +25,19 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 
   return (
     <Container>
-      <Title><FontAwesome name="comments" size={24} color="white" /> Comentários ({comments.length})</Title>
+      <Title>
+        <FontAwesome name="comments" size={24} color="white" /> Comentários (
+        {comments.length})
+      </Title>
 
       {comments.map((comment) => (
         <CommentCard key={comment.id}>
           <CommentAvatar>
-            <AvatarText>{comment.author.avatar}</AvatarText>
+            {comment.author.avatar.startsWith("http") ? (
+              <AvatarImage source={{ uri: comment.author.avatar }} />
+            ) : (
+              <AvatarText>{comment.author.avatar}</AvatarText>
+            )}
           </CommentAvatar>
           <CommentContent>
             <CommentAuthor>{comment.author.name}</CommentAuthor>
@@ -46,7 +53,9 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
           onChangeText={setCommentText}
         />
         <SendButton onPress={handleSubmit}>
-          <SendButtonText><FontAwesome name="send" size={16} color="white" /></SendButtonText>
+          <SendButtonText>
+            <FontAwesome name="send" size={16} color="white" />
+          </SendButtonText>
         </SendButton>
       </InputContainer>
     </Container>
@@ -84,6 +93,12 @@ const AvatarText = styled.Text`
   color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
   font-size: ${typography.sizes.sm}px;
   font-weight: 600;
+`;
+
+const AvatarImage = styled.Image`
+  width: 35px;
+  height: 35px;
+  border-radius: 17.5px;
 `;
 
 const CommentContent = styled.View`

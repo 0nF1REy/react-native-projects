@@ -24,7 +24,7 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="community"
-          options={{ title: "Comunidade", headerShown: true }}
+          options={{ title: "", headerShown: true }}
         />
       </Stack>
       <StatusBar style={theme === "minimal" ? "dark" : "light"} />

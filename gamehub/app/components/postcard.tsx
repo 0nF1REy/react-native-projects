@@ -34,7 +34,11 @@ export const PostCard: React.FC<PostCardProps> = ({
       <Header>
         <UserSection>
           <Avatar>
-            <AvatarText>{post.author.avatar}</AvatarText>
+            {post.author.avatar.startsWith("http") ? (
+              <AvatarImage source={{ uri: post.author.avatar }} />
+            ) : (
+              <AvatarText>{post.author.avatar}</AvatarText>
+            )}
           </Avatar>
           <UserInfo>
             <UserName>{post.author.name}</UserName>
@@ -54,7 +58,10 @@ export const PostCard: React.FC<PostCardProps> = ({
       <Content>{post.content}</Content>
 
       {post.image && (
-        <PostImage source={{ uri: post.image }} resizeMode="cover" />
+        <PostImage
+          source={typeof post.image === 'string' ? { uri: post.image } : post.image}
+          resizeMode="cover"
+        />
       )}
 
       <Stats>
@@ -134,6 +141,12 @@ const AvatarText = styled.Text`
   color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
   font-size: ${typography.sizes.md}px;
   font-weight: 600;
+`;
+
+const AvatarImage = styled.Image`
+  width: 45px;
+  height: 45px;
+  border-radius: 22.5px;
 `;
 
 const UserInfo = styled.View``;

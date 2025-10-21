@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
 import { spacing, typography } from "@/app/constants/styles";
 import { Post } from "@/app/types/community";
+import { CommentSection } from "@/app/components/commentsection";
 import { PostCard } from "@/app/components/postcard";
 import { FontAwesome } from "@expo/vector-icons";
 
-const MOCK_POSTS: Post[] = [
+type PostWithComments = Post & { commentsList?: any[] };
+const MOCK_POSTS: PostWithComments[] = [
   {
     id: "1",
     author: {
       id: "user1",
       name: "ShadowGamer",
-      avatar: "SG",
+      avatar: "https://i.pravatar.cc/290",
       level: 85,
       rank: "Diamante",
     },
@@ -23,48 +25,58 @@ const MOCK_POSTS: Post[] = [
     comments: 8,
     shares: 3,
     isLiked: false,
+    commentsList: [],
   },
   {
     id: "2",
     author: {
       id: "user2",
       name: "ProGamer99",
-      avatar: "PG",
+      avatar: "https://i.pravatar.cc/291",
       level: 92,
       rank: "Mestre",
     },
     content: "Alguém quer jogar Valorant agora? Preciso de um time pra ranked!",
-    image:
-      "https://images.prismic.io/play-valorant/9371478a-7e84-4413-8523-357045543426_valorant-offwhitelaunch-keyart.jpg?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080",
+    image: require("../assets/images/community/01.png"),
     timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
     likes: 15,
     comments: 12,
     shares: 1,
     isLiked: true,
+    commentsList: [],
   },
   {
     id: "3",
     author: {
       id: "user3",
       name: "NinjaKiller",
-      avatar: "NK",
+      avatar: "https://i.pravatar.cc/293",
       level: 73,
       rank: "Platina",
     },
     content: "Setup novo chegou! RTX 4090 + i9-13900K. Agora sim vou dominar!",
-    image:
-      "https://images.prismic.io/play-valorant/9371478a-7e84-4413-8523-357045543426_valorant-offwhitelaunch-keyart.jpg?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080",
+    image: require("../assets/images/community/02.jpg"),
     timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
     likes: 128,
     comments: 34,
     shares: 12,
     isLiked: false,
+    commentsList: [],
   },
 ];
 
 export default function CommunityScreen() {
-  const [posts, setPosts] = useState<Post[]>(MOCK_POSTS);
+  const [posts, setPosts] = useState<PostWithComments[]>(MOCK_POSTS);
+  const [activePostId, setActivePostId] = useState<string | null>(null);
   const [newPostText, setNewPostText] = useState("");
+
+  const user = {
+    id: "currentUser",
+    name: "Você",
+    avatar: `https://i.pravatar.cc/300`,
+    level: 50,
+    rank: "Ouro",
+  };
 
   const handleLike = (postId: string) => {
     setPosts((prevPosts) =>
@@ -81,7 +93,29 @@ export default function CommunityScreen() {
   };
 
   const handleComment = (postId: string) => {
-    Alert.alert("Comentar", `Abrindo comentários do post ${postId}`);
+    setActivePostId(postId);
+  };
+
+  const handleAddComment = (postId: string, content: string) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === postId
+          ? {
+              ...post,
+              commentsList: [
+                ...(post.commentsList || []),
+                {
+                  id: Date.now().toString(),
+                  author: user,
+                  content,
+                  timestamp: new Date(),
+                },
+              ],
+              comments: (post.comments || 0) + 1,
+            }
+          : post
+      )
+    );
   };
 
   const handleShare = (postId: string) => {
@@ -102,11 +136,11 @@ export default function CommunityScreen() {
     const newPost: Post = {
       id: Date.now().toString(),
       author: {
-        id: "currentUser",
-        name: "Você",
-        avatar: "VC",
-        level: 50,
-        rank: "Ouro",
+        id: user.id,
+        name: user.name,
+        avatar: user.avatar,
+        level: user.level,
+        rank: user.rank,
       },
       content: newPostText,
       timestamp: new Date(),
@@ -124,10 +158,7 @@ export default function CommunityScreen() {
   return (
     <Container>
       <Header>
-        <HeaderTitle>
-          <FontAwesome name="globe" size={24} color="white" /> Comunidade
-          GameHub
-        </HeaderTitle>
+        <HeaderTitle>Comunidade</HeaderTitle>
         <HeaderSubtitle>Conecte-se com outros gamers</HeaderSubtitle>
       </Header>
 
@@ -152,13 +183,23 @@ export default function CommunityScreen() {
         showsVerticalScrollIndicator={false}
       >
         {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            onLike={handleLike}
-            onComment={handleComment}
-            onShare={handleShare}
-          />
+          <React.Fragment key={post.id}>
+            <PostCard
+              post={post}
+              onLike={handleLike}
+              onComment={handleComment}
+              onShare={handleShare}
+            />
+            {activePostId === post.id && (
+              <View style={{ marginLeft: 40 }}>
+                <CommentSection
+                  postId={post.id}
+                  comments={post.commentsList || []}
+                  onAddComment={handleAddComment}
+                />
+              </View>
+            )}
+          </React.Fragment>
         ))}
       </FeedScrollView>
     </Container>
