@@ -1,28 +1,16 @@
-import React, { useState, useContext } from "react";
-import { View, Alert } from "react-native";
-import styled, { DefaultTheme, useTheme } from "styled-components/native";
-import { addOpacity, spacing, typography, themes } from "./constants/theme";
-import { ThemeContext, ThemeContextType } from "./contexts/ThemeContext";
+import React, { useState } from "react";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { useThemeStore, themes } from "@/app/store/theme";
+import { addOpacity, spacing, typography } from "@/app/constants/styles";
+import ReportButton from "@/app/components/ReportButton";
+import { FontAwesome } from "@expo/vector-icons";
 
-// --- Tipos para Props Condicionais ---
-interface OnlineProps {
-  isOnline: boolean;
-}
+export default function Xulambs() {
+  const { theme: themeName, toggleTheme } = useThemeStore();
+  const theme = themes[themeName];
 
-interface PrimaryProps {
-  isPrimary?: boolean;
-}
-
-// --- Componente Principal ---
-export default function ExploreOutsideTabs2() {
   const [likes, setLikes] = useState(42);
   const [isOnline, setIsOnline] = useState(true);
-  const theme = useTheme();
-
-  const themeContext = useContext(ThemeContext) as ThemeContextType;
-  const { themeName, changeTheme } = themeContext;
-
-  const availableThemes = Object.keys(themes);
 
   const handleLike = () => {
     setLikes((prev) => prev + 1);
@@ -37,299 +25,629 @@ export default function ExploreOutsideTabs2() {
     setIsOnline((prev) => !prev);
   };
 
+  const availableThemes = Object.keys(themes) as (keyof typeof themes)[];
+
   return (
-    <ScreenScrollView contentContainerStyle={{ paddingBottom: spacing.lg }}>
-      <HeaderSection>
-        <HeaderTitle>GameHub Demo</HeaderTitle>
-        <HeaderSubtitle>Demonstração de temas dinâmicos</HeaderSubtitle>
-      </HeaderSection>
-
-      <Section>
-        <SectionTitle>Temas Disponíveis</SectionTitle>
-        <Row style={{ flexWrap: "wrap" }}>
-          {availableThemes.map((name) => (
-            <ThemeButton
-              key={name}
-              isActive={themeName === name}
-              onPress={() => changeTheme(name)}
-              style={{
-                backgroundColor: themes[name as keyof typeof themes].primary,
-              }}
-            >
-              <ThemeButtonText>
-                {name.charAt(0).toUpperCase() + name.slice(1)}
-              </ThemeButtonText>
-            </ThemeButton>
-          ))}
-        </Row>
-      </Section>
-
-      <Section>
-        <SectionTitle>Componentes de Card</SectionTitle>
-        <Card>
-          <View style={{ position: "relative", marginRight: spacing.md }}>
-            <Avatar>
-              <AvatarText>HC</AvatarText>
-            </Avatar>
-            <StatusBubble isOnline={isOnline} />
-          </View>
-          <TextContent>
-            <NameText>Prof: Beto Pro</NameText>
-            <InfoText>Magic The Gathering</InfoText>
-            <Row>
-              <MutedText>Level 87</MutedText>
-              <MutedText>• Diamante</MutedText>
-            </Row>
-          </TextContent>
-          <OnOffButton isOnline={isOnline} onPress={toggleOnlineStatus}>
-            <ButtonText>{isOnline ? "ON" : "OFF"}</ButtonText>
-          </OnOffButton>
-        </Card>
-      </Section>
-
-      <Section>
-        <SectionTitle>Botões Interativos</SectionTitle>
-        <Row>
-          <ActionButtonContainer isPrimary onPress={handleLike}>
-            <ActionButtonText isPrimary>LIKE {likes}</ActionButtonText>
-          </ActionButtonContainer>
-          <ActionButtonContainer isPrimary={false} onPress={handleShare}>
-            <ActionButtonText isPrimary={false}>SHARE</ActionButtonText>
-          </ActionButtonContainer>
-        </Row>
-      </Section>
-
-      <Section>
-        <SectionTitle>Paleta de Cores</SectionTitle>
-        <View style={{ gap: spacing.sm }}>
-          <Row>
-            <ColorBox style={{ backgroundColor: theme.primary }}>
-              <ColorBoxText>Primary</ColorBoxText>
-            </ColorBox>
-            <ColorBox style={{ backgroundColor: theme.secondary }}>
-              <ColorBoxText>Secondary</ColorBoxText>
-            </ColorBox>
-          </Row>
-          <Row>
-            <ColorBox style={{ backgroundColor: theme.success }}>
-              <ColorBoxText>Success</ColorBoxText>
-            </ColorBox>
-            <ColorBox style={{ backgroundColor: theme.error }}>
-              <ColorBoxText>Error</ColorBoxText>
-            </ColorBox>
-          </Row>
-        </View>
-      </Section>
-
-      <Section>
-        <SectionTitle>Tipografia</SectionTitle>
-        <HeaderTitle
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: theme.background,
+      }}
+    >
+      <View
+        style={{
+          padding: spacing.lg,
+          alignItems: "center",
+          borderBottomWidth: 1,
+          borderBottomColor: addOpacity(theme.primary, 0.2),
+        }}
+      >
+        <Text
           style={{
             fontSize: typography.sizes.heading,
+            fontWeight: "700",
+            color: theme.text,
+            marginBottom: spacing.xs,
+          }}
+        >
+          GameHub
+        </Text>
+        <Text
+          style={{
+            fontSize: typography.sizes.md,
+            color: theme.textSecondary,
+            textAlign: "center",
+          }}
+        >
+          Demonstração de componentes usando themes.js
+        </Text>
+      </View>
+
+      <View
+        style={{
+          padding: spacing.lg,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.border,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: typography.sizes.xl,
+            fontWeight: "600",
+            color: theme.primary,
+            marginBottom: spacing.md,
+          }}
+        >
+          Temas Disponíveis
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            gap: spacing.sm,
+          }}
+        >
+          {availableThemes.map((themeKey) => (
+            <TouchableOpacity
+              key={themeKey}
+              style={{
+                paddingHorizontal: spacing.md,
+                paddingVertical: spacing.sm,
+                borderRadius: 20,
+                borderWidth: 2,
+                backgroundColor: themes[themeKey].primary,
+
+              }}
+              onPress={() => toggleTheme(themeKey)}
+            >
+              <Text
+                style={{
+                  color: "#000000",
+                  fontSize: typography.sizes.sm,
+                  fontWeight: "600",
+                }}
+              >
+                {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+
+      <View
+        style={{
+          padding: spacing.lg,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.border,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: typography.sizes.xl,
+            fontWeight: "600",
+            color: theme.primary,
+            marginBottom: spacing.md,
+          }}
+        >
+          Componentes de Card
+        </Text>
+
+        <View
+          style={{
+            flexDirection: "row",
+            backgroundColor: theme.surface,
+            padding: spacing.md,
+            borderRadius: 15,
+            marginBottom: spacing.md,
+            borderWidth: 1,
+            borderColor: addOpacity(theme.primary, 0.1),
+          }}
+        >
+          <View style={{ position: "relative", marginRight: spacing.md }}>
+            <View
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                backgroundColor: theme.primary,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: theme.background,
+                  fontSize: 18,
+                  fontWeight: "600",
+                }}
+              >
+                HC
+              </Text>
+            </View>
+            <View
+              style={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                width: 15,
+                height: 15,
+                borderRadius: 7.5,
+                backgroundColor: isOnline ? theme.success : theme.error,
+                borderWidth: 2,
+                borderColor: theme.surface,
+              }}
+            />
+          </View>
+
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                fontSize: typography.sizes.lg,
+                fontWeight: "600",
+                color: theme.text,
+                marginBottom: spacing.xs,
+              }}
+            >
+              Prof: Beto Pro
+            </Text>
+            <Text
+              style={{
+                fontSize: typography.sizes.sm,
+                color: theme.textSecondary,
+                marginBottom: spacing.xs,
+              }}
+            >
+              Magic The Gathering
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text
+                style={{
+                  fontSize: typography.sizes.xs,
+                  color: theme.textMuted,
+                  marginRight: spacing.sm,
+                }}
+              >
+                Level 87
+              </Text>
+              <Text
+                style={{
+                  fontSize: typography.sizes.xs,
+                  color: theme.textMuted,
+                }}
+              >
+                <FontAwesome name="diamond" size={12} color="white" /> Diamante
+              </Text>
+            </View>
+          </View>
+
+                    <TouchableOpacity
+
+                      style={{
+
+                        width: 50,
+
+                        height: 50,
+
+                        borderRadius: 25,
+
+                        backgroundColor: isOnline ? theme.accent : theme.error,
+
+                        justifyContent: "center",
+
+                        alignItems: "center",
+
+                        borderWidth: 2,
+
+                        borderColor: isOnline
+
+                          ? addOpacity(theme.accent, 0.7)
+
+                          : addOpacity(theme.error, 0.7),
+
+                      }}
+
+                      onPress={toggleOnlineStatus}
+
+                    >
+                        <Text
+                          style={{
+                            fontSize: typography.sizes.sm,
+                            fontWeight: "700",
+                            color: theme.background,
+                          }}
+                        >
+              {isOnline ? "ON" : "OFF"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+                  <View
+
+                    style={{
+
+                      flexDirection: "row",
+
+                      backgroundColor: theme.surface,
+
+                      padding: spacing.md,
+
+                      borderRadius: 15,
+
+                      alignItems: "center",
+
+                      borderWidth: 1,
+
+                      borderColor: theme.border,
+
+                    }}
+
+                  >
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 10,
+              backgroundColor: addOpacity(theme.secondary, 0.2),
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: spacing.md,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: typography.sizes.lg,
+              }}
+            >
+              GAME
+            </Text>
+          </View>
+
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                fontSize: typography.sizes.lg,
+                fontWeight: "600",
+                color: theme.text,
+                marginBottom: spacing.xs,
+              }}
+            >
+              League of Legends
+            </Text>
+            <Text
+              style={{
+                fontSize: typography.sizes.sm,
+                color: theme.textSecondary,
+                marginBottom: spacing.xs,
+              }}
+            >
+              MOBA <FontAwesome name="circle" size={12} color="white" />{" "}
+              Competitivo
+            </Text>
+            <Text
+              style={{
+                fontSize: typography.sizes.sm,
+                color: theme.success,
+              }}
+            >
+              15.2k online
+            </Text>
+          </View>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: theme.primary,
+              paddingHorizontal: spacing.md,
+              paddingVertical: spacing.sm,
+              borderRadius: 20,
+            }}
+          >
+            <Text
+              style={{
+                color: theme.background,
+                fontSize: typography.sizes.sm,
+                fontWeight: "600",
+              }}
+            >
+              Entrar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View
+        style={{
+          padding: spacing.lg,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.border,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: typography.sizes.xl,
+            fontWeight: "600",
+            color: theme.primary,
+            marginBottom: spacing.md,
+          }}
+        >
+          Botões Interativos
+        </Text>
+
+        <View
+          style={{
+            gap: spacing.md,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              gap: spacing.md,
+            }}
+          >
+                        <TouchableOpacity
+                          style={{
+                            flex: 1,
+                            backgroundColor: theme.primary,
+                            padding: spacing.md,
+                            borderRadius: 25,
+                            alignItems: "center",
+                          }}
+                          onPress={handleLike}
+                        >              <Text
+                style={{
+                  color: theme.background,
+                  fontSize: typography.sizes.md,
+                  fontWeight: "600",
+                }}
+              >
+                LIKE {likes}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                backgroundColor: "transparent",
+                padding: spacing.md,
+                borderRadius: 25,
+                alignItems: "center",
+                borderWidth: 2,
+                borderColor: theme.primary,
+              }}
+              onPress={handleShare}
+            >
+              <Text
+                style={{
+                  color: theme.primary,
+                  fontSize: typography.sizes.md,
+                  fontWeight: "600",
+                }}
+              >
+                SHARE
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <ReportButton commentId="demo-comment-id-123" theme={theme} />
+        </View>
+      </View>
+
+      <View
+        style={{
+          padding: spacing.lg,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.border,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: typography.sizes.xl,
+            fontWeight: "600",
+            color: theme.primary,
+            marginBottom: spacing.md,
+          }}
+        >
+          Paleta de Cores
+        </Text>
+
+        <View style={{ gap: spacing.sm }}>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: spacing.sm,
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: theme.primary,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: typography.sizes.xs,
+                  fontWeight: "600",
+                }}
+              >
+                Primary
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: theme.secondary,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: typography.sizes.xs,
+                  fontWeight: "600",
+                  textShadowColor: "rgba(0,0,0,0.5)",
+                  textShadowOffset: { width: 1, height: 1 },
+                  textShadowRadius: 2,
+                }}
+              >
+                Secondary
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              gap: spacing.sm,
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: theme.success,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: typography.sizes.xs,
+                  fontWeight: "600",
+                  textShadowColor: "rgba(0,0,0,0.5)",
+                  textShadowOffset: { width: 1, height: 1 },
+                  textShadowRadius: 2,
+                }}
+              >
+                Success
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: theme.error,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: typography.sizes.xs,
+                  fontWeight: "600",
+                  textShadowColor: "rgba(0,0,0,0.5)",
+                  textShadowOffset: { width: 1, height: 1 },
+                  textShadowRadius: 2,
+                }}
+              >
+                Error
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View
+        style={{
+          padding: spacing.lg,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.border,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: typography.sizes.xl,
+            fontWeight: "600",
+            color: theme.primary,
+            marginBottom: spacing.md,
+          }}
+        >
+          Tipografia
+        </Text>
+
+        <Text
+          style={{
+            fontSize: typography.sizes.heading,
+            fontWeight: "600",
+            color: theme.text,
             marginBottom: spacing.sm,
           }}
         >
           Heading Text
-        </HeaderTitle>
-        <InfoText style={{ lineHeight: 22, color: theme.text }}>
+        </Text>
+        <Text
+          style={{
+            fontSize: typography.sizes.md,
+            color: theme.text,
+            marginBottom: spacing.sm,
+            lineHeight: 22,
+          }}
+        >
           Body text usando theme.text
-        </InfoText>
-        <InfoText>Secondary text usando theme.textSecondary</InfoText>
-        <MutedText>Muted text usando theme.textMuted</MutedText>
-      </Section>
-    </ScreenScrollView>
+        </Text>
+        <Text
+          style={{
+            fontSize: typography.sizes.md,
+            color: theme.textSecondary,
+            marginBottom: spacing.sm,
+          }}
+        >
+          Secondary text usando theme.textSecondary
+        </Text>
+        <Text
+          style={{
+            fontSize: typography.sizes.sm,
+            color: theme.textMuted,
+            marginBottom: spacing.sm,
+          }}
+        >
+          Muted text usando theme.textMuted
+        </Text>
+      </View>
+
+      <View
+        style={{
+          padding: spacing.lg,
+          alignItems: "center",
+          backgroundColor: addOpacity(theme.primary, 0.05),
+        }}
+      >
+        <Text
+          style={{
+            fontSize: typography.sizes.md,
+            color: theme.text,
+            textAlign: "center",
+            marginBottom: spacing.sm,
+          }}
+        >
+          Este é um exemplo de como usar os temas dinâmicos!
+        </Text>
+        <Text
+          style={{
+            fontSize: typography.sizes.sm,
+            color: theme.textSecondary,
+          }}
+        >
+          Tema atual:{" "}
+          <Text
+            style={{
+              color: theme.primary,
+              fontWeight: "600",
+            }}
+          >
+            {themeName}
+          </Text>
+        </Text>
+      </View>
+    </ScrollView>
   );
 }
-
-// --- Componentes Estilizados ---
-const ScreenScrollView = styled.ScrollView`
-  flex: 1;
-  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
-`;
-
-const Section = styled.View`
-  padding: ${spacing.lg}px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }: { theme: DefaultTheme }) => theme.border};
-`;
-
-const HeaderSection = styled(Section)`
-  align-items: center;
-  border-bottom-color: ${({ theme }: { theme: DefaultTheme }) =>
-    addOpacity(theme.primary, 0.2)};
-`;
-
-const SectionTitle = styled.Text`
-  font-size: ${typography.sizes.xl}px;
-  font-weight: 600;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
-  margin-bottom: ${spacing.md}px;
-`;
-
-const HeaderTitle = styled.Text`
-  font-size: ${typography.sizes.heading}px;
-  font-weight: 700;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
-  margin-bottom: ${spacing.xs}px;
-`;
-
-const HeaderSubtitle = styled.Text`
-  font-size: ${typography.sizes.md}px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.textSecondary};
-  text-align: center;
-`;
-
-const Card = styled.View`
-  flex-direction: row;
-  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.surface};
-  padding: ${spacing.md}px;
-  border-radius: 15px;
-  align-items: center;
-  border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.border};
-  margin-bottom: ${spacing.md}px;
-`;
-
-const Avatar = styled.View`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
-  justify-content: center;
-  align-items: center;
-`;
-
-const AvatarText = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
-  font-size: 18px;
-  font-weight: 600;
-`;
-
-const StatusBubble = styled.View<OnlineProps>`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 15px;
-  height: 15px;
-  border-radius: 7.5px;
-  background-color: ${({
-    theme,
-    isOnline,
-  }: {
-    theme: DefaultTheme;
-    isOnline: boolean;
-  }) => (isOnline ? theme.success : theme.error)};
-  border: 2px solid ${({ theme }: { theme: DefaultTheme }) => theme.surface};
-`;
-
-const TextContent = styled.View`
-  flex: 1;
-`;
-
-const NameText = styled.Text`
-  font-size: ${typography.sizes.lg}px;
-  font-weight: 600;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
-  margin-bottom: ${spacing.xs}px;
-`;
-
-const InfoText = styled.Text`
-  font-size: ${typography.sizes.sm}px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.textSecondary};
-  margin-bottom: ${spacing.xs}px;
-`;
-
-const MutedText = styled.Text`
-  font-size: ${typography.sizes.xs}px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.textMuted};
-`;
-
-const OnOffButton = styled.TouchableOpacity<OnlineProps>`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({
-    theme,
-    isOnline,
-  }: {
-    theme: DefaultTheme;
-    isOnline: boolean;
-  }) => (isOnline ? theme.accent : theme.error)};
-  border: 2px solid
-    ${({ theme, isOnline }: { theme: DefaultTheme; isOnline: boolean }) =>
-      isOnline ? addOpacity(theme.accent, 0.7) : addOpacity(theme.error, 0.7)};
-`;
-
-const ButtonText = styled.Text`
-  font-weight: 700;
-  font-size: ${typography.sizes.sm}px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
-`;
-
-const ActionButtonContainer = styled.TouchableOpacity<PrimaryProps>`
-  flex: 1;
-  background-color: ${({
-    theme,
-    isPrimary = true,
-  }: {
-    theme: DefaultTheme;
-    isPrimary?: boolean;
-  }) => (isPrimary ? theme.primary : "transparent")};
-  padding: ${spacing.md}px;
-  border-radius: 25px;
-  align-items: center;
-  border: 2px solid
-    ${({
-      theme,
-      isPrimary = true,
-    }: {
-      theme: DefaultTheme;
-      isPrimary?: boolean;
-    }) => (isPrimary ? "transparent" : theme.primary)};
-`;
-
-const ActionButtonText = styled.Text<PrimaryProps>`
-  color: ${({
-    theme,
-    isPrimary = true,
-  }: {
-    theme: DefaultTheme;
-    isPrimary?: boolean;
-  }) => (isPrimary ? theme.background : theme.primary)};
-  font-size: ${typography.sizes.md}px;
-  font-weight: 600;
-`;
-
-const ColorBox = styled.View`
-  flex: 1;
-  height: 60px;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ColorBoxText = styled.Text`
-  color: #ffffff;
-  font-size: ${typography.sizes.xs}px;
-  font-weight: 600;
-`;
-
-const Row = styled.View`
-  flex-direction: row;
-  gap: ${spacing.sm}px;
-`;
-
-const ThemeButton = styled.TouchableOpacity<{ isActive: boolean }>`
-  padding: ${spacing.sm}px ${spacing.md}px;
-  border-radius: 20px;
-  border: 2px solid
-    ${({ theme, isActive }: { theme: DefaultTheme; isActive: boolean }) =>
-      isActive ? theme.accent : "transparent"};
-`;
-
-const ThemeButtonText = styled.Text`
-  color: #000;
-  font-weight: 600;
-  font-size: ${typography.sizes.sm}px;
-`;

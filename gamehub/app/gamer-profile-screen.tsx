@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Alert } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
-import { spacing, typography } from "./constants/theme";
+import { spacing, typography } from "@/app/constants/styles";
 
-import ActionButton from "./components/gamer-profile-screen/ActionButton";
-import ProfileHeader from "./components/gamer-profile-screen/ProfileHeader";
-import MessageModal from "./components/gamer-profile-screen/MessageModal";
+import ActionButton from "@/app/components/gamer-profile-screen/ActionButton";
+import ProfileHeader from "@/app/components/gamer-profile-screen/ProfileHeader";
+import MessageModal from "@/app/components/gamer-profile-screen/MessageModal";
 
 interface Message {
   id: string;

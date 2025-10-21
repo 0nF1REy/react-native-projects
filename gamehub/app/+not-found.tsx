@@ -1,17 +1,16 @@
 import { Link, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { useTheme, DefaultTheme } from "styled-components/native";
 
-import { spacing, typography, themes } from "./constants/theme";
+import { spacing, typography } from "@/app/constants/styles";
 
-// --- Componente Principal ---
 export default function NotFoundScreen() {
-  const retroTheme = themes.retro;
+  const theme = useTheme();
 
   const headerStyleWithBorder = {
-    backgroundColor: retroTheme.surface,
+    backgroundColor: theme.surface,
     borderBottomWidth: 2,
-    borderBottomColor: retroTheme.border,
+    borderBottomColor: theme.border,
   };
 
   return (
@@ -21,12 +20,12 @@ export default function NotFoundScreen() {
           title: "FALHA NA ROTA",
           headerShadowVisible: false,
           headerStyle: headerStyleWithBorder,
-          headerTintColor: retroTheme.primary,
+          headerTintColor: theme.primary,
           headerTitleStyle: { fontFamily: "monospace", fontWeight: "bold" },
         }}
       />
       <Container>
-        <Icon name="alert-circle-outline" size={80} color={retroTheme.accent} />
+        <Icon name="alert-circle-outline" size={80} color={theme.accent} />
 
         <Title>404</Title>
 
@@ -40,7 +39,6 @@ export default function NotFoundScreen() {
   );
 }
 
-// --- Componentes Estilizados com Anotação Explícita ---
 const Container = styled.View`
   flex: 1;
   align-items: center;

@@ -1,23 +1,21 @@
-// types/community.ts
-
 export interface User {
   id: string;
   name: string;
-  avatar: string; // Iniciais para avatar
+  avatar: string;
   level: number;
-  rank: string; // "Bronze", "Silver", "Gold", etc.
+  rank: string;
 }
 
 export interface Post {
   id: string;
   author: User;
   content: string;
-  image?: string; // URL da imagem (opcional)
+  image?: string;
   timestamp: Date;
   likes: number;
   comments: number;
   shares: number;
-  isLiked: boolean; // Se o usuário atual curtiu
+  isLiked: boolean;
 }
 
 export interface Comment {

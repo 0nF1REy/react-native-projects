@@ -1,10 +1,9 @@
 import { Button } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import styled, { DefaultTheme, useTheme } from "styled-components/native";
 
-import { spacing, typography } from "../constants/theme";
-import HeaderWithAvatar from "../components/HeaderWithAvatar";
-import { Link } from "expo-router";
+import { spacing, typography } from "@/app/constants/styles";
+import HeaderWithAvatar from "@/app/components/common/HeaderWithAvatar";
 
 export default function Index() {
   const router = useRouter();

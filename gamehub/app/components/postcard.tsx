@@ -1,14 +1,10 @@
-// components/PostCard.tsx
-
 import React from "react";
-import { View, Alert } from "react-native";
-import styled, { DefaultTheme } from "styled-components/native";
-import { spacing, typography } from "../constants/theme";
-import { Post } from "../types/community";
+import styled, { DefaultTheme, useTheme } from "styled-components/native";
+import { spacing, typography } from "@/app/constants/styles";
+import { Post } from "@/app/types/community";
+import ReportButton from "./ReportButton";
+import { FontAwesome } from "@expo/vector-icons";
 
-// ============================================
-// PROPS DO COMPONENTE
-// ============================================
 interface PostCardProps {
   post: Post;
   onLike: (postId: string) => void;
@@ -16,19 +12,17 @@ interface PostCardProps {
   onShare: (postId: string) => void;
 }
 
-// ============================================
-// COMPONENTE PRINCIPAL
-// ============================================
 export const PostCard: React.FC<PostCardProps> = ({
   post,
   onLike,
   onComment,
   onShare,
 }) => {
-  // Formatar tempo relativo (ex: "há 2 horas")
+  const theme = useTheme();
+
   const getTimeAgo = (date: Date): string => {
     const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
-    
+
     if (seconds < 60) return "agora";
     if (seconds < 3600) return `${Math.floor(seconds / 60)}min`;
     if (seconds < 86400) return `${Math.floor(seconds / 3600)}h`;
@@ -37,61 +31,73 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <Card>
-      {/* HEADER DO POST */}
       <Header>
-        <Avatar>
-          <AvatarText>{post.author.avatar}</AvatarText>
-        </Avatar>
-        
-        <UserInfo>
-          <UserName>{post.author.name}</UserName>
-          <MetaInfo>
-            Lvl {post.author.level} • {post.author.rank} • {getTimeAgo(post.timestamp)}
-          </MetaInfo>
-        </UserInfo>
+        <UserSection>
+          <Avatar>
+            <AvatarText>{post.author.avatar}</AvatarText>
+          </Avatar>
+          <UserInfo>
+            <UserName>{post.author.name}</UserName>
+            <MetaInfo>
+              Lvl {post.author.level}{" "}
+              <FontAwesome name="circle" size={12} color="white" />{" "}
+              {post.author.rank}{" "}
+              <FontAwesome name="circle" size={12} color="white" />{" "}
+              {getTimeAgo(post.timestamp)}
+            </MetaInfo>
+          </UserInfo>
+        </UserSection>
+
+        <ReportButton commentId={post.id} theme={theme} />
       </Header>
 
-      {/* CONTEÚDO DO POST */}
       <Content>{post.content}</Content>
 
-      {/* IMAGEM (SE HOUVER) */}
       {post.image && (
         <PostImage source={{ uri: post.image }} resizeMode="cover" />
       )}
 
-      {/* ESTATÍSTICAS */}
       <Stats>
         <StatText>{post.likes} likes</StatText>
-        <StatText>•</StatText>
+        <StatText>
+          <FontAwesome name="circle" size={12} color="white" />
+        </StatText>
         <StatText>{post.comments} comentários</StatText>
-        <StatText>•</StatText>
+        <StatText>
+          <FontAwesome name="circle" size={12} color="white" />
+        </StatText>
         <StatText>{post.shares} compartilhamentos</StatText>
       </Stats>
 
-      {/* BOTÕES DE AÇÃO */}
       <Actions>
         <ActionButton onPress={() => onLike(post.id)}>
-          <ActionIcon>{post.isLiked ? "❤️" : "🤍"}</ActionIcon>
+          <ActionIcon>
+            <FontAwesome
+              name={post.isLiked ? "heart" : "heart-o"}
+              size={20}
+              color="white"
+            />
+          </ActionIcon>
           <ActionText>Like</ActionText>
         </ActionButton>
 
         <ActionButton onPress={() => onComment(post.id)}>
-          <ActionIcon>💬</ActionIcon>
+          <ActionIcon>
+            <FontAwesome name="comment-o" size={20} color="white" />
+          </ActionIcon>
           <ActionText>Comentar</ActionText>
         </ActionButton>
 
         <ActionButton onPress={() => onShare(post.id)}>
-          <ActionIcon>🔗</ActionIcon>
+          <ActionIcon>
+            <FontAwesome name="share" size={20} color="white" />
+          </ActionIcon>
           <ActionText>Compartilhar</ActionText>
         </ActionButton>
       </Actions>
     </Card>
   );
 };
-
-// ============================================
-// COMPONENTES ESTILIZADOS
-// ============================================
 
 const Card = styled.View`
   background-color: ${({ theme }: { theme: DefaultTheme }) => theme.surface};
@@ -104,7 +110,14 @@ const Card = styled.View`
 const Header = styled.View`
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: ${spacing.md}px;
+`;
+
+const UserSection = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
 `;
 
 const Avatar = styled.View`
@@ -123,9 +136,7 @@ const AvatarText = styled.Text`
   font-weight: 600;
 `;
 
-const UserInfo = styled.View`
-  flex: 1;
-`;
+const UserInfo = styled.View``;
 
 const UserName = styled.Text`
   font-size: ${typography.sizes.md}px;

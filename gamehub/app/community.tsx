@@ -1,15 +1,11 @@
-// community.tsx
-
 import React, { useState } from "react";
-import { Alert, KeyboardAvoidingView, Platform } from "react-native";
+import { Alert } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
-import { spacing, typography } from "./constants/theme";
-import { Post } from "./types/community";
-import { PostCard } from "./components/postcard";
+import { spacing, typography } from "@/app/constants/styles";
+import { Post } from "@/app/types/community";
+import { PostCard } from "@/app/components/postcard";
+import { FontAwesome } from "@expo/vector-icons";
 
-// ============================================
-// DADOS MOCKADOS (simulados)
-// ============================================
 const MOCK_POSTS: Post[] = [
   {
     id: "1",
@@ -20,8 +16,9 @@ const MOCK_POSTS: Post[] = [
       level: 85,
       rank: "Diamante",
     },
-    content: "Acabei de zerar Dark Souls pela 10ª vez! Quem mais é viciado nesse jogo? 🎮🔥",
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2h atrás
+    content:
+      "Acabei de zerar Dark Souls pela 10ª vez! Quem mais é viciado nesse jogo?",
+    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
     likes: 42,
     comments: 8,
     shares: 3,
@@ -37,8 +34,9 @@ const MOCK_POSTS: Post[] = [
       rank: "Mestre",
     },
     content: "Alguém quer jogar Valorant agora? Preciso de um time pra ranked!",
-    image: "https://picsum.photos/400/300?random=1",
-    timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000), // 5h atrás
+    image:
+      "https://images.prismic.io/play-valorant/9371478a-7e84-4413-8523-357045543426_valorant-offwhitelaunch-keyart.jpg?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080",
+    timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
     likes: 15,
     comments: 12,
     shares: 1,
@@ -53,9 +51,10 @@ const MOCK_POSTS: Post[] = [
       level: 73,
       rank: "Platina",
     },
-    content: "Setup novo chegou! RTX 4090 + i9-13900K. Agora sim vou dominar! 💻⚡",
-    image: "https://picsum.photos/400/300?random=2",
-    timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 dia atrás
+    content: "Setup novo chegou! RTX 4090 + i9-13900K. Agora sim vou dominar!",
+    image:
+      "https://images.prismic.io/play-valorant/9371478a-7e84-4413-8523-357045543426_valorant-offwhitelaunch-keyart.jpg?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080",
+    timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
     likes: 128,
     comments: 34,
     shares: 12,
@@ -63,15 +62,10 @@ const MOCK_POSTS: Post[] = [
   },
 ];
 
-// ============================================
-// COMPONENTE PRINCIPAL
-// ============================================
 export default function CommunityScreen() {
   const [posts, setPosts] = useState<Post[]>(MOCK_POSTS);
   const [newPostText, setNewPostText] = useState("");
 
-  // ========== HANDLERS ==========
-  
   const handleLike = (postId: string) => {
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
@@ -93,9 +87,7 @@ export default function CommunityScreen() {
   const handleShare = (postId: string) => {
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
-        post.id === postId
-          ? { ...post, shares: post.shares + 1 }
-          : post
+        post.id === postId ? { ...post, shares: post.shares + 1 } : post
       )
     );
     Alert.alert("Compartilhado!", "Post compartilhado com sucesso!");
@@ -124,20 +116,21 @@ export default function CommunityScreen() {
       isLiked: false,
     };
 
-    setPosts([newPost, ...posts]); // Adiciona no início
-    setNewPostText(""); // Limpa o campo
+    setPosts([newPost, ...posts]);
+    setNewPostText("");
     Alert.alert("Sucesso!", "Post publicado na comunidade!");
   };
 
   return (
     <Container>
-      {/* HEADER */}
       <Header>
-        <HeaderTitle>🌐 Comunidade GameHub</HeaderTitle>
+        <HeaderTitle>
+          <FontAwesome name="globe" size={24} color="white" /> Comunidade
+          GameHub
+        </HeaderTitle>
         <HeaderSubtitle>Conecte-se com outros gamers</HeaderSubtitle>
       </Header>
 
-      {/* FORMULÁRIO NOVO POST */}
       <NewPostSection>
         <NewPostInput
           placeholder="Compartilhe algo com a comunidade..."
@@ -148,11 +141,12 @@ export default function CommunityScreen() {
           maxLength={500}
         />
         <PublishButton onPress={handlePublishPost}>
-          <PublishButtonText>📤 PUBLICAR</PublishButtonText>
+          <PublishButtonText>
+            <FontAwesome name="send" size={16} color="white" /> PUBLICAR
+          </PublishButtonText>
         </PublishButton>
       </NewPostSection>
 
-      {/* FEED DE POSTS */}
       <FeedScrollView
         contentContainerStyle={{ paddingBottom: spacing.xl }}
         showsVerticalScrollIndicator={false}
@@ -170,10 +164,6 @@ export default function CommunityScreen() {
     </Container>
   );
 }
-
-// ============================================
-// COMPONENTES ESTILIZADOS
-// ============================================
 
 const Container = styled.View`
   flex: 1;

@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  Modal,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { Modal, KeyboardAvoidingView, Platform } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
-import { spacing, typography } from "../../constants/theme";
+import { spacing, typography } from "@/app/constants/styles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface Message {

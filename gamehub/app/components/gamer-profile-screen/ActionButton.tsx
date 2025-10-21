@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { DefaultTheme } from "styled-components/native";
-import { spacing, typography } from "../../constants/theme";
+import { spacing, typography } from "@/app/constants/styles";
 
 interface ActionButtonProps {
   title: string;

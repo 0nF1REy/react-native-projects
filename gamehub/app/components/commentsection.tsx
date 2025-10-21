@@ -1,9 +1,8 @@
-// components/CommentSection.tsx
-
 import React, { useState } from "react";
 import styled, { DefaultTheme } from "styled-components/native";
-import { spacing, typography } from "../constants/theme";
-import { Comment } from "../types/community";
+import { spacing, typography } from "@/app/constants/styles";
+import { Comment } from "@/app/types/community";
+import { FontAwesome } from "@expo/vector-icons";
 
 interface CommentSectionProps {
   postId: string;
@@ -26,9 +25,8 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 
   return (
     <Container>
-      <Title>💬 Comentários ({comments.length})</Title>
+      <Title><FontAwesome name="comments" size={24} color="white" /> Comentários ({comments.length})</Title>
 
-      {/* LISTA DE COMENTÁRIOS */}
       {comments.map((comment) => (
         <CommentCard key={comment.id}>
           <CommentAvatar>
@@ -41,7 +39,6 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
         </CommentCard>
       ))}
 
-      {/* CAMPO PARA NOVO COMENTÁRIO */}
       <InputContainer>
         <CommentInput
           placeholder="Escreva um comentário..."
@@ -49,14 +46,13 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
           onChangeText={setCommentText}
         />
         <SendButton onPress={handleSubmit}>
-          <SendButtonText>➤</SendButtonText>
+          <SendButtonText><FontAwesome name="send" size={16} color="white" /></SendButtonText>
         </SendButton>
       </InputContainer>
     </Container>
   );
 };
 
-// Estilos...
 const Container = styled.View`
   padding: ${spacing.md}px;
   background-color: ${({ theme }: { theme: DefaultTheme }) => theme.surface};

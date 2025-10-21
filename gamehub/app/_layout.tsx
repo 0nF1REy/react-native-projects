@@ -1,40 +1,29 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
-import React, { useState } from "react";
+import React from "react";
 
 import { ThemeProvider } from "styled-components/native";
-import { themes } from "./constants/theme";
-import { ThemeContext } from "./contexts/ThemeContext";
-
-type ThemeName = keyof typeof themes;
+import { useThemeStore, themes } from "./store/theme";
 
 export default function RootLayout() {
-  const [themeName, setThemeName] = useState<ThemeName>("retro");
+  const theme = useThemeStore((state) => state.theme);
 
-  const changeTheme = (name: string) => {
-    if (themes[name]) {
-      setThemeName(name as ThemeName);
-    }
-  };
-
-  const currentThemeObject = themes[themeName];
+  const currentThemeObject = themes[theme];
 
   return (
-    <ThemeContext.Provider value={{ themeName, changeTheme }}>
-      <ThemeProvider theme={currentThemeObject}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-          <Stack.Screen name="xulambs" />
-          <Stack.Screen name="gamer-profile-screen" />
-          <Stack.Screen
-            name="community"
-            options={{ title: "Comunidade", headerShown: true }}
-          />
-        </Stack>
-        <StatusBar style={themeName === "minimal" ? "dark" : "light"} />
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <ThemeProvider theme={currentThemeObject}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="xulambs" />
+        <Stack.Screen name="gamer-profile-screen" />
+        <Stack.Screen
+          name="community"
+          options={{ title: "Comunidade", headerShown: true }}
+        />
+      </Stack>
+      <StatusBar style={theme === "minimal" ? "dark" : "light"} />
+    </ThemeProvider>
   );
 }
