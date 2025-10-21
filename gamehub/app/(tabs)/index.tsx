@@ -12,7 +12,7 @@ export default function Index() {
   return (
     <ScreenContainer>
       <HeaderWithAvatar
-        userName="Retrô"
+        userName="0nF1REy"
         onAvatarPress={() => router.push("/gamer-profile-screen")}
       />
 

@@ -10,7 +10,7 @@ export default function Explore() {
 
   return (
     <ScreenContainer>
-      <HeaderWithAvatar userName="Retrô" notifications={5} />
+      <HeaderWithAvatar userName="0nF1REy" notifications={5} />
 
       <ContentContainer>
         <Title>Explorar Mundos</Title>

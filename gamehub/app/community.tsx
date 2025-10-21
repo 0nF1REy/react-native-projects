@@ -73,7 +73,7 @@ export default function CommunityScreen() {
   const user = {
     id: "currentUser",
     name: "Você",
-    avatar: `https://i.pravatar.cc/300`,
+    avatar: require("../assets/images/creator/alan-ryan.jpg"),
     level: 50,
     rank: "Ouro",
   };

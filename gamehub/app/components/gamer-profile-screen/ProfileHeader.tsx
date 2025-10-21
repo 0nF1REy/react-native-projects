@@ -3,7 +3,7 @@ import styled, { DefaultTheme } from "styled-components/native";
 import { spacing, typography } from "@/app/constants/styles";
 
 interface ProfileHeaderProps {
-  avatarUri: string;
+  avatarUri: string | number;
   userName: string;
   userId: string;
   userInfo: string;
@@ -16,7 +16,9 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   userInfo,
 }) => (
   <HeaderSection>
-    <AvatarImage source={{ uri: avatarUri }} />
+    <AvatarImage
+      source={typeof avatarUri === "string" ? { uri: avatarUri } : avatarUri}
+    />
     <UserName>{userName}</UserName>
     <UserInfo>{userInfo}</UserInfo>
   </HeaderSection>

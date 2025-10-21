@@ -34,10 +34,10 @@ export const PostCard: React.FC<PostCardProps> = ({
       <Header>
         <UserSection>
           <Avatar>
-            {post.author.avatar.startsWith("http") ? (
+            {typeof post.author.avatar === "string" ? (
               <AvatarImage source={{ uri: post.author.avatar }} />
             ) : (
-              <AvatarText>{post.author.avatar}</AvatarText>
+              <AvatarImage source={post.author.avatar} />
             )}
           </Avatar>
           <UserInfo>
@@ -137,11 +137,6 @@ const Avatar = styled.View`
   margin-right: ${spacing.sm}px;
 `;
 
-const AvatarText = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
-  font-size: ${typography.sizes.md}px;
-  font-weight: 600;
-`;
 
 const AvatarImage = styled.Image`
   width: 45px;

@@ -22,7 +22,7 @@ export default function GamerProfileScreen() {
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: "1",
-      text: "E aí, Jett! Tudo tranquilo?",
+      text: "E aí, 0nF1REy! Tudo tranquilo?",
       time: "10:00 AM",
       isUser: false,
     },
@@ -73,8 +73,8 @@ export default function GamerProfileScreen() {
   return (
     <ProfileScrollView contentContainerStyle={{ paddingBottom: spacing.lg }}>
       <ProfileHeader
-        avatarUri="https://i.pravatar.cc/300"
-        userName="Jett_Decoder"
+        avatarUri={require("../assets/images/creator/alan-ryan.jpg")}
+        userName="0nF1REy"
         userId="2077"
         userInfo="Netrunner | Lvl 99 | Tokyo Grid"
       />
@@ -120,7 +120,7 @@ export default function GamerProfileScreen() {
         currentMessage={currentMessage}
         onMessageChange={setCurrentMessage}
         onSendMessage={handleSendMessage}
-        chatPartnerName="Jett_Decoder"
+        chatPartnerName="0nF1REy"
       />
     </ProfileScrollView>
   );

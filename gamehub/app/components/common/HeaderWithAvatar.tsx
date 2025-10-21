@@ -25,7 +25,9 @@ const HeaderWithAvatar: React.FC<HeaderWithAvatarProps> = ({
         activeOpacity={0.7}
         disabled={!onAvatarPress}
       >
-        <AvatarImage source={{ uri: "https://i.pravatar.cc/300" }} />
+        <AvatarImage
+          source={require("../../../assets/images/creator/alan-ryan.jpg")}
+        />
 
         <View>
           <Greeting>Olá,</Greeting>

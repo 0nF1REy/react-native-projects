@@ -33,10 +33,10 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
       {comments.map((comment) => (
         <CommentCard key={comment.id}>
           <CommentAvatar>
-            {comment.author.avatar.startsWith("http") ? (
+            {typeof comment.author.avatar === "string" ? (
               <AvatarImage source={{ uri: comment.author.avatar }} />
             ) : (
-              <AvatarText>{comment.author.avatar}</AvatarText>
+              <AvatarImage source={comment.author.avatar} />
             )}
           </CommentAvatar>
           <CommentContent>
@@ -89,11 +89,6 @@ const CommentAvatar = styled.View`
   margin-right: ${spacing.sm}px;
 `;
 
-const AvatarText = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.background};
-  font-size: ${typography.sizes.sm}px;
-  font-weight: 600;
-`;
 
 const AvatarImage = styled.Image`
   width: 35px;
