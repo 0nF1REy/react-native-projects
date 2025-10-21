@@ -19,6 +19,10 @@ export default function RootLayout() {
         <Stack.Screen name="xulambs" />
         <Stack.Screen name="gamer-profile-screen" />
         <Stack.Screen
+          name="transformice-screen"
+          options={{ title: "Transformice" }}
+        />
+        <Stack.Screen
           name="community"
           options={{ title: "Comunidade", headerShown: true }}
         />

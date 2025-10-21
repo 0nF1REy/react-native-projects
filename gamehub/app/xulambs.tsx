@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from "react-native";
+import { useRouter } from "expo-router";
 import { useThemeStore, themes } from "@/app/store/theme";
 import { addOpacity, spacing, typography } from "@/app/constants/styles";
 import ReportButton from "@/app/components/ReportButton";
@@ -8,6 +16,7 @@ import { FontAwesome } from "@expo/vector-icons";
 export default function Xulambs() {
   const { theme: themeName, toggleTheme } = useThemeStore();
   const theme = themes[themeName];
+  const router = useRouter();
 
   const [likes, setLikes] = useState(42);
   const [isOnline, setIsOnline] = useState(true);
@@ -96,7 +105,6 @@ export default function Xulambs() {
                 borderRadius: 20,
                 borderWidth: 2,
                 backgroundColor: themes[themeKey].primary,
-
               }}
               onPress={() => toggleTheme(themeKey)}
             >
@@ -220,68 +228,57 @@ export default function Xulambs() {
             </View>
           </View>
 
-                    <TouchableOpacity
+          <TouchableOpacity
+            style={{
+              width: 50,
 
-                      style={{
+              height: 50,
 
-                        width: 50,
+              borderRadius: 25,
 
-                        height: 50,
+              backgroundColor: isOnline ? theme.accent : theme.error,
 
-                        borderRadius: 25,
+              justifyContent: "center",
 
-                        backgroundColor: isOnline ? theme.accent : theme.error,
+              alignItems: "center",
 
-                        justifyContent: "center",
+              borderWidth: 2,
 
-                        alignItems: "center",
-
-                        borderWidth: 2,
-
-                        borderColor: isOnline
-
-                          ? addOpacity(theme.accent, 0.7)
-
-                          : addOpacity(theme.error, 0.7),
-
-                      }}
-
-                      onPress={toggleOnlineStatus}
-
-                    >
-                        <Text
-                          style={{
-                            fontSize: typography.sizes.sm,
-                            fontWeight: "700",
-                            color: theme.background,
-                          }}
-                        >
+              borderColor: isOnline
+                ? addOpacity(theme.accent, 0.7)
+                : addOpacity(theme.error, 0.7),
+            }}
+            onPress={toggleOnlineStatus}
+          >
+            <Text
+              style={{
+                fontSize: typography.sizes.sm,
+                fontWeight: "700",
+                color: theme.background,
+              }}
+            >
               {isOnline ? "ON" : "OFF"}
             </Text>
           </TouchableOpacity>
         </View>
 
-                  <View
+        <View
+          style={{
+            flexDirection: "row",
 
-                    style={{
+            backgroundColor: theme.surface,
 
-                      flexDirection: "row",
+            padding: spacing.md,
 
-                      backgroundColor: theme.surface,
+            borderRadius: 15,
 
-                      padding: spacing.md,
+            alignItems: "center",
 
-                      borderRadius: 15,
+            borderWidth: 1,
 
-                      alignItems: "center",
-
-                      borderWidth: 1,
-
-                      borderColor: theme.border,
-
-                    }}
-
-                  >
+            borderColor: theme.border,
+          }}
+        >
           <View
             style={{
               width: 50,
@@ -293,13 +290,10 @@ export default function Xulambs() {
               marginRight: spacing.md,
             }}
           >
-            <Text
-              style={{
-                fontSize: typography.sizes.lg,
-              }}
-            >
-              GAME
-            </Text>
+            <Image
+              source={require("@/assets/images/transformice-icon.png")}
+              style={{ width: 40, height: 40, borderRadius: 8 }}
+            />
           </View>
 
           <View style={{ flex: 1 }}>
@@ -311,7 +305,7 @@ export default function Xulambs() {
                 marginBottom: spacing.xs,
               }}
             >
-              League of Legends
+              Transformice
             </Text>
             <Text
               style={{
@@ -320,8 +314,8 @@ export default function Xulambs() {
                 marginBottom: spacing.xs,
               }}
             >
-              MOBA <FontAwesome name="circle" size={12} color="white" />{" "}
-              Competitivo
+              Platformer <FontAwesome name="paw" size={12} color="gold" />{" "}
+              Adventure
             </Text>
             <Text
               style={{
@@ -329,7 +323,7 @@ export default function Xulambs() {
                 color: theme.success,
               }}
             >
-              15.2k online
+              8.7k mice online
             </Text>
           </View>
 
@@ -340,6 +334,7 @@ export default function Xulambs() {
               paddingVertical: spacing.sm,
               borderRadius: 20,
             }}
+            onPress={() => router.push("/transformice-screen")}
           >
             <Text
               style={{
@@ -383,16 +378,18 @@ export default function Xulambs() {
               gap: spacing.md,
             }}
           >
-                        <TouchableOpacity
-                          style={{
-                            flex: 1,
-                            backgroundColor: theme.primary,
-                            padding: spacing.md,
-                            borderRadius: 25,
-                            alignItems: "center",
-                          }}
-                          onPress={handleLike}
-                        >              <Text
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                backgroundColor: theme.primary,
+                padding: spacing.md,
+                borderRadius: 25,
+                alignItems: "center",
+              }}
+              onPress={handleLike}
+            >
+              {" "}
+              <Text
                 style={{
                   color: theme.background,
                   fontSize: typography.sizes.md,
