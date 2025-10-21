@@ -59,7 +59,7 @@ export default function Xulambs() {
             marginBottom: spacing.xs,
           }}
         >
-          GameHub
+          UI
         </Text>
         <Text
           style={{
@@ -68,7 +68,7 @@ export default function Xulambs() {
             textAlign: "center",
           }}
         >
-          Demonstração de componentes usando themes.js
+          Interface do Usuário
         </Text>
       </View>
 

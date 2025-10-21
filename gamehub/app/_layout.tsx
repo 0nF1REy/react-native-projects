@@ -16,8 +16,11 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="xulambs" />
-        <Stack.Screen name="gamer-profile-screen" />
+        <Stack.Screen name="xulambs" options={{ title: "Temas e Componentes" }}/>
+        <Stack.Screen
+          name="gamer-profile-screen"
+          options={{ title: "Perfil" }}
+        />
         <Stack.Screen
           name="transformice-screen"
           options={{ title: "Transformice" }}
