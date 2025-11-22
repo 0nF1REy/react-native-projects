@@ -50,8 +50,8 @@ Este repositório contém uma coleção de projetos React Native desenvolvidos p
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/0nF1REy/react-native-projects.git
-   cd react-native-projects
+   git clone https://github.com/0nF1REy/react-native-workspace.git
+   cd react-native-workspace
    ```
 
 2. **Navegue até o projeto desejado:**
@@ -81,47 +81,6 @@ Este repositório contém uma coleção de projetos React Native desenvolvidos p
    # ou
    npx react-native run-ios
    ```
-
-## 📱 Projetos em Destaque
-
-### StickerSmash
-
-Um editor de imagens interativo onde você pode adicionar stickers emoji às suas fotos. Construído com Expo e React Native.
-
-**Funcionalidades:**
-
-- Seleção de imagens da galeria
-- Adição de stickers emoji
-- Captura de tela da imagem editada
-- Salvamento na galeria do dispositivo
-
-**Como executar:**
-
-```bash
-cd StickerSmash
-npm install
-npx expo start
-```
-
-### Storage Project
-
-Projeto demonstrando integração com Firebase para armazenamento de dados.
-
-**Configuração:**
-
-1. Copie o arquivo de exemplo de configuração:
-   ```bash
-   cp .env.example .env
-   ```
-2. Configure suas credenciais do Firebase no arquivo `.env`
-
-### Health BMI Calculator
-
-Calculadora de Índice de Massa Corporal com interface intuitiva.
-
-### Pokemon Search
-
-Aplicativo para buscar e visualizar informações de Pokémon usando a PokéAPI.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -155,7 +114,7 @@ Cada projeto neste repositório demonstra conceitos específicos do desenvolvime
     <td align="center">
         <br>
         <a href="https://github.com/0nF1REy" target="_blank">
-          <img src="./readme_images/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan" style="border-radius:50%;border:3px solid #0077B5;">
+          <img src="./resources/images/docs/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan">
         </a>
         </p>
         <a href="https://github.com/0nF1REy" target="_blank">
@@ -186,7 +145,7 @@ Cada projeto neste repositório demonstra conceitos específicos do desenvolvime
 
 ---
 
-## 📜 Licença
+## 📜 Licença <a name="licenca"></a>
 
 Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
 
