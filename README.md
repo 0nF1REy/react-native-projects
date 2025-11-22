@@ -1,5 +1,5 @@
 <h1 align="center">
-   React Native Projects Collection
+   React Native Workspace
 </h1>
 
 <div align="center">
@@ -185,38 +185,6 @@ Cada projeto neste repositório demonstra conceitos específicos do desenvolvime
 </div>
 
 ---
-
-## 📫 Contribuir
-
-Contribuições são muito bem-vindas! Se você deseja contribuir com o projeto, por favor, siga estes passos:
-
-1.  **Faça um Fork** do repositório.
-
-2.  **Crie uma nova Branch** para sua feature ou correção:
-
-    ```bash
-    git checkout -b feature/nome-da-feature
-    ```
-
-3.  **Faça suas alterações** e realize o commit:
-
-    ```bash
-    git commit -m "feat: Adiciona nova feature"
-    ```
-
-4.  **Envie suas alterações** para o seu fork:
-
-    ```bash
-    git push origin feature/nome-da-feature
-    ```
-
-5.  **Abra um pull request** para a branch `main` do repositório original.
-
-## 📚 Recursos Adicionais
-
-- **<a href="https://www.atlassian.com/br/git/tutorials/making-a-pull-request" target="_blank">📝 Como criar um Pull Request</a>**
-
-- **<a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">💾 Padrão de Commits Convencionais</a>**
 
 ## 📜 Licença
 
